@@ -1,0 +1,16 @@
+[
+{
+  "modid": "slideemall",
+  "name": "Slide'em All!",
+  "description": "Well, drawbridges rethought",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["ZigTheHedge"],
+  "credits": "",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]

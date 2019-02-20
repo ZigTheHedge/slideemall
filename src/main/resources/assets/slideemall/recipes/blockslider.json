@@ -1,0 +1,31 @@
+{
+  "result": {
+    "item": "slideemall:blockslider"
+  },
+  "pattern": [
+    "aaa",
+    "bcb",
+    "ded"
+  ],
+  "type": "forge:ore_shaped",
+  "key": {
+    "a": {
+      "type": "forge:ore_dict",
+      "ore": "ingotIron"
+    },
+    "b": {
+      "type": "forge:ore_dict",
+      "ore": "ingotGold"
+    },
+    "d": {
+      "item": "minecraft:stone",
+      "data": 0
+    },
+    "c": {
+      "item": "minecraft:dispenser"
+    },
+    "e": {
+      "item": "minecraft:sticky_piston"
+    }
+  }
+}
