@@ -117,11 +117,17 @@ public class BlockSlider extends CommonTEBlock<BlockSliderTE> {
             BlockSliderTE te = (BlockSliderTE)worldIn.getTileEntity(pos);
             if (worldIn.isBlockPowered(pos))
             {
-                te.setActive(1);
+                if(te.isRedstoneHigh)
+                    te.setActive(1);
+                else
+                    te.setActive(-1);
             }
             else
             {
-                te.setActive(-1);
+                if(te.isRedstoneHigh)
+                    te.setActive(-1);
+                else
+                    te.setActive(1);
             }
         }
     }

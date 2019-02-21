@@ -29,6 +29,7 @@ public class BlockSliderTE extends CommonTE implements ITickable {
     public int BLOCKSEXTENDED;
     public EnumHoleTypes HOLE_TYPE;
     private int delayCounter = 10;
+    public boolean isRedstoneHigh = true;
 
     public BlockSliderTE() {
         super(2);
@@ -51,6 +52,8 @@ public class BlockSliderTE extends CommonTE implements ITickable {
             BLOCKSEXTENDED = compound.getInteger("blocksextended");
         if(compound.hasKey("holetype"))
             HOLE_TYPE = EnumHoleTypes.values()[compound.getInteger("holetype")];
+        if(compound.hasKey("redstonehigh"))
+            isRedstoneHigh = compound.getBoolean("redstonehigh");
     }
 
     @Override
@@ -61,14 +64,9 @@ public class BlockSliderTE extends CommonTE implements ITickable {
         compound.setInteger("state", STATE);
         compound.setInteger("blocksextended", BLOCKSEXTENDED);
         compound.setInteger("holetype", HOLE_TYPE.getIndex());
+        compound.setBoolean("redstonehigh", isRedstoneHigh);
+        this.markDirty();
         return compound;
-    }
-
-    @Override
-    public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity packet) {
-        super.onDataPacket(net, packet);
-        //ARGH! I shouldn't do it like this!
-        this.sendUpdates();
     }
 
     public void setActive(int direction)
