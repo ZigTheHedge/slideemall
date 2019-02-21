@@ -1,0 +1,6 @@
+tile.slideemall.blockslider.name=Выдвигалда
+
+slider.slot0.desc=Блоки моста:
+slider.slot1.desc=Блок маскировки:
+slider.texture.desc=Тип отверстия:
+slider.redstone.desc=Активироваться по:

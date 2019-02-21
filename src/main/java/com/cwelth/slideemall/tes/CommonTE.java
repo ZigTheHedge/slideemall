@@ -77,16 +77,9 @@ public class CommonTE extends TileEntity {
     @Override
     public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity packet) {
         super.onDataPacket(net, packet);
+        world.notifyBlockUpdate(pos, world.getBlockState(pos), world.getBlockState(pos), 3);
         // Here we get the packet from the server and read it into our server side tile entity
         this.readFromNBT(packet.getNbtCompound());
-    }
-
-    public void sendUpdates()
-    {
-        world.markBlockRangeForRenderUpdate(pos, pos);
-        world.notifyBlockUpdate(pos, world.getBlockState(pos), world.getBlockState(pos), 3);
-        world.scheduleBlockUpdate(pos, this.getBlockType(),0,0);
-        CommonTE.this.markDirty();
     }
 
 }

@@ -12,6 +12,7 @@ import net.minecraft.client.gui.GuiButtonImage;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.client.resources.I18n;
 
 import java.io.IOException;
 import java.util.List;
@@ -51,9 +52,14 @@ public class BlockSliderGUIContainer<TE extends CommonTE, CNT extends CommonCont
     protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
         mc.getTextureManager().bindTexture(background);
         drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
-        drawString(fontRenderer, "Drawbridge blocks:", guiLeft + 18, guiTop + 28, 0xFFFFFF);
-        drawString(fontRenderer, "Disguise block:", guiLeft + 40, guiTop + 54, 0xFFFFFF);
-        drawString(fontRenderer, "Hole type:", guiLeft + 23, guiTop + 80, 0xFFFFFF);
+        int len = fontRenderer.getStringWidth(I18n.format("slider.slot0.desc"));
+        drawString(fontRenderer, I18n.format("slider.slot0.desc"), guiLeft + 115 - len - 3, guiTop + 18, 0xFFFFFF);
+        len = fontRenderer.getStringWidth(I18n.format("slider.slot1.desc"));
+        drawString(fontRenderer, I18n.format("slider.slot1.desc"), guiLeft + 115 - len - 3, guiTop + 39, 0xFFFFFF);
+        len = fontRenderer.getStringWidth(I18n.format("slider.texture.desc"));
+        drawString(fontRenderer, I18n.format("slider.texture.desc"), guiLeft + 75 - len - 3, guiTop + 60, 0xFFFFFF);
+        len = fontRenderer.getStringWidth(I18n.format("slider.redstone.desc"));
+        drawString(fontRenderer, I18n.format("slider.redstone.desc"), guiLeft + 115 - len - 3, guiTop + 81, 0xFFFFFF);
 
         if(((BlockSliderTE)te).HOLE_TYPE == EnumHoleTypes.ROUND)
             holeTypeButtons.get(3).drawButton(mc, mouseX, mouseY, 0);
@@ -67,19 +73,34 @@ public class BlockSliderGUIContainer<TE extends CommonTE, CNT extends CommonCont
             holeTypeButtons.get(5).drawButton(mc, mouseX, mouseY, 0);
         else
             holeTypeButtons.get(2).drawButton(mc, mouseX, mouseY, 0);
-
+        if(((BlockSliderTE)te).isRedstoneHigh)
+            holeTypeButtons.get(6).drawButton(mc, mouseX, mouseY, 0);
+        else
+            holeTypeButtons.get(7).drawButton(mc, mouseX, mouseY, 0);
     }
 
     @Override
     protected void mouseClicked(int mouseX, int mouseY, int mouseButton) throws IOException {
         super.mouseClicked(mouseX, mouseY, mouseButton);
-        for (int i = 0; i < holeTypeButtons.size(); i++)
+        int mouseClicked = -1;
+        for (int i = 0; i < 6; i++) {
             if (holeTypeButtons.get(i).mousePressed(mc, mouseX, mouseY)) {
                 int rem = i % 3;
-                if(rem == 0) ((BlockSliderTE)te).HOLE_TYPE = EnumHoleTypes.ROUND;
-                if(rem == 1) ((BlockSliderTE)te).HOLE_TYPE = EnumHoleTypes.SQUARE;
-                if(rem == 2) ((BlockSliderTE)te).HOLE_TYPE = EnumHoleTypes.CROSS;
+                if (rem == 0) ((BlockSliderTE) te).HOLE_TYPE = EnumHoleTypes.ROUND;
+                if (rem == 1) ((BlockSliderTE) te).HOLE_TYPE = EnumHoleTypes.SQUARE;
+                if (rem == 2) ((BlockSliderTE) te).HOLE_TYPE = EnumHoleTypes.CROSS;
+                mouseClicked = i;
             }
+        }
+        if(holeTypeButtons.get(6).mousePressed(mc, mouseX, mouseY) || holeTypeButtons.get(7).mousePressed(mc, mouseX, mouseY))
+        {
+            ((BlockSliderTE)te).isRedstoneHigh = !((BlockSliderTE)te).isRedstoneHigh;
+            mouseClicked = 6;
+        }
+        if(mouseClicked != -1)
+        {
+            holeTypeButtons.get(mouseClicked).playPressSound(this.mc.getSoundHandler());
+        }
     }
 
     @Override
@@ -88,19 +109,27 @@ public class BlockSliderGUIContainer<TE extends CommonTE, CNT extends CommonCont
         int yCenter = height / 2 - ySize / 2;
         if(!isGuiInitialized)
         {
-            holeTypeButtons.add(new GuiButtonImage(0,  xCenter + 74,  yCenter + 76, 18, 18, 0, 0, 18, new ResourceLocation(ModMain.MODID, "textures/gui/holetypesbuttons.png")));
-            holeTypeButtons.add(new GuiButtonImage(1,  xCenter + 94,  yCenter + 76, 18, 18, 18, 0, 18, new ResourceLocation(ModMain.MODID, "textures/gui/holetypesbuttons.png")));
-            holeTypeButtons.add(new GuiButtonImage(2,  xCenter + 114,  yCenter + 76, 18, 18, 36, 0, 18, new ResourceLocation(ModMain.MODID, "textures/gui/holetypesbuttons.png")));
-            holeTypeButtons.add(new GuiButtonImage(3,  xCenter + 74,  yCenter + 76, 18, 18, 0, 36, 18, new ResourceLocation(ModMain.MODID, "textures/gui/holetypesbuttons.png")));
-            holeTypeButtons.add(new GuiButtonImage(4,  xCenter + 94,  yCenter + 76, 18, 18, 18, 36, 18, new ResourceLocation(ModMain.MODID, "textures/gui/holetypesbuttons.png")));
-            holeTypeButtons.add(new GuiButtonImage(5,  xCenter + 114,  yCenter + 76, 18, 18, 36, 36, 18, new ResourceLocation(ModMain.MODID, "textures/gui/holetypesbuttons.png")));
+            holeTypeButtons.add(new GuiButtonImage(0,  xCenter + 74,  yCenter + 56, 18, 18, 0, 0, 18, new ResourceLocation(ModMain.MODID, "textures/gui/holetypesbuttons.png")));
+            holeTypeButtons.add(new GuiButtonImage(1,  xCenter + 94,  yCenter + 56, 18, 18, 18, 0, 18, new ResourceLocation(ModMain.MODID, "textures/gui/holetypesbuttons.png")));
+            holeTypeButtons.add(new GuiButtonImage(2,  xCenter + 114,  yCenter + 56, 18, 18, 36, 0, 18, new ResourceLocation(ModMain.MODID, "textures/gui/holetypesbuttons.png")));
+            holeTypeButtons.add(new GuiButtonImage(3,  xCenter + 74,  yCenter + 56, 18, 18, 0, 36, 18, new ResourceLocation(ModMain.MODID, "textures/gui/holetypesbuttons.png")));
+            holeTypeButtons.add(new GuiButtonImage(4,  xCenter + 94,  yCenter + 56, 18, 18, 18, 36, 18, new ResourceLocation(ModMain.MODID, "textures/gui/holetypesbuttons.png")));
+            holeTypeButtons.add(new GuiButtonImage(5,  xCenter + 114,  yCenter + 56, 18, 18, 36, 36, 18, new ResourceLocation(ModMain.MODID, "textures/gui/holetypesbuttons.png")));
+            holeTypeButtons.add(new GuiButtonImage(6,  xCenter + 114,  yCenter + 77, 18, 18, 54, 0, 18, new ResourceLocation(ModMain.MODID, "textures/gui/holetypesbuttons.png")));
+            holeTypeButtons.add(new GuiButtonImage(7,  xCenter + 114,  yCenter + 77, 18, 18, 54, 36, 18, new ResourceLocation(ModMain.MODID, "textures/gui/holetypesbuttons.png")));
             isGuiInitialized = true;
         } else
         {
             for(int i = 0; i < holeTypeButtons.size(); i++)
             {
-                holeTypeButtons.get(i).x = xCenter + 74 + ((i%3)*20);
-                holeTypeButtons.get(i).y = yCenter + 76;
+                if(i < 6) {
+                    holeTypeButtons.get(i).x = xCenter + 74 + ((i % 3) * 20);
+                    holeTypeButtons.get(i).y = yCenter + 56;
+                } else
+                {
+                    holeTypeButtons.get(i).x = xCenter + 114;
+                    holeTypeButtons.get(i).y = yCenter + 77;
+                }
             }
         }
 
