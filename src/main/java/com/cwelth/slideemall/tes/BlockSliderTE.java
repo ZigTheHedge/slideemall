@@ -19,7 +19,9 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.util.FakePlayer;
+import net.minecraftforge.common.util.FakePlayerFactory;
 
 import java.util.UUID;
 
@@ -101,7 +103,8 @@ public class BlockSliderTE extends CommonTE implements ITickable {
                         BLOCKSEXTENDED++;
                         ItemBlock blockToPlace = (ItemBlock)piston.getItem();
                         BlockPos posToPlace = pos.add(deltaX, deltaY, deltaZ);
-                        FakePlayer fakePlayer = new FakePlayer(getWorld().getMinecraftServer().getWorld(0),new GameProfile(new UUID(0, 0), "fakePlayerSlider"));
+                        //FakePlayer fakePlayer = new FakePlayer(getWorld().getMinecraftServer().getWorld(0), new GameProfile(new UUID(0, 0), "fakePlayerSlider"));
+                        FakePlayer fakePlayer = FakePlayerFactory.getMinecraft((WorldServer)getWorld());
                         IBlockState newBlock = blockToPlace.getBlock().getStateForPlacement(getWorld(), pos, EnumFacing.getFront(FACING & 7), posToPlace.getX(), posToPlace.getY(), posToPlace.getZ(), piston.getMetadata(), fakePlayer);
                         getWorld().setBlockState(pos, newBlock);
                         piston.setCount(piston.getCount() - 1);
