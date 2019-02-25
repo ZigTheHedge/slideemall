@@ -94,7 +94,7 @@ public class BlockSliderTE extends CommonTE implements ITickable {
             } else {
                 delayCounter = 5;
                 ItemStack piston = itemStackHandler.getStackInSlot(0);
-                if(piston.getCount() > 0)
+                if(piston.getCount() > 0 && BLOCKSEXTENDED < ModMain.maxExtend)
                 {
                     BlockPos pos = this.getPos();
                     pos = pos.add(deltaX * (BLOCKSEXTENDED + 1), deltaY * (BLOCKSEXTENDED + 1), deltaZ * (BLOCKSEXTENDED + 1));

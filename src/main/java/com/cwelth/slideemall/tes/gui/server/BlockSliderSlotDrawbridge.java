@@ -1,5 +1,6 @@
 package com.cwelth.slideemall.tes.gui.server;
 
+import com.cwelth.slideemall.ModMain;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.inventory.IInventory;
@@ -15,6 +16,11 @@ public class BlockSliderSlotDrawbridge extends SlotItemHandler {
 
     public BlockSliderSlotDrawbridge(IItemHandler itemHandler, int index, int xPosition, int yPosition) {
         super(itemHandler, index, xPosition, yPosition);
+    }
+
+    @Override
+    public int getItemStackLimit(@Nonnull ItemStack stack) {
+        return ModMain.maxExtend;
     }
 
     @Override

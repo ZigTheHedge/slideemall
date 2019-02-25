@@ -1,5 +1,6 @@
 package com.cwelth.slideemall.tes.gui.server;
 
+import com.cwelth.slideemall.ModMain;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
@@ -11,6 +12,11 @@ import javax.annotation.Nonnull;
 public class BlockSliderSlotDisguise extends SlotItemHandler {
     public BlockSliderSlotDisguise(IItemHandler itemHandler, int index, int xPosition, int yPosition) {
         super(itemHandler, index, xPosition, yPosition);
+    }
+
+    @Override
+    public int getItemStackLimit(@Nonnull ItemStack stack) {
+        return 1;
     }
 
     @Override
