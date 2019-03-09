@@ -11,15 +11,15 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
-public class SliderGUISync implements IMessageHandler<SliderGUISync.Packet, IMessage> {
+public final class SliderGuiSync implements IMessageHandler<SliderGuiSync.Packet, IMessage> {
 
     @Override
-    public IMessage onMessage(SliderGUISync.Packet message, MessageContext ctx) {
+    public IMessage onMessage(Packet message, MessageContext ctx) {
         EntityPlayerMP player = ctx.getServerHandler().player;
         player.getServerWorld().addScheduledTask(() -> {
             World world = player.world;
             BlockSliderTE te = (BlockSliderTE) world.getTileEntity(message.tePos);
-            te.HOLE_TYPE = message.holeType;
+            te.holeType = message.holeType;
             te.isRedstoneHigh = message.isRedstoneHigh;
             //te.sendUpdates();
             world.notifyBlockUpdate(message.tePos, world.getBlockState(message.tePos), world.getBlockState(message.tePos), 3);
@@ -28,8 +28,7 @@ public class SliderGUISync implements IMessageHandler<SliderGUISync.Packet, IMes
         return null;
     }
 
-    public static void send(BlockSliderTE te)
-    {
+    public static void send(BlockSliderTE te) {
         ModMain.network.sendToServer(new Packet(te));
     }
 
@@ -40,11 +39,12 @@ public class SliderGUISync implements IMessageHandler<SliderGUISync.Packet, IMes
 
         public Packet(BlockSliderTE te) {
             tePos = te.getPos();
-            holeType = te.HOLE_TYPE;
+            holeType = te.holeType;
             isRedstoneHigh = te.isRedstoneHigh;
         }
 
-        public Packet(){}
+        public Packet() {
+        }
 
         @Override
         public void fromBytes(ByteBuf buf) {

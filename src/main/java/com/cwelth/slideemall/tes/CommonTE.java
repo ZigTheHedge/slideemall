@@ -1,6 +1,5 @@
 package com.cwelth.slideemall.tes;
 
-import com.cwelth.slideemall.ModMain;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
@@ -11,15 +10,17 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
+import javax.annotation.Nonnull;
+
 public class CommonTE extends TileEntity {
-    public static int INVSIZE;
+    public static int inventorySize;
 
     public ItemStackHandler itemStackHandler;
 
-    public CommonTE(int invsize) {
-        INVSIZE = invsize;
+    public CommonTE(int inventorySize) {
+        CommonTE.inventorySize = inventorySize;
 
-        itemStackHandler = new ItemStackHandler(INVSIZE) {
+        itemStackHandler = new ItemStackHandler(CommonTE.inventorySize) {
             @Override
             protected void onContentsChanged(int slot) {
                 // We need to tell the tile entity that something has changed so
@@ -39,7 +40,7 @@ public class CommonTE extends TileEntity {
     }
 
     @Override
-    public boolean hasCapability(Capability<?> capability, EnumFacing facing) {
+    public boolean hasCapability(@Nonnull Capability<?> capability, EnumFacing facing) {
         if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
             return true;
         }
@@ -47,7 +48,7 @@ public class CommonTE extends TileEntity {
     }
 
     @Override
-    public <T> T getCapability(Capability<T> capability, EnumFacing facing) {
+    public <T> T getCapability(@Nonnull Capability<T> capability, EnumFacing facing) {
         if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
             return (T) itemStackHandler;
         }
@@ -56,7 +57,7 @@ public class CommonTE extends TileEntity {
 
     @Override
     public NBTTagCompound getUpdateTag() {
-        // getUpdateTag() is called whenever the chunkdata is sent to the
+        // getUpdateTag() is called whenever the chunk data is sent to the
         // server. In contrast getUpdatePacket() is called when the tile entity
         // itself wants to sync to the server. In many cases you want to send
         // over the same information in getUpdateTag() as in getUpdatePacket().
@@ -81,5 +82,4 @@ public class CommonTE extends TileEntity {
         // Here we get the packet from the server and read it into our server side tile entity
         this.readFromNBT(packet.getNbtCompound());
     }
-
 }

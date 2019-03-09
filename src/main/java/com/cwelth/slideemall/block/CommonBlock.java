@@ -1,4 +1,5 @@
-package com.cwelth.slideemall.blocks;
+package com.cwelth.slideemall.block;
+
 import com.cwelth.slideemall.ModMain;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -13,6 +14,8 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+
+import javax.annotation.Nonnull;
 
 public class CommonBlock extends Block {
     protected String name;
@@ -29,12 +32,22 @@ public class CommonBlock extends Block {
     }
 
     @Override
-    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+    public boolean onBlockActivated(
+            World worldIn,
+            BlockPos pos,
+            IBlockState state,
+            EntityPlayer playerIn,
+            EnumHand hand,
+            EnumFacing facing,
+            float hitX,
+            float hitY,
+            float hitZ) {
         return super.onBlockActivated(worldIn, pos, state, playerIn, hand, facing, hitX, hitY, hitZ);
     }
 
+    @Nonnull
     @Override
-    public CommonBlock setCreativeTab(CreativeTabs tab) {
+    public CommonBlock setCreativeTab(@Nonnull CreativeTabs tab) {
         super.setCreativeTab(tab);
         return this;
     }
@@ -50,6 +63,8 @@ public class CommonBlock extends Block {
                 (float) (entity.posY - clickedBlock.getY()),
                 (float) (entity.posZ - clickedBlock.getZ()));
     }
+
+    @Nonnull
     @Override
     public IBlockState getStateFromMeta(int meta) {
         return getDefaultState().withProperty(FACING, EnumFacing.getFront(meta & 7));
@@ -60,9 +75,9 @@ public class CommonBlock extends Block {
         return state.getValue(FACING).getIndex();
     }
 
+    @Nonnull
     @Override
     protected BlockStateContainer createBlockState() {
         return new BlockStateContainer(this, FACING);
     }
-
 }

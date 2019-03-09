@@ -7,7 +7,7 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
-import javax.annotation.Nullable;
+import javax.annotation.Nonnull;
 
 public abstract class CommonContainer<TE extends CommonTE> extends Container {
     protected TE tileEntity;
@@ -39,36 +39,37 @@ public abstract class CommonContainer<TE extends CommonTE> extends Container {
 
     protected abstract void addOwnSlots();
 
-    @Nullable
     @Override
     public ItemStack transferStackInSlot(EntityPlayer playerIn, int index) {
-        ItemStack itemstack = null;
+        ItemStack first = null;
         Slot slot = this.inventorySlots.get(index);
 
         if (slot != null && slot.getHasStack()) {
-            ItemStack itemstack1 = slot.getStack();
-            itemstack = itemstack1.copy();
+            ItemStack second = slot.getStack();
+            first = second.copy();
 
-            if (index < TE.INVSIZE) {
-                if (!this.mergeItemStack(itemstack1, TE.INVSIZE, this.inventorySlots.size(), true)) {
+            if (index < TE.inventorySize) {
+                if (!this.mergeItemStack(
+                        second,
+                        TE.inventorySize,
+                        this.inventorySlots.size(),
+                        true))
                     return null;
-                }
-            } else if (!this.mergeItemStack(itemstack1, 0, TE.INVSIZE, false)) {
+            } else if (!this.mergeItemStack(second, 0, TE.inventorySize, false))
                 return null;
-            }
 
-            if (itemstack1.isEmpty()) {
+            if (second.isEmpty())
                 slot.putStack(ItemStack.EMPTY);
-            } else {
+            else
                 slot.onSlotChanged();
-            }
+
         }
 
-        return itemstack;
+        return first;
     }
 
     @Override
-    public boolean canInteractWith(EntityPlayer playerIn) {
+    public boolean canInteractWith(@Nonnull EntityPlayer playerIn) {
         return tileEntity.canInteractWith(playerIn);
     }
 }

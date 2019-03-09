@@ -2,13 +2,13 @@ package com.cwelth.slideemall.bakes;
 
 import net.minecraftforge.common.property.IUnlistedProperty;
 
-public class UnlistedPropertyHoleType implements IUnlistedProperty<EnumHoleTypes> {
+public final class UnlistedPropertyHoleType implements IUnlistedProperty<EnumHoleTypes> {
     private final String name;
 
-    public UnlistedPropertyHoleType(String name)
-    {
+    public UnlistedPropertyHoleType(String name) {
         this.name = name;
     }
+
     @Override
     public String getName() {
         return name;

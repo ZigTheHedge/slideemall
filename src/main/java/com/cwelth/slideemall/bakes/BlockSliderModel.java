@@ -10,21 +10,23 @@ import net.minecraftforge.client.model.IModel;
 import net.minecraftforge.common.model.IModelState;
 import net.minecraftforge.common.model.TRSRTransformation;
 
+import javax.annotation.Nonnull;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.function.Function;
 
-public class BlockSliderModel implements IModel {
-
+public final class BlockSliderModel implements IModel {
     @Override
     public IBakedModel bake(IModelState state, VertexFormat format, Function<ResourceLocation, TextureAtlasSprite> bakedTextureGetter) {
         return new BlockSliderBakedModel(state, format, bakedTextureGetter);
     }
+
     @Override
     public Collection<ResourceLocation> getDependencies() {
         return Collections.emptySet();
     }
 
+    @Nonnull
     @Override
     public Collection<ResourceLocation> getTextures() {
         return ImmutableSet.of(
@@ -39,6 +41,7 @@ public class BlockSliderModel implements IModel {
                 new ResourceLocation(ModMain.MODID, "blocks/blocksliderhole_box"));
     }
 
+    @Nonnull
     @Override
     public IModelState getDefaultState() {
         return TRSRTransformation.identity();

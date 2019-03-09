@@ -6,7 +6,9 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.ICustomModelLoader;
 import net.minecraftforge.client.model.IModel;
 
-public class BlockSliderModelLoader implements ICustomModelLoader {
+import javax.annotation.Nonnull;
+
+public final class BlockSliderModelLoader implements ICustomModelLoader {
     public static final BlockSliderModel SLIDER_MODEL = new BlockSliderModel();
 
     @Override
@@ -14,14 +16,14 @@ public class BlockSliderModelLoader implements ICustomModelLoader {
         return modelLocation.getResourceDomain().equals(ModMain.MODID) && "blockslider".equals(modelLocation.getResourcePath());
     }
 
+    @Nonnull
     @Override
-    public IModel loadModel(ResourceLocation modelLocation) throws Exception {
+    public IModel loadModel(@Nonnull ResourceLocation modelLocation) {
         return SLIDER_MODEL;
     }
 
     @Override
-    public void onResourceManagerReload(IResourceManager resourceManager) {
+    public void onResourceManagerReload(@Nonnull IResourceManager resourceManager) {
 
     }
-
 }

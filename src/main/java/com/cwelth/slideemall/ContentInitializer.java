@@ -1,22 +1,24 @@
 package com.cwelth.slideemall;
 
-import com.cwelth.slideemall.blocks.BlockSlider;
+import com.cwelth.slideemall.block.BlockSlider;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class InitContent {
+public final class ContentInitializer {
+    private ContentInitializer() {
+    }
 
     @GameRegistry.ObjectHolder("slideemall:blockslider")
     public static BlockSlider blockSlider;
 
     @SideOnly(Side.CLIENT)
-    public static void initModels() {
+    public static void initializeModels() {
         blockSlider.initModel();
     }
 
     @SideOnly(Side.CLIENT)
-    public static void initItemModels() {
+    public static void initializeItemModels() {
         blockSlider.initItemModel();
     }
 }

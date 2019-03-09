@@ -2,8 +2,7 @@ package com.cwelth.slideemall.bakes;
 
 import net.minecraft.util.IStringSerializable;
 
-public enum EnumHoleTypes implements IStringSerializable
-{
+public enum EnumHoleTypes implements IStringSerializable {
     ROUND(0, "round"),
     SQUARE(1, "square"),
     CROSS(2, "cross");
@@ -11,18 +10,14 @@ public enum EnumHoleTypes implements IStringSerializable
     private final int index;
     private final String name;
 
-    private EnumHoleTypes(int index, String name)
-    {
+    EnumHoleTypes(int index, String name) {
         this.index = index;
         this.name = name;
     }
 
-    public int getIndex()
-    {
+    public int getIndex() {
         return index;
     }
-
-
 
     @Override
     public String getName() {
