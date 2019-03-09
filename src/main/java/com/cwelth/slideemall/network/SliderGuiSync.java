@@ -23,9 +23,9 @@ public final class SliderGuiSync implements IMessageHandler<SliderGuiSync.Packet
             BlockSliderTE tileEntity = (BlockSliderTE) world.getTileEntity(message.tePos);
             Objects.requireNonNull(tileEntity).holeType = message.holeType;
             tileEntity.isRedstoneHigh = message.isRedstoneHigh;
-            //te.sendUpdates();
+            // te.sendUpdates();
             world.notifyBlockUpdate(message.tePos, world.getBlockState(message.tePos), world.getBlockState(message.tePos), 3);
-            //SlideEmAll.logger.warning("TE synced. Side: " + ctx.side + ", Data follows: X: "+message.tePos.getX() + ", Y: "+message.tePos.getY()+", Z: "+message.tePos.getZ()+", HOLE_TYPE:"+message.holeType);
+            // SlideEmAll.logger.warning("TE synced. Side: " + ctx.side + ", Data follows: X: "+message.tePos.getX() + ", Y: "+message.tePos.getY()+", Z: "+message.tePos.getZ()+", HOLE_TYPE:"+message.holeType);
         });
         return null;
     }

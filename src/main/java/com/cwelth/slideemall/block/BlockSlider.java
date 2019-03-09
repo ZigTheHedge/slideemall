@@ -51,8 +51,8 @@ public final class BlockSlider extends CommonTEBlock<BlockSliderTE> {
 
     @SideOnly(Side.CLIENT)
     public void initModel() {
-        //Replace with BakedModel
-        //ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), 0, new ModelResourceLocation(getRegistryName(), "inventory"));
+        // Replace with BakedModel
+        // ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), 0, new ModelResourceLocation(getRegistryName(), "inventory"));
         /*
         StateMapperBase ignoreState = new StateMapperBase() {
             @Override
@@ -155,6 +155,11 @@ public final class BlockSlider extends CommonTEBlock<BlockSliderTE> {
                     ((BlockSliderTE) tileentity).itemStackHandler.getStackInSlot(1));
         }
         super.breakBlock(worldIn, pos, state);
+    }
+
+    @Override
+    public boolean isOpaqueCube(IBlockState p_isOpaqueCube_1_) {
+        return false;
     }
 
     @Override

@@ -10,7 +10,6 @@ import net.minecraftforge.items.SlotItemHandler;
 import javax.annotation.Nonnull;
 
 public final class BlockSliderSlotDrawbridge extends SlotItemHandler {
-
     public BlockSliderSlotDrawbridge(IItemHandler itemHandler, int index, int xPosition, int yPosition) {
         super(itemHandler, index, xPosition, yPosition);
     }

@@ -21,10 +21,14 @@ public final class BlockSliderSlotDisguise extends SlotItemHandler {
     @Override
     public boolean isItemValid(@Nonnull ItemStack stack) {
         if (stack.getItem() instanceof ItemBlock)
-            if (Block.getBlockFromItem(stack.getItem()).hasTileEntity(Block.getBlockFromItem(stack.getItem()).getDefaultState()))
+            if (Block
+                    .getBlockFromItem(stack.getItem())
+                    .hasTileEntity(Block.getBlockFromItem(stack.getItem()).getDefaultState()))
                 return false;
             else
-                return Block.getBlockFromItem(stack.getItem()).isOpaqueCube(Block.getBlockFromItem(stack.getItem()).getDefaultState());
+                return Block
+                        .getBlockFromItem(stack.getItem())
+                        .isOpaqueCube(Block.getBlockFromItem(stack.getItem()).getDefaultState());
         else
             return false;
     }

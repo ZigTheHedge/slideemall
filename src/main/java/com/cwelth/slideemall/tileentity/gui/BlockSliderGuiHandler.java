@@ -8,7 +8,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.IGuiHandler;
 
 /**
- * Created by ZtH on 23.02.2017.
+ * @author zth
  */
 public final class BlockSliderGuiHandler implements IGuiHandler {
 
