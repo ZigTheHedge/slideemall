@@ -87,7 +87,11 @@ public final class BlockSliderGuiContainer<E extends CommonTE, C extends CommonC
 
     @Override
     protected void mouseClicked(int mouseX, int mouseY, int mouseButton) throws IOException {
-        super.mouseClicked(mouseX, mouseY, mouseButton);
+        try {
+            super.mouseClicked(mouseX, mouseY, mouseButton);
+        } catch (IOException | NullPointerException exception) {
+            return;
+        }
         int mouseClicked = -1;
         for (int i = 0; i < 6; i++)
             if (holeTypeButtons.get(i).mousePressed(mc, mouseX, mouseY)) {
