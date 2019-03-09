@@ -147,7 +147,13 @@ public final class BlockSliderBakedModel implements IBakedModel {
                         .getBlockRendererDispatcher()
                         .getBlockModelShapes()
                         .getTexture(newBlock);
-            quads.add(createQuad(new Vec3d(0, 0, 1), new Vec3d(0, 0, 0), new Vec3d(1, 0, 0), new Vec3d(1, 0, 1), sprite));
+            quads.add(
+                    createQuad(
+                            new Vec3d(0, 0, 1),
+                            new Vec3d(0, 0, 0),
+                            new Vec3d(1, 0, 0),
+                            new Vec3d(1, 0, 1),
+                            sprite));
 
             // top
             if (disguise == null)
@@ -163,7 +169,8 @@ public final class BlockSliderBakedModel implements IBakedModel {
                             new Vec3d(0, 1, 0),
                             new Vec3d(0, 1, 1),
                             new Vec3d(1, 1, 1),
-                            new Vec3d(1, 1, 0), sprite));
+                            new Vec3d(1, 1, 0),
+                            sprite));
 
             // east
             if (disguise == null)
@@ -174,7 +181,13 @@ public final class BlockSliderBakedModel implements IBakedModel {
                         .getBlockRendererDispatcher()
                         .getBlockModelShapes()
                         .getTexture(newBlock);
-            quads.add(createQuad(new Vec3d(0, 1, 1), new Vec3d(0, 0, 1), new Vec3d(1, 0, 1), new Vec3d(1, 1, 1), sprite));
+            quads.add(
+                    createQuad(
+                            new Vec3d(0, 1, 1),
+                            new Vec3d(0, 0, 1),
+                            new Vec3d(1, 0, 1),
+                            new Vec3d(1, 1, 1),
+                            sprite));
             // west
             if (disguise == null)
                 sprite = tGetter.apply(new ResourceLocation(SlideEmAll.MODID, "blocks/blockslider_west"));
@@ -184,7 +197,13 @@ public final class BlockSliderBakedModel implements IBakedModel {
                         .getBlockRendererDispatcher()
                         .getBlockModelShapes()
                         .getTexture(newBlock);
-            quads.add(createQuad(new Vec3d(1, 1, 0), new Vec3d(1, 0, 0), new Vec3d(0, 0, 0), new Vec3d(0, 1, 0), sprite));
+            quads.add(
+                    createQuad(
+                            new Vec3d(1, 1, 0),
+                            new Vec3d(1, 0, 0),
+                            new Vec3d(0, 0, 0),
+                            new Vec3d(0, 1, 0),
+                            sprite));
             // front
             if (disguise == null)
                 sprite = tGetter.apply(new ResourceLocation(SlideEmAll.MODID, "blocks/" + holeTexture));
@@ -194,7 +213,13 @@ public final class BlockSliderBakedModel implements IBakedModel {
                         .getBlockRendererDispatcher()
                         .getBlockModelShapes()
                         .getTexture(newBlock);
-            quads.add(createQuad(new Vec3d(1, 1, 1), new Vec3d(1, 0, 1), new Vec3d(1, 0, 0), new Vec3d(1, 1, 0), sprite));
+            quads.add(
+                    createQuad(
+                            new Vec3d(1, 1, 1),
+                            new Vec3d(1, 0, 1),
+                            new Vec3d(1, 0, 0),
+                            new Vec3d(1, 1, 0),
+                            sprite));
             // back
             if (disguise == null)
                 sprite = tGetter.apply(new ResourceLocation(SlideEmAll.MODID, "blocks/blockslider"));
@@ -204,7 +229,13 @@ public final class BlockSliderBakedModel implements IBakedModel {
                         .getBlockRendererDispatcher()
                         .getBlockModelShapes()
                         .getTexture(newBlock);
-            quads.add(createQuad(new Vec3d(0, 1, 0), new Vec3d(0, 0, 0), new Vec3d(0, 0, 1), new Vec3d(0, 1, 1), sprite));
+            quads.add(
+                    createQuad(
+                            new Vec3d(0, 1, 0),
+                            new Vec3d(0, 0, 0),
+                            new Vec3d(0, 0, 1),
+                            new Vec3d(0, 1, 1),
+                            sprite));
 
         }
         if (facing == EnumFacing.SOUTH) {
@@ -218,7 +249,13 @@ public final class BlockSliderBakedModel implements IBakedModel {
                         .getBlockRendererDispatcher()
                         .getBlockModelShapes()
                         .getTexture(newBlock);
-            quads.add(createQuad(new Vec3d(0, 0, 1), new Vec3d(0, 0, 0), new Vec3d(1, 0, 0), new Vec3d(1, 0, 1), sprite));
+            quads.add(
+                    createQuad(
+                            new Vec3d(0, 0, 1),
+                            new Vec3d(0, 0, 0),
+                            new Vec3d(1, 0, 0),
+                            new Vec3d(1, 0, 1),
+                            sprite));
             // top
             if (disguise == null)
                 sprite = tGetter.apply(new ResourceLocation(SlideEmAll.MODID, "blocks/blockslider_bottom"));
@@ -228,7 +265,13 @@ public final class BlockSliderBakedModel implements IBakedModel {
                         .getBlockRendererDispatcher()
                         .getBlockModelShapes()
                         .getTexture(newBlock);
-            quads.add(createQuad(new Vec3d(0, 1, 0), new Vec3d(0, 1, 1), new Vec3d(1, 1, 1), new Vec3d(1, 1, 0), sprite));
+            quads.add(
+                    createQuad(
+                            new Vec3d(0, 1, 0),
+                            new Vec3d(0, 1, 1),
+                            new Vec3d(1, 1, 1),
+                            new Vec3d(1, 1, 0),
+                            sprite));
             // east
             if (disguise == null)
                 sprite = tGetter.apply(new ResourceLocation(SlideEmAll.MODID, "blocks/" + holeTexture));
@@ -238,7 +281,13 @@ public final class BlockSliderBakedModel implements IBakedModel {
                         .getBlockRendererDispatcher()
                         .getBlockModelShapes()
                         .getTexture(newBlock);
-            quads.add(createQuad(new Vec3d(0, 1, 1), new Vec3d(0, 0, 1), new Vec3d(1, 0, 1), new Vec3d(1, 1, 1), sprite));
+            quads.add(
+                    createQuad(
+                            new Vec3d(0, 1, 1),
+                            new Vec3d(0, 0, 1),
+                            new Vec3d(1, 0, 1),
+                            new Vec3d(1, 1, 1),
+                            sprite));
             // west
             if (disguise == null)
                 sprite = tGetter.apply(new ResourceLocation(SlideEmAll.MODID, "blocks/blockslider"));
@@ -248,7 +297,13 @@ public final class BlockSliderBakedModel implements IBakedModel {
                         .getBlockRendererDispatcher()
                         .getBlockModelShapes()
                         .getTexture(newBlock);
-            quads.add(createQuad(new Vec3d(1, 1, 0), new Vec3d(1, 0, 0), new Vec3d(0, 0, 0), new Vec3d(0, 1, 0), sprite));
+            quads.add(
+                    createQuad(
+                            new Vec3d(1, 1, 0),
+                            new Vec3d(1, 0, 0),
+                            new Vec3d(0, 0, 0),
+                            new Vec3d(0, 1, 0),
+                            sprite));
             // front
             if (disguise == null)
                 sprite = tGetter.apply(new ResourceLocation(SlideEmAll.MODID, "blocks/blockslider_west"));
@@ -258,7 +313,13 @@ public final class BlockSliderBakedModel implements IBakedModel {
                         .getBlockRendererDispatcher()
                         .getBlockModelShapes()
                         .getTexture(newBlock);
-            quads.add(createQuad(new Vec3d(1, 1, 1), new Vec3d(1, 0, 1), new Vec3d(1, 0, 0), new Vec3d(1, 1, 0), sprite));
+            quads.add(
+                    createQuad(
+                            new Vec3d(1, 1, 1),
+                            new Vec3d(1, 0, 1),
+                            new Vec3d(1, 0, 0),
+                            new Vec3d(1, 1, 0),
+                            sprite));
             // back
             if (disguise == null)
                 sprite = tGetter.apply(new ResourceLocation(SlideEmAll.MODID, "blocks/blockslider_east"));
@@ -268,11 +329,16 @@ public final class BlockSliderBakedModel implements IBakedModel {
                         .getBlockRendererDispatcher()
                         .getBlockModelShapes()
                         .getTexture(newBlock);
-            quads.add(createQuad(new Vec3d(0, 1, 0), new Vec3d(0, 0, 0), new Vec3d(0, 0, 1), new Vec3d(0, 1, 1), sprite));
+            quads.add(
+                    createQuad(
+                            new Vec3d(0, 1, 0),
+                            new Vec3d(0, 0, 0),
+                            new Vec3d(0, 0, 1),
+                            new Vec3d(0, 1, 1),
+                            sprite));
 
         }
         if (facing == EnumFacing.WEST) {
-
             // bottom
             if (disguise == null)
                 sprite = tGetter.apply(new ResourceLocation(SlideEmAll.MODID, "blocks/blockslider_west"));
@@ -282,7 +348,13 @@ public final class BlockSliderBakedModel implements IBakedModel {
                         .getBlockRendererDispatcher()
                         .getBlockModelShapes()
                         .getTexture(newBlock);
-            quads.add(createQuad(new Vec3d(0, 0, 1), new Vec3d(0, 0, 0), new Vec3d(1, 0, 0), new Vec3d(1, 0, 1), sprite));
+            quads.add(
+                    createQuad(
+                            new Vec3d(0, 0, 1),
+                            new Vec3d(0, 0, 0),
+                            new Vec3d(1, 0, 0),
+                            new Vec3d(1, 0, 1), sprite));
+
             // top
             if (disguise == null)
                 sprite = tGetter.apply(new ResourceLocation(SlideEmAll.MODID, "blocks/blockslider_west"));
@@ -292,7 +364,14 @@ public final class BlockSliderBakedModel implements IBakedModel {
                         .getBlockRendererDispatcher()
                         .getBlockModelShapes()
                         .getTexture(newBlock);
-            quads.add(createQuad(new Vec3d(0, 1, 0), new Vec3d(0, 1, 1), new Vec3d(1, 1, 1), new Vec3d(1, 1, 0), sprite));
+            quads.add(
+                    createQuad(
+                            new Vec3d(0, 1, 0),
+                            new Vec3d(0, 1, 1),
+                            new Vec3d(1, 1, 1),
+                            new Vec3d(1, 1, 0),
+                            sprite));
+
             // east
             if (disguise == null)
                 sprite = tGetter.apply(new ResourceLocation(SlideEmAll.MODID, "blocks/blockslider_west"));
@@ -302,7 +381,14 @@ public final class BlockSliderBakedModel implements IBakedModel {
                         .getBlockRendererDispatcher()
                         .getBlockModelShapes()
                         .getTexture(newBlock);
-            quads.add(createQuad(new Vec3d(0, 1, 1), new Vec3d(0, 0, 1), new Vec3d(1, 0, 1), new Vec3d(1, 1, 1), sprite));
+            quads.add(
+                    createQuad(
+                            new Vec3d(0, 1, 1),
+                            new Vec3d(0, 0, 1),
+                            new Vec3d(1, 0, 1),
+                            new Vec3d(1, 1, 1),
+                            sprite));
+
             // west
             if (disguise == null)
                 sprite = tGetter.apply(new ResourceLocation(SlideEmAll.MODID, "blocks/blockslider_east"));
@@ -312,7 +398,14 @@ public final class BlockSliderBakedModel implements IBakedModel {
                         .getBlockRendererDispatcher()
                         .getBlockModelShapes()
                         .getTexture(newBlock);
-            quads.add(createQuad(new Vec3d(1, 1, 0), new Vec3d(1, 0, 0), new Vec3d(0, 0, 0), new Vec3d(0, 1, 0), sprite));
+            quads.add(
+                    createQuad(
+                            new Vec3d(1, 1, 0),
+                            new Vec3d(1, 0, 0),
+                            new Vec3d(0, 0, 0),
+                            new Vec3d(0, 1, 0),
+                            sprite));
+
             // front
             if (disguise == null)
                 sprite = tGetter.apply(new ResourceLocation(SlideEmAll.MODID, "blocks/blockslider"));
@@ -322,7 +415,13 @@ public final class BlockSliderBakedModel implements IBakedModel {
                         .getBlockRendererDispatcher()
                         .getBlockModelShapes()
                         .getTexture(newBlock);
-            quads.add(createQuad(new Vec3d(1, 1, 1), new Vec3d(1, 0, 1), new Vec3d(1, 0, 0), new Vec3d(1, 1, 0), sprite));
+            quads.add(
+                    createQuad(
+                            new Vec3d(1, 1, 1),
+                            new Vec3d(1, 0, 1),
+                            new Vec3d(1, 0, 0),
+                            new Vec3d(1, 1, 0),
+                            sprite));
             // back
             if (disguise == null)
                 sprite = tGetter.apply(new ResourceLocation(SlideEmAll.MODID, "blocks/" + holeTexture));
@@ -332,11 +431,16 @@ public final class BlockSliderBakedModel implements IBakedModel {
                         .getBlockRendererDispatcher()
                         .getBlockModelShapes()
                         .getTexture(newBlock);
-            quads.add(createQuad(new Vec3d(0, 1, 0), new Vec3d(0, 0, 0), new Vec3d(0, 0, 1), new Vec3d(0, 1, 1), sprite));
+            quads.add(
+                    createQuad(
+                            new Vec3d(0, 1, 0),
+                            new Vec3d(0, 0, 0),
+                            new Vec3d(0, 0, 1),
+                            new Vec3d(0, 1, 1),
+                            sprite));
 
         }
         if (facing == EnumFacing.NORTH) {
-
             // bottom
             if (disguise == null)
                 sprite = tGetter.apply(new ResourceLocation(SlideEmAll.MODID, "blocks/blockslider_bottom"));
@@ -346,7 +450,13 @@ public final class BlockSliderBakedModel implements IBakedModel {
                         .getBlockRendererDispatcher()
                         .getBlockModelShapes()
                         .getTexture(newBlock);
-            quads.add(createQuad(new Vec3d(0, 0, 1), new Vec3d(0, 0, 0), new Vec3d(1, 0, 0), new Vec3d(1, 0, 1), sprite));
+            quads.add(
+                    createQuad(
+                            new Vec3d(0, 0, 1),
+                            new Vec3d(0, 0, 0),
+                            new Vec3d(1, 0, 0),
+                            new Vec3d(1, 0, 1),
+                            sprite));
 
             // top
             if (disguise == null)
@@ -357,7 +467,14 @@ public final class BlockSliderBakedModel implements IBakedModel {
                         .getBlockRendererDispatcher()
                         .getBlockModelShapes()
                         .getTexture(newBlock);
-            quads.add(createQuad(new Vec3d(0, 1, 0), new Vec3d(0, 1, 1), new Vec3d(1, 1, 1), new Vec3d(1, 1, 0), sprite));
+            quads.add(
+                    createQuad(
+                            new Vec3d(0, 1, 0),
+                            new Vec3d(0, 1, 1),
+                            new Vec3d(1, 1, 1),
+                            new Vec3d(1, 1, 0),
+                            sprite));
+
             // east
             if (disguise == null)
                 sprite = tGetter.apply(new ResourceLocation(SlideEmAll.MODID, "blocks/blockslider"));
@@ -367,7 +484,14 @@ public final class BlockSliderBakedModel implements IBakedModel {
                         .getBlockRendererDispatcher()
                         .getBlockModelShapes()
                         .getTexture(newBlock);
-            quads.add(createQuad(new Vec3d(0, 1, 1), new Vec3d(0, 0, 1), new Vec3d(1, 0, 1), new Vec3d(1, 1, 1), sprite));
+            quads.add(
+                    createQuad(
+                            new Vec3d(0, 1, 1),
+                            new Vec3d(0, 0, 1),
+                            new Vec3d(1, 0, 1),
+                            new Vec3d(1, 1, 1),
+                            sprite));
+
             // west
             if (disguise == null)
                 sprite = tGetter.apply(new ResourceLocation(SlideEmAll.MODID, "blocks/" + holeTexture));
@@ -377,7 +501,14 @@ public final class BlockSliderBakedModel implements IBakedModel {
                         .getBlockRendererDispatcher()
                         .getBlockModelShapes()
                         .getTexture(newBlock);
-            quads.add(createQuad(new Vec3d(1, 1, 0), new Vec3d(1, 0, 0), new Vec3d(0, 0, 0), new Vec3d(0, 1, 0), sprite));
+            quads.add(
+                    createQuad(
+                            new Vec3d(1, 1, 0),
+                            new Vec3d(1, 0, 0),
+                            new Vec3d(0, 0, 0),
+                            new Vec3d(0, 1, 0),
+                            sprite));
+
             // front
             if (disguise == null)
                 sprite = tGetter.apply(new ResourceLocation(SlideEmAll.MODID, "blocks/blockslider_east"));
@@ -387,7 +518,13 @@ public final class BlockSliderBakedModel implements IBakedModel {
                         .getBlockRendererDispatcher()
                         .getBlockModelShapes()
                         .getTexture(newBlock);
-            quads.add(createQuad(new Vec3d(1, 1, 1), new Vec3d(1, 0, 1), new Vec3d(1, 0, 0), new Vec3d(1, 1, 0), sprite));
+            quads.add(
+                    createQuad(
+                            new Vec3d(1, 1, 1),
+                            new Vec3d(1, 0, 1),
+                            new Vec3d(1, 0, 0),
+                            new Vec3d(1, 1, 0),
+                            sprite));
             // back
             if (disguise == null)
                 sprite = tGetter.apply(new ResourceLocation(SlideEmAll.MODID, "blocks/blockslider_west"));
@@ -397,7 +534,13 @@ public final class BlockSliderBakedModel implements IBakedModel {
                         .getBlockRendererDispatcher()
                         .getBlockModelShapes()
                         .getTexture(newBlock);
-            quads.add(createQuad(new Vec3d(0, 1, 0), new Vec3d(0, 0, 0), new Vec3d(0, 0, 1), new Vec3d(0, 1, 1), sprite));
+            quads.add(
+                    createQuad(
+                            new Vec3d(0, 1, 0),
+                            new Vec3d(0, 0, 0),
+                            new Vec3d(0, 0, 1),
+                            new Vec3d(0, 1, 1),
+                            sprite));
 
         }
         if (facing == EnumFacing.UP) {
@@ -411,7 +554,14 @@ public final class BlockSliderBakedModel implements IBakedModel {
                         .getBlockRendererDispatcher()
                         .getBlockModelShapes()
                         .getTexture(newBlock);
-            quads.add(createQuad(new Vec3d(0, 0, 1), new Vec3d(0, 0, 0), new Vec3d(1, 0, 0), new Vec3d(1, 0, 1), sprite));
+            quads.add(
+                    createQuad(
+                            new Vec3d(0, 0, 1),
+                            new Vec3d(0, 0, 0),
+                            new Vec3d(1, 0, 0),
+                            new Vec3d(1, 0, 1),
+                            sprite));
+
             // top
             if (disguise == null)
                 sprite = tGetter.apply(new ResourceLocation(SlideEmAll.MODID, "blocks/" + holeTexture));
@@ -421,7 +571,14 @@ public final class BlockSliderBakedModel implements IBakedModel {
                         .getBlockRendererDispatcher()
                         .getBlockModelShapes()
                         .getTexture(newBlock);
-            quads.add(createQuad(new Vec3d(0, 1, 0), new Vec3d(0, 1, 1), new Vec3d(1, 1, 1), new Vec3d(1, 1, 0), sprite));
+            quads.add(
+                    createQuad(
+                            new Vec3d(0, 1, 0),
+                            new Vec3d(0, 1, 1),
+                            new Vec3d(1, 1, 1),
+                            new Vec3d(1, 1, 0),
+                            sprite));
+
             // east
             if (disguise == null)
                 sprite = tGetter.apply(new ResourceLocation(SlideEmAll.MODID, "blocks/blockslider_top"));
@@ -431,7 +588,14 @@ public final class BlockSliderBakedModel implements IBakedModel {
                         .getBlockRendererDispatcher()
                         .getBlockModelShapes()
                         .getTexture(newBlock);
-            quads.add(createQuad(new Vec3d(0, 1, 1), new Vec3d(0, 0, 1), new Vec3d(1, 0, 1), new Vec3d(1, 1, 1), sprite));
+            quads.add(
+                    createQuad(
+                            new Vec3d(0, 1, 1),
+                            new Vec3d(0, 0, 1),
+                            new Vec3d(1, 0, 1),
+                            new Vec3d(1, 1, 1),
+                            sprite));
+
             // west
             if (disguise == null)
                 sprite = tGetter.apply(new ResourceLocation(SlideEmAll.MODID, "blocks/blockslider_top"));
@@ -441,7 +605,14 @@ public final class BlockSliderBakedModel implements IBakedModel {
                         .getBlockRendererDispatcher()
                         .getBlockModelShapes()
                         .getTexture(newBlock);
-            quads.add(createQuad(new Vec3d(1, 1, 0), new Vec3d(1, 0, 0), new Vec3d(0, 0, 0), new Vec3d(0, 1, 0), sprite));
+            quads.add(
+                    createQuad(
+                            new Vec3d(1, 1, 0),
+                            new Vec3d(1, 0, 0),
+                            new Vec3d(0, 0, 0),
+                            new Vec3d(0, 1, 0),
+                            sprite));
+
             // front
             if (disguise == null)
                 sprite = tGetter.apply(new ResourceLocation(SlideEmAll.MODID, "blocks/blockslider_top"));
@@ -451,7 +622,14 @@ public final class BlockSliderBakedModel implements IBakedModel {
                         .getBlockRendererDispatcher()
                         .getBlockModelShapes()
                         .getTexture(newBlock);
-            quads.add(createQuad(new Vec3d(1, 1, 1), new Vec3d(1, 0, 1), new Vec3d(1, 0, 0), new Vec3d(1, 1, 0), sprite));
+            quads.add(
+                    createQuad(
+                            new Vec3d(1, 1, 1),
+                            new Vec3d(1, 0, 1),
+                            new Vec3d(1, 0, 0),
+                            new Vec3d(1, 1, 0),
+                            sprite));
+
             // back
             if (disguise == null)
                 sprite = tGetter.apply(new ResourceLocation(SlideEmAll.MODID, "blocks/blockslider_top"));
@@ -461,9 +639,11 @@ public final class BlockSliderBakedModel implements IBakedModel {
                         .getBlockRendererDispatcher()
                         .getBlockModelShapes()
                         .getTexture(newBlock);
-            quads.add(createQuad(new Vec3d(0, 1, 0), new Vec3d(0, 0, 0), new Vec3d(0, 0, 1), new Vec3d(0, 1, 1), sprite));
+            quads.add(
+                    createQuad(new Vec3d(0, 1, 0), new Vec3d(0, 0, 0), new Vec3d(0, 0, 1), new Vec3d(0, 1, 1), sprite));
 
         }
+
         if (facing == EnumFacing.DOWN) {
 
             // bottom
@@ -475,7 +655,14 @@ public final class BlockSliderBakedModel implements IBakedModel {
                         .getBlockRendererDispatcher()
                         .getBlockModelShapes()
                         .getTexture(newBlock);
-            quads.add(createQuad(new Vec3d(0, 0, 1), new Vec3d(0, 0, 0), new Vec3d(1, 0, 0), new Vec3d(1, 0, 1), sprite));
+            quads.add(
+                    createQuad(
+                            new Vec3d(0, 0, 1),
+                            new Vec3d(0, 0, 0),
+                            new Vec3d(1, 0, 0),
+                            new Vec3d(1, 0, 1),
+                            sprite));
+
             // top
             if (disguise == null)
                 sprite = tGetter.apply(new ResourceLocation(SlideEmAll.MODID, "blocks/blockslider"));
@@ -485,7 +672,14 @@ public final class BlockSliderBakedModel implements IBakedModel {
                         .getBlockRendererDispatcher()
                         .getBlockModelShapes()
                         .getTexture(newBlock);
-            quads.add(createQuad(new Vec3d(0, 1, 0), new Vec3d(0, 1, 1), new Vec3d(1, 1, 1), new Vec3d(1, 1, 0), sprite));
+            quads.add(
+                    createQuad(
+                            new Vec3d(0, 1, 0),
+                            new Vec3d(0, 1, 1),
+                            new Vec3d(1, 1, 1),
+                            new Vec3d(1, 1, 0),
+                            sprite));
+
             // east
             if (disguise == null)
                 sprite = tGetter.apply(new ResourceLocation(SlideEmAll.MODID, "blocks/blockslider_bottom"));
@@ -495,7 +689,14 @@ public final class BlockSliderBakedModel implements IBakedModel {
                         .getBlockRendererDispatcher()
                         .getBlockModelShapes()
                         .getTexture(newBlock);
-            quads.add(createQuad(new Vec3d(0, 1, 1), new Vec3d(0, 0, 1), new Vec3d(1, 0, 1), new Vec3d(1, 1, 1), sprite));
+            quads.add(
+                    createQuad(
+                            new Vec3d(0, 1, 1),
+                            new Vec3d(0, 0, 1),
+                            new Vec3d(1, 0, 1),
+                            new Vec3d(1, 1, 1),
+                            sprite));
+
             // west
             if (disguise == null)
                 sprite = tGetter.apply(new ResourceLocation(SlideEmAll.MODID, "blocks/blockslider_bottom"));
@@ -505,7 +706,14 @@ public final class BlockSliderBakedModel implements IBakedModel {
                         .getBlockRendererDispatcher()
                         .getBlockModelShapes()
                         .getTexture(newBlock);
-            quads.add(createQuad(new Vec3d(1, 1, 0), new Vec3d(1, 0, 0), new Vec3d(0, 0, 0), new Vec3d(0, 1, 0), sprite));
+            quads.add(
+                    createQuad(
+                            new Vec3d(1, 1, 0),
+                            new Vec3d(1, 0, 0),
+                            new Vec3d(0, 0, 0),
+                            new Vec3d(0, 1, 0),
+                            sprite));
+
             // front
             if (disguise == null)
                 sprite = tGetter.apply(new ResourceLocation(SlideEmAll.MODID, "blocks/blockslider_bottom"));
@@ -515,7 +723,14 @@ public final class BlockSliderBakedModel implements IBakedModel {
                         .getBlockRendererDispatcher()
                         .getBlockModelShapes()
                         .getTexture(newBlock);
-            quads.add(createQuad(new Vec3d(1, 1, 1), new Vec3d(1, 0, 1), new Vec3d(1, 0, 0), new Vec3d(1, 1, 0), sprite));
+            quads.add(
+                    createQuad(
+                            new Vec3d(1, 1, 1),
+                            new Vec3d(1, 0, 1),
+                            new Vec3d(1, 0, 0),
+                            new Vec3d(1, 1, 0),
+                            sprite));
+
             // back
             if (disguise == null)
                 sprite = tGetter.apply(new ResourceLocation(SlideEmAll.MODID, "blocks/blockslider_bottom"));
@@ -525,7 +740,13 @@ public final class BlockSliderBakedModel implements IBakedModel {
                         .getBlockRendererDispatcher()
                         .getBlockModelShapes()
                         .getTexture(newBlock);
-            quads.add(createQuad(new Vec3d(0, 1, 0), new Vec3d(0, 0, 0), new Vec3d(0, 0, 1), new Vec3d(0, 1, 1), sprite));
+            quads.add(
+                    createQuad(
+                            new Vec3d(0, 1, 0),
+                            new Vec3d(0, 0, 0),
+                            new Vec3d(0, 0, 1),
+                            new Vec3d(0, 1, 1),
+                            sprite));
 
         }
         return quads;
