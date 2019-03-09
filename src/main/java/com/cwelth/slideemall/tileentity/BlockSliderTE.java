@@ -27,9 +27,9 @@ public final class BlockSliderTE extends CommonTE implements ITickable {
     public int facing;
     public int state;
     public int blocksExtended;
-    public EnumHoleTypes holeType;
+    private EnumHoleTypes holeType;
     private int delayCounter = 10;
-    public boolean isRedstoneHigh = true;
+    private boolean redstoneHigh = true;
 
     public BlockSliderTE() {
         super(2);
@@ -37,6 +37,22 @@ public final class BlockSliderTE extends CommonTE implements ITickable {
         blocksExtended = 0;
         holeType = EnumHoleTypes.ROUND;
 
+    }
+
+    public EnumHoleTypes getHoleType() {
+        return holeType;
+    }
+
+    public void setHoleType(EnumHoleTypes value) {
+        this.holeType = value;
+    }
+
+    public void setRedstoneHigh(boolean value) {
+        this.redstoneHigh = value;
+    }
+
+    public boolean isRedstoneHigh() {
+        return redstoneHigh;
     }
 
     @Override
@@ -54,7 +70,7 @@ public final class BlockSliderTE extends CommonTE implements ITickable {
         if (compound.hasKey("holetype"))
             holeType = EnumHoleTypes.values()[compound.getInteger("holetype")];
         if (compound.hasKey("redstonehigh"))
-            isRedstoneHigh = compound.getBoolean("redstonehigh");
+            redstoneHigh = compound.getBoolean("redstonehigh");
     }
 
     @Nonnull
@@ -66,7 +82,7 @@ public final class BlockSliderTE extends CommonTE implements ITickable {
         compound.setInteger("state", state);
         compound.setInteger("blocksextended", blocksExtended);
         compound.setInteger("holetype", holeType.getIndex());
-        compound.setBoolean("redstonehigh", isRedstoneHigh);
+        compound.setBoolean("redstonehigh", redstoneHigh);
         this.markDirty();
         return compound;
     }

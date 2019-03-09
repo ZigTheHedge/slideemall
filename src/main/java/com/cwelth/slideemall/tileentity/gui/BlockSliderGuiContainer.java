@@ -67,19 +67,19 @@ public final class BlockSliderGuiContainer<E extends CommonTE, C extends CommonC
                 guiTop + 81,
                 0xFFFFFF);
 
-        if (((BlockSliderTE) tileEntity).holeType == EnumHoleTypes.ROUND)
+        if (((BlockSliderTE) tileEntity).getHoleType() == EnumHoleTypes.ROUND)
             holeTypeButtons.get(3).drawButton(mc, mouseX, mouseY, 0);
         else
             holeTypeButtons.get(0).drawButton(mc, mouseX, mouseY, 0);
-        if (((BlockSliderTE) tileEntity).holeType == EnumHoleTypes.SQUARE)
+        if (((BlockSliderTE) tileEntity).getHoleType() == EnumHoleTypes.SQUARE)
             holeTypeButtons.get(4).drawButton(mc, mouseX, mouseY, 0);
         else
             holeTypeButtons.get(1).drawButton(mc, mouseX, mouseY, 0);
-        if (((BlockSliderTE) tileEntity).holeType == EnumHoleTypes.CROSS)
+        if (((BlockSliderTE) tileEntity).getHoleType() == EnumHoleTypes.CROSS)
             holeTypeButtons.get(5).drawButton(mc, mouseX, mouseY, 0);
         else
             holeTypeButtons.get(2).drawButton(mc, mouseX, mouseY, 0);
-        if (((BlockSliderTE) tileEntity).isRedstoneHigh)
+        if (((BlockSliderTE) tileEntity).isRedstoneHigh())
             holeTypeButtons.get(6).drawButton(mc, mouseX, mouseY, 0);
         else
             holeTypeButtons.get(7).drawButton(mc, mouseX, mouseY, 0);
@@ -92,12 +92,10 @@ public final class BlockSliderGuiContainer<E extends CommonTE, C extends CommonC
         for (int i = 0; i < 6; i++)
             if (holeTypeButtons.get(i).mousePressed(mc, mouseX, mouseY)) {
                 int rem = i % 3;
-                if (rem == 0)
-                    ((BlockSliderTE) tileEntity).holeType = EnumHoleTypes.ROUND;
-                if (rem == 1)
-                    ((BlockSliderTE) tileEntity).holeType = EnumHoleTypes.SQUARE;
-                if (rem == 2)
-                    ((BlockSliderTE) tileEntity).holeType = EnumHoleTypes.CROSS;
+                for (EnumHoleTypes holeType : EnumHoleTypes.values()) {
+                    if (rem == holeType.getIndex())
+                        ((BlockSliderTE) tileEntity).setHoleType(holeType);
+                }
                 mouseClicked = i;
             }
 
@@ -106,7 +104,7 @@ public final class BlockSliderGuiContainer<E extends CommonTE, C extends CommonC
                 .mousePressed(mc, mouseX, mouseY) || holeTypeButtons
                 .get(7)
                 .mousePressed(mc, mouseX, mouseY)) {
-            ((BlockSliderTE) tileEntity).isRedstoneHigh = !((BlockSliderTE) tileEntity).isRedstoneHigh;
+            ((BlockSliderTE) tileEntity).setRedstoneHigh(!((BlockSliderTE) tileEntity).isRedstoneHigh());
             mouseClicked = 6;
         }
         if (mouseClicked != -1)

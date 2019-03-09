@@ -29,7 +29,7 @@ public final class SlideEmAll {
             serverSide = "com.cwelth.slideemall.proxy.CommonProxy"
     )
     public static CommonProxy proxy;
-    public static Configuration config;
+    private static Configuration config;
     public static final SimpleNetworkWrapper network = NetworkRegistry.INSTANCE.newSimpleChannel(MODID);
 
     @Mod.EventHandler
@@ -53,4 +53,5 @@ public final class SlideEmAll {
     public static int getMaxExtend() {
         return config.get("slider settings", "maxExtend", 64).getInt();
     }
+
 }

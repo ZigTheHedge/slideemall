@@ -21,8 +21,8 @@ public final class SliderGuiSync implements IMessageHandler<SliderGuiSync.Packet
         player.getServerWorld().addScheduledTask(() -> {
             World world = player.world;
             BlockSliderTE tileEntity = (BlockSliderTE) world.getTileEntity(message.tePos);
-            Objects.requireNonNull(tileEntity).holeType = message.holeType;
-            tileEntity.isRedstoneHigh = message.isRedstoneHigh;
+            Objects.requireNonNull(tileEntity).setHoleType(message.holeType);
+            tileEntity.setRedstoneHigh(message.isRedstoneHigh);
             // te.sendUpdates();
             world.notifyBlockUpdate(message.tePos, world.getBlockState(message.tePos), world.getBlockState(message.tePos), 3);
             // SlideEmAll.logger.warning("TE synced. Side: " + ctx.side + ", Data follows: X: "+message.tePos.getX() + ", Y: "+message.tePos.getY()+", Z: "+message.tePos.getZ()+", HOLE_TYPE:"+message.holeType);
@@ -39,10 +39,10 @@ public final class SliderGuiSync implements IMessageHandler<SliderGuiSync.Packet
         public EnumHoleTypes holeType;
         public boolean isRedstoneHigh;
 
-        public Packet(BlockSliderTE te) {
-            tePos = te.getPos();
-            holeType = te.holeType;
-            isRedstoneHigh = te.isRedstoneHigh;
+        public Packet(BlockSliderTE tileEntity) {
+            tePos = tileEntity.getPos();
+            holeType = tileEntity.getHoleType();
+            isRedstoneHigh = tileEntity.isRedstoneHigh();
         }
 
         public Packet() {

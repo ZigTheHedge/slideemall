@@ -122,12 +122,12 @@ public final class BlockSlider extends CommonTEBlock<BlockSliderTE> {
         if (!worldIn.isRemote) {
             BlockSliderTE te = (BlockSliderTE) worldIn.getTileEntity(pos);
             if (worldIn.isBlockPowered(pos)) {
-                if (Objects.requireNonNull(te).isRedstoneHigh)
+                if (Objects.requireNonNull(te).isRedstoneHigh())
                     te.setActive(1);
                 else
                     te.setActive(-1);
             } else {
-                if (Objects.requireNonNull(te).isRedstoneHigh)
+                if (Objects.requireNonNull(te).isRedstoneHigh())
                     te.setActive(-1);
                 else
                     te.setActive(1);
@@ -190,7 +190,7 @@ public final class BlockSlider extends CommonTEBlock<BlockSliderTE> {
                             ((BlockSliderTE) te).itemStackHandler.getStackInSlot(1))
                     .withProperty(
                             HOLE_TYPE,
-                            ((BlockSliderTE) te).holeType)
+                            ((BlockSliderTE) te).getHoleType())
                     .withProperty(FACING, state.getValue(FACING));
         else
             throw new UnsupportedOperationException("tile entity is null");
