@@ -28,11 +28,10 @@ import java.util.function.Function;
 
 public final class BlockSliderBakedModel implements IBakedModel {
     public static final ModelResourceLocation BAKED_MODEL = new ModelResourceLocation(SlideEmAll.MODID + ":blockslider");
-
     private TextureAtlasSprite sprite;
-    Function<ResourceLocation, TextureAtlasSprite> tGetter;
+    public Function<ResourceLocation, TextureAtlasSprite> tGetter;
     private VertexFormat format;
-    IModelState state;
+    public IModelState state;
 
     public BlockSliderBakedModel(IModelState state, VertexFormat format, Function<ResourceLocation, TextureAtlasSprite> bakedTextureGetter) {
         this.state = state;

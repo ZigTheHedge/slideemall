@@ -20,9 +20,9 @@ public final class SliderGuiSync implements IMessageHandler<SliderGuiSync.Packet
         EntityPlayerMP player = ctx.getServerHandler().player;
         player.getServerWorld().addScheduledTask(() -> {
             World world = player.world;
-            BlockSliderTE te = (BlockSliderTE) world.getTileEntity(message.tePos);
-            Objects.requireNonNull(te).holeType = message.holeType;
-            te.isRedstoneHigh = message.isRedstoneHigh;
+            BlockSliderTE tileEntity = (BlockSliderTE) world.getTileEntity(message.tePos);
+            Objects.requireNonNull(tileEntity).holeType = message.holeType;
+            tileEntity.isRedstoneHigh = message.isRedstoneHigh;
             //te.sendUpdates();
             world.notifyBlockUpdate(message.tePos, world.getBlockState(message.tePos), world.getBlockState(message.tePos), 3);
             //SlideEmAll.logger.warning("TE synced. Side: " + ctx.side + ", Data follows: X: "+message.tePos.getX() + ", Y: "+message.tePos.getY()+", Z: "+message.tePos.getZ()+", HOLE_TYPE:"+message.holeType);
@@ -30,8 +30,8 @@ public final class SliderGuiSync implements IMessageHandler<SliderGuiSync.Packet
         return null;
     }
 
-    public static void send(BlockSliderTE te) {
-        SlideEmAll.network.sendToServer(new Packet(te));
+    public static void send(BlockSliderTE tileEntity) {
+        SlideEmAll.network.sendToServer(new Packet(tileEntity));
     }
 
     public static class Packet implements IMessage {
@@ -56,12 +56,12 @@ public final class SliderGuiSync implements IMessageHandler<SliderGuiSync.Packet
         }
 
         @Override
-        public void toBytes(ByteBuf buf) {
-            buf.writeInt(tePos.getX());
-            buf.writeInt(tePos.getY());
-            buf.writeInt(tePos.getZ());
-            buf.writeInt(holeType.getIndex());
-            buf.writeBoolean(isRedstoneHigh);
+        public void toBytes(ByteBuf buffer) {
+            buffer.writeInt(tePos.getX());
+            buffer.writeInt(tePos.getY());
+            buffer.writeInt(tePos.getZ());
+            buffer.writeInt(holeType.getIndex());
+            buffer.writeBoolean(isRedstoneHigh);
         }
 
     }

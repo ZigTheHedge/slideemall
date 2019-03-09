@@ -17,7 +17,10 @@ import java.util.function.Function;
 
 public final class BlockSliderModel implements IModel {
     @Override
-    public IBakedModel bake(IModelState state, VertexFormat format, Function<ResourceLocation, TextureAtlasSprite> bakedTextureGetter) {
+    public IBakedModel bake(
+            @Nonnull IModelState state,
+            @Nonnull VertexFormat format,
+            @Nonnull Function<ResourceLocation, TextureAtlasSprite> bakedTextureGetter) {
         return new BlockSliderBakedModel(state, format, bakedTextureGetter);
     }
 
