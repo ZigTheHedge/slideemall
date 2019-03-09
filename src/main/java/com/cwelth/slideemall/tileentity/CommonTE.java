@@ -15,7 +15,7 @@ import javax.annotation.Nonnull;
 public class CommonTE extends TileEntity {
     public static int inventorySize;
 
-    public ItemStackHandler itemStackHandler;
+    public final ItemStackHandler itemStackHandler;
 
     public CommonTE(int inventorySize) {
         CommonTE.inventorySize = inventorySize;
@@ -55,6 +55,7 @@ public class CommonTE extends TileEntity {
         return super.getCapability(capability, facing);
     }
 
+    @Nonnull
     @Override
     public NBTTagCompound getUpdateTag() {
         // getUpdateTag() is called whenever the chunk data is sent to the

@@ -13,51 +13,44 @@ import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.relauncher.Side;
 
+import javax.annotation.Nonnull;
+
 /**
  * @author zth
  */
 @Mod(modid = SlideEmAll.MODID, name = "Slide'em All!", version = "0.94")
 public final class SlideEmAll {
-    public Configuration config;
-    public static final String MODID = "slideemall";
-    public static int maxExtend = 64;
-    public static final SimpleNetworkWrapper network = NetworkRegistry.INSTANCE.newSimpleChannel(MODID);
     @Mod.Instance("slideemall")
     public static SlideEmAll instance;
+    @Nonnull
+    public static final String MODID = "slideemall";
     @SidedProxy(
             clientSide = "com.cwelth.slideemall.proxy.ClientProxy",
             serverSide = "com.cwelth.slideemall.proxy.CommonProxy"
     )
     public static CommonProxy proxy;
-
-    public void saveConfig() {
-        config.load();
-        config.get("Slider params", "maxExtend", 64).set(maxExtend);
-        config.save();
-    }
-
-    public void loadConfig() {
-        config.load();
-        maxExtend = config.get("Slider params", "maxExtend", 64).getInt();
-        config.save();
-    }
-
+    public static Configuration config;
+    public static final SimpleNetworkWrapper network = NetworkRegistry.INSTANCE.newSimpleChannel(MODID);
 
     @Mod.EventHandler
-    public void preInit(FMLPreInitializationEvent e) {
-        config = new Configuration(e.getSuggestedConfigurationFile());
-        loadConfig();
-        proxy.preInit(e);
-    }
-
-    @Mod.EventHandler
-    public static void init(FMLInitializationEvent e) {
+    public static void init(FMLInitializationEvent event) {
         NetworkRegistry.INSTANCE.registerGuiHandler(instance, new BlockSliderGuiHandler());
         network.registerMessage(SliderGuiSync.class, SliderGuiSync.Packet.class, 1, Side.SERVER);
     }
 
     @Mod.EventHandler
-    public static void postInit(FMLPostInitializationEvent e) {
-        proxy.postInit(e);
+    public static void preInit(FMLPreInitializationEvent event) {
+        config = new Configuration(event.getSuggestedConfigurationFile());
+        config.load();
+        proxy.preInit(event);
+    }
+
+    @Mod.EventHandler
+    public static void postInit(FMLPostInitializationEvent event) {
+        proxy.postInit(event);
+    }
+
+    public static int getMaxExtend() {
+        return config.get("slider settings", "maxExtend", 64).getInt();
     }
 }

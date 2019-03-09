@@ -31,7 +31,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.util.Objects;
 
 @Mod.EventBusSubscriber
@@ -43,7 +42,7 @@ public final class BlockSlider extends CommonTEBlock<BlockSliderTE> {
         super(material, name);
     }
 
-    @Nullable
+    @Nonnull
     @Override
     public BlockSliderTE createTileEntity(@Nonnull World world, @Nonnull IBlockState state) {
         return new BlockSliderTE();
@@ -170,6 +169,7 @@ public final class BlockSlider extends CommonTEBlock<BlockSliderTE> {
         return false;
     }
 
+    @Nonnull
     @Override
     protected BlockStateContainer createBlockState() {
         IProperty[] listedProperties = new IProperty[]{FACING};

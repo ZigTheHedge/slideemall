@@ -10,7 +10,7 @@ import net.minecraft.item.ItemStack;
 import javax.annotation.Nonnull;
 
 public abstract class CommonContainer<TE extends CommonTE> extends Container {
-    protected TE tileEntity;
+    protected final TE tileEntity;
 
     public CommonContainer(IInventory playerInventory, TE te) {
         this.tileEntity = te;

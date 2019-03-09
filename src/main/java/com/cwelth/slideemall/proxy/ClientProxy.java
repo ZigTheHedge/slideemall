@@ -13,9 +13,9 @@ import net.minecraftforge.fml.relauncher.Side;
 @Mod.EventBusSubscriber(Side.CLIENT)
 public final class ClientProxy extends CommonProxy {
     @Override
-    public void preInit(FMLPreInitializationEvent e) {
+    public void preInit(FMLPreInitializationEvent event) {
         ModelLoaderRegistry.registerLoader(new BlockSliderModelLoader());
-        super.preInit(e);
+        super.preInit(event);
     }
 
     @SubscribeEvent
@@ -24,8 +24,8 @@ public final class ClientProxy extends CommonProxy {
     }
 
     @Override
-    public void postInit(FMLPostInitializationEvent e) {
+    public void postInit(FMLPostInitializationEvent event) {
         ContentInitializer.initializeItemModels();
-        super.postInit(e);
+        super.postInit(event);
     }
 }

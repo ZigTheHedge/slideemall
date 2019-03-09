@@ -1,16 +1,14 @@
 [
-{
-  "modid": "slideemall",
-  "name": "Slide'em All!",
-  "description": "Well, drawbridges rethought",
-  "version": "${version}",
-  "mcversion": "${mcversion}",
-  "url": "",
-  "updateUrl": "",
-  "authorList": ["ZigTheHedge"],
-  "credits": "",
-  "logoFile": "",
-  "screenshots": [],
-  "dependencies": []
-}
+  {
+    "modid": "${name}",
+    "name": "Slide'em All!",
+    "description": "${description}",
+    "version": "${version}",
+    "mcversion": "${mcversion}",
+    "url": "https://cwelth.com/index.php",
+    "authorList": [
+      "ZigTheHedge"
+    ],
+    "logoFile": "logo.png"
+  }
 ]

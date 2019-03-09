@@ -12,6 +12,7 @@ plugins {
     id 'net.minecraftforge.gradle.forge' version '2.0.2'
 }
 
+description 'Well, drawbridges rethought'
 version '0.94'
 group 'com.cwelth'
 
@@ -32,7 +33,12 @@ processResources {
     inputs.property 'mcversion', project.minecraft.version
     from(sourceSets.main.resources.srcDirs) {
         include 'mcmod.info'
-        expand 'version': project.version, 'mcversion': project.minecraft.version
+        expand(
+                'version': project.version,
+                'mcversion': project.minecraft.version,
+                'name': project.name,
+                'description': project.description
+        )
     }
     from(sourceSets.main.resources.srcDirs) {
         exclude 'mcmod.info'

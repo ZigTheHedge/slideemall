@@ -16,15 +16,16 @@ public final class BlockSliderSlotDrawbridge extends SlotItemHandler {
 
     @Override
     public int getItemStackLimit(@Nonnull ItemStack stack) {
-        return SlideEmAll.maxExtend;
+        return SlideEmAll.getMaxExtend();
     }
 
     @Override
     public boolean isItemValid(@Nonnull ItemStack stack) {
-        if (stack.getItem() instanceof ItemBlock) {
+        if (stack.getItem() instanceof ItemBlock)
             return !Block
                     .getBlockFromItem(stack.getItem())
                     .hasTileEntity(Block.getBlockFromItem(stack.getItem()).getDefaultState());
-        } else return false;
+        else
+            return false;
     }
 }

@@ -13,6 +13,7 @@ import net.minecraft.client.renderer.vertex.VertexFormat;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.Vec3d;
 import net.minecraftforge.client.model.pipeline.UnpackedBakedQuad;
@@ -29,9 +30,9 @@ import java.util.function.Function;
 public final class BlockSliderBakedModel implements IBakedModel {
     public static final ModelResourceLocation BAKED_MODEL = new ModelResourceLocation(SlideEmAll.MODID + ":blockslider");
     private TextureAtlasSprite sprite;
-    public Function<ResourceLocation, TextureAtlasSprite> tGetter;
-    private VertexFormat format;
-    public IModelState state;
+    public final Function<ResourceLocation, TextureAtlasSprite> tGetter;
+    private final VertexFormat format;
+    public final IModelState state;
 
     public BlockSliderBakedModel(
             IModelState state,
@@ -127,7 +128,8 @@ public final class BlockSliderBakedModel implements IBakedModel {
                             0,
                             0,
                             disguise.getMetadata(),
-                            null);
+                            null,
+                            EnumHand.MAIN_HAND);
         else {
             if (holeType == EnumHoleTypes.ROUND)
                 holeTexture = "blocksliderhole_round";

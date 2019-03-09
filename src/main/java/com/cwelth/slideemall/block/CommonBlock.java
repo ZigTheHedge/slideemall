@@ -18,7 +18,7 @@ import net.minecraft.world.World;
 import javax.annotation.Nonnull;
 
 public class CommonBlock extends Block {
-    protected String name;
+    protected final String name;
     public static final PropertyDirection FACING = PropertyDirection.create("facing");
 
     public CommonBlock(Material material, String name) {

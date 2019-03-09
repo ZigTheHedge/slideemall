@@ -11,89 +11,75 @@ import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiButtonImage;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.resources.I18n;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 
+import javax.annotation.Nonnull;
 import java.io.IOException;
 import java.util.List;
 
-public final class BlockSliderGuiContainer<TE extends CommonTE, CNT extends CommonContainer> extends GuiContainer {
-    public static final int WIDTH = 174;
-    public static final int HEIGHT = 186;
-    private TE te;
-    private EntityPlayer player;
-
-    private List<GuiButton> holeTypeButtons = Lists.<GuiButton>newArrayList();
-
+public final class BlockSliderGuiContainer<E extends CommonTE, C extends CommonContainer> extends GuiContainer {
+    private final E tileEntity;
+    @Nonnull
+    private final List<GuiButton> holeTypeButtons = Lists.newArrayList();
     private boolean isGuiInitialized = false;
     private static ResourceLocation background;
+    public static final int WIDTH = 174;
+    public static final int HEIGHT = 186;
 
-    public BlockSliderGuiContainer(TE tileEntity, CNT container, String bg, EntityPlayer player) {
+    public BlockSliderGuiContainer(E tileEntity, C container, String background) {
         super(container);
-        this.player = player;
-        te = tileEntity;
-        background = new ResourceLocation(SlideEmAll.MODID, bg);
+        this.tileEntity = tileEntity;
+        BlockSliderGuiContainer.background = new ResourceLocation(SlideEmAll.MODID, background);
         xSize = WIDTH;
         ySize = HEIGHT;
-    }
-
-    @Override
-    public void drawScreen(int mouseX, int mouseY, float partialTicks) {
-        super.drawScreen(mouseX, mouseY, partialTicks);
-
-    }
-
-    @Override
-    protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
-        super.drawGuiContainerForegroundLayer(mouseX, mouseY);
     }
 
     @Override
     protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
         mc.getTextureManager().bindTexture(background);
         drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
-        int len = fontRenderer.getStringWidth(I18n.format("slider.slot0.desc"));
+        int length = fontRenderer.getStringWidth(I18n.format("slider.slot0.desc"));
         drawString(
                 fontRenderer,
                 I18n.format("slider.slot0.desc"),
-                guiLeft + 115 - len - 3,
+                guiLeft + 115 - length - 3,
                 guiTop + 18,
                 0xFFFFFF);
-        len = fontRenderer.getStringWidth(I18n.format("slider.slot1.desc"));
+        length = fontRenderer.getStringWidth(I18n.format("slider.slot1.desc"));
         drawString(
                 fontRenderer,
                 I18n.format("slider.slot1.desc"),
-                guiLeft + 115 - len - 3,
+                guiLeft + 115 - length - 3,
                 guiTop + 39,
                 0xFFFFFF);
-        len = fontRenderer.getStringWidth(I18n.format("slider.texture.desc"));
+        length = fontRenderer.getStringWidth(I18n.format("slider.texture.desc"));
         drawString(
                 fontRenderer,
                 I18n.format("slider.texture.desc"),
-                guiLeft + 75 - len - 3,
+                guiLeft + 75 - length - 3,
                 guiTop + 60,
                 0xFFFFFF);
-        len = fontRenderer.getStringWidth(I18n.format("slider.redstone.desc"));
+        length = fontRenderer.getStringWidth(I18n.format("slider.redstone.desc"));
         drawString(
                 fontRenderer,
                 I18n.format("slider.redstone.desc"),
-                guiLeft + 115 - len - 3,
+                guiLeft + 115 - length - 3,
                 guiTop + 81,
                 0xFFFFFF);
 
-        if (((BlockSliderTE) te).holeType == EnumHoleTypes.ROUND)
+        if (((BlockSliderTE) tileEntity).holeType == EnumHoleTypes.ROUND)
             holeTypeButtons.get(3).drawButton(mc, mouseX, mouseY, 0);
         else
             holeTypeButtons.get(0).drawButton(mc, mouseX, mouseY, 0);
-        if (((BlockSliderTE) te).holeType == EnumHoleTypes.SQUARE)
+        if (((BlockSliderTE) tileEntity).holeType == EnumHoleTypes.SQUARE)
             holeTypeButtons.get(4).drawButton(mc, mouseX, mouseY, 0);
         else
             holeTypeButtons.get(1).drawButton(mc, mouseX, mouseY, 0);
-        if (((BlockSliderTE) te).holeType == EnumHoleTypes.CROSS)
+        if (((BlockSliderTE) tileEntity).holeType == EnumHoleTypes.CROSS)
             holeTypeButtons.get(5).drawButton(mc, mouseX, mouseY, 0);
         else
             holeTypeButtons.get(2).drawButton(mc, mouseX, mouseY, 0);
-        if (((BlockSliderTE) te).isRedstoneHigh)
+        if (((BlockSliderTE) tileEntity).isRedstoneHigh)
             holeTypeButtons.get(6).drawButton(mc, mouseX, mouseY, 0);
         else
             holeTypeButtons.get(7).drawButton(mc, mouseX, mouseY, 0);
@@ -107,11 +93,11 @@ public final class BlockSliderGuiContainer<TE extends CommonTE, CNT extends Comm
             if (holeTypeButtons.get(i).mousePressed(mc, mouseX, mouseY)) {
                 int rem = i % 3;
                 if (rem == 0)
-                    ((BlockSliderTE) te).holeType = EnumHoleTypes.ROUND;
+                    ((BlockSliderTE) tileEntity).holeType = EnumHoleTypes.ROUND;
                 if (rem == 1)
-                    ((BlockSliderTE) te).holeType = EnumHoleTypes.SQUARE;
+                    ((BlockSliderTE) tileEntity).holeType = EnumHoleTypes.SQUARE;
                 if (rem == 2)
-                    ((BlockSliderTE) te).holeType = EnumHoleTypes.CROSS;
+                    ((BlockSliderTE) tileEntity).holeType = EnumHoleTypes.CROSS;
                 mouseClicked = i;
             }
 
@@ -120,7 +106,7 @@ public final class BlockSliderGuiContainer<TE extends CommonTE, CNT extends Comm
                 .mousePressed(mc, mouseX, mouseY) || holeTypeButtons
                 .get(7)
                 .mousePressed(mc, mouseX, mouseY)) {
-            ((BlockSliderTE) te).isRedstoneHigh = !((BlockSliderTE) te).isRedstoneHigh;
+            ((BlockSliderTE) tileEntity).isRedstoneHigh = !((BlockSliderTE) tileEntity).isRedstoneHigh;
             mouseClicked = 6;
         }
         if (mouseClicked != -1)
@@ -237,7 +223,7 @@ public final class BlockSliderGuiContainer<TE extends CommonTE, CNT extends Comm
 
     @Override
     public void onGuiClosed() {
-        SliderGuiSync.send((BlockSliderTE) te);
+        SliderGuiSync.send((BlockSliderTE) tileEntity);
         super.onGuiClosed();
     }
 }

@@ -9,6 +9,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
@@ -20,23 +21,21 @@ import java.util.Objects;
 
 @Mod.EventBusSubscriber
 public class CommonProxy {
-    public void preInit(FMLPreInitializationEvent e) {
+    public void preInit(FMLPreInitializationEvent event) {
     }
 
-    public void postInit(FMLPostInitializationEvent e) {
+    public void postInit(FMLPostInitializationEvent event) {
     }
 
     @SubscribeEvent
     public static void registerBlocks(RegistryEvent.Register<Block> event) {
-        event
-                .getRegistry()
-                .register(
-                        new BlockSlider(
-                                Material.ROCK,
-                                "blockslider")
-                                .setHardness(5F)
-                                .setCreativeTab(CreativeTabs.MATERIALS));
-        GameRegistry.registerTileEntity(BlockSliderTE.class, SlideEmAll.MODID + "_blocksliderte");
+        event.getRegistry().register(
+                new BlockSlider(
+                        Material.ROCK,
+                        "blockslider")
+                        .setHardness(5F)
+                        .setCreativeTab(CreativeTabs.REDSTONE));
+        GameRegistry.registerTileEntity(BlockSliderTE.class, new ResourceLocation(SlideEmAll.MODID + "_blocksliderte"));
     }
 
     @SubscribeEvent
