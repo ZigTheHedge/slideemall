@@ -1,11 +1,11 @@
-package com.cwelth.slideemall.tes.gui;
+package com.cwelth.slideemall.tileentity.gui;
 
 import com.cwelth.slideemall.ModMain;
 import com.cwelth.slideemall.bakes.EnumHoleTypes;
 import com.cwelth.slideemall.network.SliderGuiSync;
-import com.cwelth.slideemall.tes.BlockSliderTE;
-import com.cwelth.slideemall.tes.CommonTE;
-import com.cwelth.slideemall.tes.gui.server.CommonContainer;
+import com.cwelth.slideemall.tileentity.BlockSliderTE;
+import com.cwelth.slideemall.tileentity.CommonTE;
+import com.cwelth.slideemall.tileentity.gui.server.CommonContainer;
 import com.google.common.collect.Lists;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiButtonImage;

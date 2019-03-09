@@ -2,7 +2,7 @@ package com.cwelth.slideemall.network;
 
 import com.cwelth.slideemall.ModMain;
 import com.cwelth.slideemall.bakes.EnumHoleTypes;
-import com.cwelth.slideemall.tes.BlockSliderTE;
+import com.cwelth.slideemall.tileentity.BlockSliderTE;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.math.BlockPos;

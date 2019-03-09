@@ -1,4 +1,4 @@
-package com.cwelth.slideemall.tes.gui.server;
+package com.cwelth.slideemall.tileentity.gui.server;
 
 import com.cwelth.slideemall.ModMain;
 import net.minecraft.block.Block;

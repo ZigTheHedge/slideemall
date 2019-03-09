@@ -1,6 +1,6 @@
-package com.cwelth.slideemall.tes.gui.server;
+package com.cwelth.slideemall.tileentity.gui.server;
 
-import com.cwelth.slideemall.tes.CommonTE;
+import com.cwelth.slideemall.tileentity.CommonTE;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;

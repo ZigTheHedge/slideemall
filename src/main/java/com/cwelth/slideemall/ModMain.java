@@ -2,7 +2,7 @@ package com.cwelth.slideemall;
 
 import com.cwelth.slideemall.network.SliderGuiSync;
 import com.cwelth.slideemall.proxy.CommonProxy;
-import com.cwelth.slideemall.tes.gui.BlockSliderGuiHandler;
+import com.cwelth.slideemall.tileentity.gui.BlockSliderGuiHandler;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;

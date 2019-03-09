@@ -3,7 +3,7 @@ package com.cwelth.slideemall.block;
 import com.cwelth.slideemall.ModMain;
 import com.cwelth.slideemall.bakes.UnlistedPropertyDisguiseItem;
 import com.cwelth.slideemall.bakes.UnlistedPropertyHoleType;
-import com.cwelth.slideemall.tes.BlockSliderTE;
+import com.cwelth.slideemall.tileentity.BlockSliderTE;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;

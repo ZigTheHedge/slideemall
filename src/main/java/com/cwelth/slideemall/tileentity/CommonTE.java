@@ -1,4 +1,4 @@
-package com.cwelth.slideemall.tes;
+package com.cwelth.slideemall.tileentity;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;

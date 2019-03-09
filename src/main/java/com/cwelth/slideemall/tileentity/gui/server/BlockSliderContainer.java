@@ -1,6 +1,6 @@
-package com.cwelth.slideemall.tes.gui.server;
+package com.cwelth.slideemall.tileentity.gui.server;
 
-import com.cwelth.slideemall.tes.BlockSliderTE;
+import com.cwelth.slideemall.tileentity.BlockSliderTE;
 import net.minecraft.inventory.IInventory;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;

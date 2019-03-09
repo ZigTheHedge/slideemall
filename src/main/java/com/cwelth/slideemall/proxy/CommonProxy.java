@@ -3,7 +3,7 @@ package com.cwelth.slideemall.proxy;
 import com.cwelth.slideemall.ContentInitializer;
 import com.cwelth.slideemall.ModMain;
 import com.cwelth.slideemall.block.BlockSlider;
-import com.cwelth.slideemall.tes.BlockSliderTE;
+import com.cwelth.slideemall.tileentity.BlockSliderTE;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;

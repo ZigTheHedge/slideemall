@@ -1,4 +1,4 @@
-package com.cwelth.slideemall.tes;
+package com.cwelth.slideemall.tileentity;
 
 import com.cwelth.slideemall.ModMain;
 import com.cwelth.slideemall.bakes.EnumHoleTypes;

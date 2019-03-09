@@ -1,7 +1,7 @@
-package com.cwelth.slideemall.tes.gui;
+package com.cwelth.slideemall.tileentity.gui;
 
-import com.cwelth.slideemall.tes.BlockSliderTE;
-import com.cwelth.slideemall.tes.gui.server.BlockSliderContainer;
+import com.cwelth.slideemall.tileentity.BlockSliderTE;
+import com.cwelth.slideemall.tileentity.gui.server.BlockSliderContainer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
