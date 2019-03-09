@@ -1,6 +1,6 @@
 package com.cwelth.slideemall.tileentity.gui;
 
-import com.cwelth.slideemall.ModMain;
+import com.cwelth.slideemall.SlideEmAll;
 import com.cwelth.slideemall.bakes.EnumHoleTypes;
 import com.cwelth.slideemall.network.SliderGuiSync;
 import com.cwelth.slideemall.tileentity.BlockSliderTE;
@@ -32,7 +32,7 @@ public final class BlockSliderGuiContainer<TE extends CommonTE, CNT extends Comm
         super(container);
         this.player = player;
         te = tileEntity;
-        background = new ResourceLocation(ModMain.MODID, bg);
+        background = new ResourceLocation(SlideEmAll.MODID, bg);
         xSize = WIDTH;
         ySize = HEIGHT;
     }
@@ -142,7 +142,7 @@ public final class BlockSliderGuiContainer<TE extends CommonTE, CNT extends Comm
                             0,
                             0,
                             18,
-                            new ResourceLocation(ModMain.MODID, "textures/gui/holetypesbuttons.png")));
+                            new ResourceLocation(SlideEmAll.MODID, "textures/gui/holetypesbuttons.png")));
             holeTypeButtons.add(
                     new GuiButtonImage(
                             1,
@@ -153,7 +153,7 @@ public final class BlockSliderGuiContainer<TE extends CommonTE, CNT extends Comm
                             18,
                             0,
                             18,
-                            new ResourceLocation(ModMain.MODID, "textures/gui/holetypesbuttons.png")));
+                            new ResourceLocation(SlideEmAll.MODID, "textures/gui/holetypesbuttons.png")));
             holeTypeButtons.add(
                     new GuiButtonImage(
                             2,
@@ -164,7 +164,7 @@ public final class BlockSliderGuiContainer<TE extends CommonTE, CNT extends Comm
                             36,
                             0,
                             18,
-                            new ResourceLocation(ModMain.MODID, "textures/gui/holetypesbuttons.png")));
+                            new ResourceLocation(SlideEmAll.MODID, "textures/gui/holetypesbuttons.png")));
             holeTypeButtons.add(
                     new GuiButtonImage(
                             3,
@@ -175,7 +175,7 @@ public final class BlockSliderGuiContainer<TE extends CommonTE, CNT extends Comm
                             0,
                             36,
                             18,
-                            new ResourceLocation(ModMain.MODID, "textures/gui/holetypesbuttons.png")));
+                            new ResourceLocation(SlideEmAll.MODID, "textures/gui/holetypesbuttons.png")));
             holeTypeButtons.add(
                     new GuiButtonImage(
                             4,
@@ -186,7 +186,7 @@ public final class BlockSliderGuiContainer<TE extends CommonTE, CNT extends Comm
                             18,
                             36,
                             18,
-                            new ResourceLocation(ModMain.MODID, "textures/gui/holetypesbuttons.png")));
+                            new ResourceLocation(SlideEmAll.MODID, "textures/gui/holetypesbuttons.png")));
             holeTypeButtons.add(
                     new GuiButtonImage(
                             5,
@@ -197,7 +197,7 @@ public final class BlockSliderGuiContainer<TE extends CommonTE, CNT extends Comm
                             36,
                             36,
                             18,
-                            new ResourceLocation(ModMain.MODID, "textures/gui/holetypesbuttons.png")));
+                            new ResourceLocation(SlideEmAll.MODID, "textures/gui/holetypesbuttons.png")));
             holeTypeButtons.add(
                     new GuiButtonImage(
                             6,
@@ -208,7 +208,7 @@ public final class BlockSliderGuiContainer<TE extends CommonTE, CNT extends Comm
                             54,
                             0,
                             18,
-                            new ResourceLocation(ModMain.MODID, "textures/gui/holetypesbuttons.png")));
+                            new ResourceLocation(SlideEmAll.MODID, "textures/gui/holetypesbuttons.png")));
             holeTypeButtons.add(
                     new GuiButtonImage(
                             7,
@@ -219,7 +219,7 @@ public final class BlockSliderGuiContainer<TE extends CommonTE, CNT extends Comm
                             54,
                             36,
                             18,
-                            new ResourceLocation(ModMain.MODID, "textures/gui/holetypesbuttons.png")));
+                            new ResourceLocation(SlideEmAll.MODID, "textures/gui/holetypesbuttons.png")));
             isGuiInitialized = true;
         } else
             for (int i = 0; i < holeTypeButtons.size(); i++) {

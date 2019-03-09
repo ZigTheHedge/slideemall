@@ -1,7 +1,7 @@
 package com.cwelth.slideemall.proxy;
 
 import com.cwelth.slideemall.ContentInitializer;
-import com.cwelth.slideemall.ModMain;
+import com.cwelth.slideemall.SlideEmAll;
 import com.cwelth.slideemall.block.BlockSlider;
 import com.cwelth.slideemall.tileentity.BlockSliderTE;
 import net.minecraft.block.Block;
@@ -36,7 +36,7 @@ public class CommonProxy {
                                 "blockslider")
                                 .setHardness(5F)
                                 .setCreativeTab(CreativeTabs.MATERIALS));
-        GameRegistry.registerTileEntity(BlockSliderTE.class, ModMain.MODID + "_blocksliderte");
+        GameRegistry.registerTileEntity(BlockSliderTE.class, SlideEmAll.MODID + "_blocksliderte");
     }
 
     @SubscribeEvent

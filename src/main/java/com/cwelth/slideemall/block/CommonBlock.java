@@ -1,6 +1,6 @@
 package com.cwelth.slideemall.block;
 
-import com.cwelth.slideemall.ModMain;
+import com.cwelth.slideemall.SlideEmAll;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyDirection;
@@ -26,7 +26,7 @@ public class CommonBlock extends Block {
 
         this.name = name;
 
-        setUnlocalizedName(ModMain.MODID + "." + name);
+        setUnlocalizedName(SlideEmAll.MODID + "." + name);
         setRegistryName(name);
         setDefaultState(blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
     }

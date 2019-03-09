@@ -1,6 +1,6 @@
 package com.cwelth.slideemall.network;
 
-import com.cwelth.slideemall.ModMain;
+import com.cwelth.slideemall.SlideEmAll;
 import com.cwelth.slideemall.bakes.EnumHoleTypes;
 import com.cwelth.slideemall.tileentity.BlockSliderTE;
 import io.netty.buffer.ByteBuf;
@@ -11,6 +11,8 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
+import java.util.Objects;
+
 public final class SliderGuiSync implements IMessageHandler<SliderGuiSync.Packet, IMessage> {
 
     @Override
@@ -19,17 +21,17 @@ public final class SliderGuiSync implements IMessageHandler<SliderGuiSync.Packet
         player.getServerWorld().addScheduledTask(() -> {
             World world = player.world;
             BlockSliderTE te = (BlockSliderTE) world.getTileEntity(message.tePos);
-            te.holeType = message.holeType;
+            Objects.requireNonNull(te).holeType = message.holeType;
             te.isRedstoneHigh = message.isRedstoneHigh;
             //te.sendUpdates();
             world.notifyBlockUpdate(message.tePos, world.getBlockState(message.tePos), world.getBlockState(message.tePos), 3);
-            //ModMain.logger.warning("TE synced. Side: " + ctx.side + ", Data follows: X: "+message.tePos.getX() + ", Y: "+message.tePos.getY()+", Z: "+message.tePos.getZ()+", HOLE_TYPE:"+message.holeType);
+            //SlideEmAll.logger.warning("TE synced. Side: " + ctx.side + ", Data follows: X: "+message.tePos.getX() + ", Y: "+message.tePos.getY()+", Z: "+message.tePos.getZ()+", HOLE_TYPE:"+message.holeType);
         });
         return null;
     }
 
     public static void send(BlockSliderTE te) {
-        ModMain.network.sendToServer(new Packet(te));
+        SlideEmAll.network.sendToServer(new Packet(te));
     }
 
     public static class Packet implements IMessage {

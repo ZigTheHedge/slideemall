@@ -16,14 +16,14 @@ import net.minecraftforge.fml.relauncher.Side;
 /**
  * @author zth
  */
-@Mod(modid = ModMain.MODID, name = "Slide'em All!", version = "0.94")
-public final class ModMain {
+@Mod(modid = SlideEmAll.MODID, name = "Slide'em All!", version = "0.94")
+public final class SlideEmAll {
     public Configuration config;
     public static final String MODID = "slideemall";
     public static int maxExtend = 64;
     public static final SimpleNetworkWrapper network = NetworkRegistry.INSTANCE.newSimpleChannel(MODID);
     @Mod.Instance("slideemall")
-    public static ModMain instance;
+    public static SlideEmAll instance;
     @SidedProxy(
             clientSide = "com.cwelth.slideemall.proxy.ClientProxy",
             serverSide = "com.cwelth.slideemall.proxy.CommonProxy"

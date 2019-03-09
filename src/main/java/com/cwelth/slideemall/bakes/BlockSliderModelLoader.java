@@ -1,6 +1,6 @@
 package com.cwelth.slideemall.bakes;
 
-import com.cwelth.slideemall.ModMain;
+import com.cwelth.slideemall.SlideEmAll;
 import net.minecraft.client.resources.IResourceManager;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.ICustomModelLoader;
@@ -13,7 +13,7 @@ public final class BlockSliderModelLoader implements ICustomModelLoader {
 
     @Override
     public boolean accepts(ResourceLocation modelLocation) {
-        return modelLocation.getResourceDomain().equals(ModMain.MODID) && "blockslider".equals(modelLocation.getResourcePath());
+        return modelLocation.getResourceDomain().equals(SlideEmAll.MODID) && "blockslider".equals(modelLocation.getResourcePath());
     }
 
     @Nonnull

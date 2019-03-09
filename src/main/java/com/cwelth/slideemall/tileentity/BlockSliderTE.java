@@ -1,6 +1,6 @@
 package com.cwelth.slideemall.tileentity;
 
-import com.cwelth.slideemall.ModMain;
+import com.cwelth.slideemall.SlideEmAll;
 import com.cwelth.slideemall.bakes.EnumHoleTypes;
 import com.mojang.authlib.GameProfile;
 import net.minecraft.block.state.IBlockState;
@@ -101,7 +101,7 @@ public final class BlockSliderTE extends CommonTE implements ITickable {
             } else {
                 delayCounter = 5;
                 ItemStack piston = itemStackHandler.getStackInSlot(0);
-                if (piston.getCount() > 0 && blocksExtended < ModMain.maxExtend) {
+                if (piston.getCount() > 0 && blocksExtended < SlideEmAll.maxExtend) {
                     BlockPos pos = this.getPos();
                     pos = pos.add(
                             deltaX * (blocksExtended + 1),

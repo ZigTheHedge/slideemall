@@ -1,6 +1,6 @@
 package com.cwelth.slideemall.block;
 
-import com.cwelth.slideemall.ModMain;
+import com.cwelth.slideemall.SlideEmAll;
 import com.cwelth.slideemall.bakes.UnlistedPropertyDisguiseItem;
 import com.cwelth.slideemall.bakes.UnlistedPropertyHoleType;
 import com.cwelth.slideemall.tileentity.BlockSliderTE;
@@ -67,7 +67,7 @@ public final class BlockSlider extends CommonTEBlock<BlockSliderTE> {
     @SideOnly(Side.CLIENT)
     public void initItemModel() {
 
-        Item itemBlock = Item.REGISTRY.getObject(new ResourceLocation(ModMain.MODID, "blockslider"));
+        Item itemBlock = Item.REGISTRY.getObject(new ResourceLocation(SlideEmAll.MODID, "blockslider"));
         ModelResourceLocation itemModelResourceLocation =
                 new ModelResourceLocation(Objects.requireNonNull(getRegistryName()), "inventory");
         final int DEFAULT_ITEM_SUBTYPE = 0;
@@ -98,7 +98,7 @@ public final class BlockSlider extends CommonTEBlock<BlockSliderTE> {
             return false;
 
         if (playerIn.isSneaking()) {
-            playerIn.openGui(ModMain.instance, 1, worldIn, pos.getX(), pos.getY(), pos.getZ());
+            playerIn.openGui(SlideEmAll.instance, 1, worldIn, pos.getX(), pos.getY(), pos.getZ());
         }
         return true;
     }

@@ -1,6 +1,6 @@
 package com.cwelth.slideemall.bakes;
 
-import com.cwelth.slideemall.ModMain;
+import com.cwelth.slideemall.SlideEmAll;
 import com.google.common.collect.ImmutableSet;
 import net.minecraft.client.renderer.block.model.IBakedModel;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
@@ -30,15 +30,15 @@ public final class BlockSliderModel implements IModel {
     @Override
     public Collection<ResourceLocation> getTextures() {
         return ImmutableSet.of(
-                new ResourceLocation(ModMain.MODID, "blocks/blockslider"),
-                new ResourceLocation(ModMain.MODID, "blocks/blockslider_east"),
-                new ResourceLocation(ModMain.MODID, "blocks/blockslider_west"),
-                new ResourceLocation(ModMain.MODID, "blocks/blockslider_top"),
-                new ResourceLocation(ModMain.MODID, "blocks/blockslider_bottom"),
-                new ResourceLocation(ModMain.MODID, "blocks/blocksliderhole"),
-                new ResourceLocation(ModMain.MODID, "blocks/blocksliderhole_round"),
-                new ResourceLocation(ModMain.MODID, "blocks/blocksliderhole_cross"),
-                new ResourceLocation(ModMain.MODID, "blocks/blocksliderhole_box"));
+                new ResourceLocation(SlideEmAll.MODID, "blocks/blockslider"),
+                new ResourceLocation(SlideEmAll.MODID, "blocks/blockslider_east"),
+                new ResourceLocation(SlideEmAll.MODID, "blocks/blockslider_west"),
+                new ResourceLocation(SlideEmAll.MODID, "blocks/blockslider_top"),
+                new ResourceLocation(SlideEmAll.MODID, "blocks/blockslider_bottom"),
+                new ResourceLocation(SlideEmAll.MODID, "blocks/blocksliderhole"),
+                new ResourceLocation(SlideEmAll.MODID, "blocks/blocksliderhole_round"),
+                new ResourceLocation(SlideEmAll.MODID, "blocks/blocksliderhole_cross"),
+                new ResourceLocation(SlideEmAll.MODID, "blocks/blocksliderhole_box"));
     }
 
     @Nonnull
