@@ -2,6 +2,7 @@ package com.cwelth.slideemall.bakes;
 
 import com.cwelth.slideemall.ModMain;
 import com.cwelth.slideemall.blocks.BlockSlider;
+import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.*;
@@ -101,7 +102,7 @@ public class BlockSliderBakedModel implements IBakedModel {
 
         if(disguise != null)
         {
-            newBlock = ((ItemBlock)disguise.getItem()).getBlock().getStateForPlacement(null, null, null, 0, 0,0,disguise.getMetadata(), null);
+            newBlock = ((ItemBlock)disguise.getItem()).getBlock().getStateForPlacement(null, null, facing, 0, 0,0,disguise.getMetadata(), null);
         } else
         {
             if(holeType == EnumHoleTypes.ROUND)holeTexture = "blocksliderhole_round";
