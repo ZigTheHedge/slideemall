@@ -1,5 +1,6 @@
 package com.cwelth.slideemall.blocks;
 
+import com.cwelth.slideemall.InitContent;
 import com.cwelth.slideemall.ModMain;
 import com.cwelth.slideemall.bakes.BlockSliderBakedModel;
 import com.cwelth.slideemall.bakes.BlockSliderModel;
@@ -93,8 +94,23 @@ public class BlockSlider extends CommonTEBlock<BlockSliderTE> {
 
         if(playerIn.isSneaking()) {
             playerIn.openGui(ModMain.instance, 1, worldIn, pos.getX(), pos.getY(), pos.getZ());
+            return true;
         }
-        return true;
+
+        ItemStack currentItem = playerIn.inventory.getCurrentItem();
+        if(currentItem != null)
+        {
+            if(currentItem.getItem().equals(InitContent.itemLiquidModule))
+            {
+                ((BlockSliderTE) te).WATERTOLERANT = true;
+                playerIn.inventory.getCurrentItem().setCount(currentItem.getCount() - 1);
+                te.markDirty();
+                worldIn.notifyBlockUpdate(pos, worldIn.getBlockState(pos), worldIn.getBlockState(pos), 3);
+                return true;
+            }
+        }
+
+        return false;
     }
 
 
@@ -153,6 +169,7 @@ public class BlockSlider extends CommonTEBlock<BlockSliderTE> {
     public boolean isOpaqueCube(IBlockState blockState) {
         return false;
     }
+
 
 
     @Override

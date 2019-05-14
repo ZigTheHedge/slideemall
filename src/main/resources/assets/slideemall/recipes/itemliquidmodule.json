@@ -1,0 +1,26 @@
+{
+  "result": {
+    "item": "slideemall:itemliquidmodule"
+  },
+  "pattern": [
+    "   ",
+    "bcd",
+    "aaa"
+  ],
+  "type": "forge:ore_shaped",
+  "key": {
+    "a": {
+      "item": "minecraft:stone_slab",
+      "data": 0
+    },
+    "b": {
+      "item": "minecraft:water_bucket"
+    },
+    "c": {
+      "item": "minecraft:bucket"
+    },
+    "d": {
+      "item": "minecraft:lava_bucket"
+    }
+  }
+}

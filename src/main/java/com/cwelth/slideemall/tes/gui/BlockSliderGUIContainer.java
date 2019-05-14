@@ -1,7 +1,10 @@
 package com.cwelth.slideemall.tes.gui;
 
+import com.cwelth.slideemall.InitContent;
 import com.cwelth.slideemall.ModMain;
 import com.cwelth.slideemall.bakes.EnumHoleTypes;
+import com.cwelth.slideemall.blocks.BlockSlider;
+import com.cwelth.slideemall.network.SliderDropModule;
 import com.cwelth.slideemall.network.SliderGUISync;
 import com.cwelth.slideemall.tes.BlockSliderTE;
 import com.cwelth.slideemall.tes.CommonTE;
@@ -11,8 +14,13 @@ import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiButtonImage;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.InventoryHelper;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
+import net.minecraftforge.fluids.BlockFluidBase;
 
 import java.io.IOException;
 import java.util.List;
@@ -77,6 +85,8 @@ public class BlockSliderGUIContainer<TE extends CommonTE, CNT extends CommonCont
             holeTypeButtons.get(6).drawButton(mc, mouseX, mouseY, 0);
         else
             holeTypeButtons.get(7).drawButton(mc, mouseX, mouseY, 0);
+        if(((BlockSliderTE)te).WATERTOLERANT)
+            holeTypeButtons.get(8).drawButton(mc, mouseX, mouseY, 0);
     }
 
     @Override
@@ -97,6 +107,20 @@ public class BlockSliderGUIContainer<TE extends CommonTE, CNT extends CommonCont
             ((BlockSliderTE)te).isRedstoneHigh = !((BlockSliderTE)te).isRedstoneHigh;
             mouseClicked = 6;
         }
+
+        if(holeTypeButtons.get(8).mousePressed(mc, mouseX, mouseY))
+        {
+            if(((BlockSliderTE)te).WATERTOLERANT) {
+                ((BlockSliderTE) te).WATERTOLERANT = false;
+                World worldIn = te.getWorld();
+                BlockPos pos = te.getPos();
+
+                SliderGUISync.send((BlockSliderTE) te);
+                SliderDropModule.send((BlockSliderTE) te);
+                mouseClicked = 8;
+            }
+        }
+
         if(mouseClicked != -1)
         {
             holeTypeButtons.get(mouseClicked).playPressSound(this.mc.getSoundHandler());
@@ -117,6 +141,7 @@ public class BlockSliderGUIContainer<TE extends CommonTE, CNT extends CommonCont
             holeTypeButtons.add(new GuiButtonImage(5,  xCenter + 114,  yCenter + 56, 18, 18, 36, 36, 18, new ResourceLocation(ModMain.MODID, "textures/gui/holetypesbuttons.png")));
             holeTypeButtons.add(new GuiButtonImage(6,  xCenter + 114,  yCenter + 77, 18, 18, 54, 0, 18, new ResourceLocation(ModMain.MODID, "textures/gui/holetypesbuttons.png")));
             holeTypeButtons.add(new GuiButtonImage(7,  xCenter + 114,  yCenter + 77, 18, 18, 54, 36, 18, new ResourceLocation(ModMain.MODID, "textures/gui/holetypesbuttons.png")));
+            holeTypeButtons.add(new GuiButtonImage(8,  xCenter + 134,  yCenter + 77, 18, 18, 72, 0, 18, new ResourceLocation(ModMain.MODID, "textures/gui/holetypesbuttons.png")));
             isGuiInitialized = true;
         } else
         {
@@ -127,8 +152,14 @@ public class BlockSliderGUIContainer<TE extends CommonTE, CNT extends CommonCont
                     holeTypeButtons.get(i).y = yCenter + 56;
                 } else
                 {
-                    holeTypeButtons.get(i).x = xCenter + 114;
-                    holeTypeButtons.get(i).y = yCenter + 77;
+                    if(i == 8)
+                    {
+                        holeTypeButtons.get(i).x = xCenter + 134;
+                        holeTypeButtons.get(i).y = yCenter + 77;
+                    } else {
+                        holeTypeButtons.get(i).x = xCenter + 114;
+                        holeTypeButtons.get(i).y = yCenter + 77;
+                    }
                 }
             }
         }

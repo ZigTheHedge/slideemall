@@ -1,5 +1,6 @@
 package com.cwelth.slideemall;
 
+import com.cwelth.slideemall.network.SliderDropModule;
 import com.cwelth.slideemall.network.SliderGUISync;
 import com.cwelth.slideemall.proxy.CommonProxy;
 import com.cwelth.slideemall.tes.gui.BlockSliderGUIHandlier;
@@ -26,7 +27,7 @@ public class ModMain {
 
     public static final String NAME = "Slide'em All!";
     public static final String MODID = "slideemall";
-    public static final String VERSION = "0.94.1";
+    public static final String VERSION = "0.95";
 
     public Configuration config;
     public static int maxExtend = 64;
@@ -69,6 +70,7 @@ public class ModMain {
         NetworkRegistry.INSTANCE.registerGuiHandler(instance, new BlockSliderGUIHandlier());
 
         network.registerMessage(SliderGUISync.class, SliderGUISync.Packet.class, 1, Side.SERVER);
+        network.registerMessage(SliderDropModule.class, SliderDropModule.Packet.class, 0, Side.SERVER);
     }
 
     @Mod.EventHandler

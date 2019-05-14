@@ -4,6 +4,7 @@ import com.cwelth.slideemall.ModMain;
 import com.cwelth.slideemall.bakes.EnumHoleTypes;
 import com.mojang.authlib.GameProfile;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -19,9 +20,11 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.common.util.FakePlayerFactory;
+import net.minecraftforge.fluids.BlockFluidBase;
 
 import java.util.UUID;
 
@@ -29,6 +32,7 @@ public class BlockSliderTE extends CommonTE implements ITickable {
     public int FACING;
     public int STATE;
     public int BLOCKSEXTENDED;
+    public boolean WATERTOLERANT = false;
     public EnumHoleTypes HOLE_TYPE;
     private int delayCounter = 10;
     public boolean isRedstoneHigh = true;
@@ -56,6 +60,8 @@ public class BlockSliderTE extends CommonTE implements ITickable {
             HOLE_TYPE = EnumHoleTypes.values()[compound.getInteger("holetype")];
         if(compound.hasKey("redstonehigh"))
             isRedstoneHigh = compound.getBoolean("redstonehigh");
+        if(compound.hasKey("watertolerant"))
+            WATERTOLERANT = compound.getBoolean("watertolerant");
     }
 
     @Override
@@ -67,6 +73,7 @@ public class BlockSliderTE extends CommonTE implements ITickable {
         compound.setInteger("blocksextended", BLOCKSEXTENDED);
         compound.setInteger("holetype", HOLE_TYPE.getIndex());
         compound.setBoolean("redstonehigh", isRedstoneHigh);
+        compound.setBoolean("watertolerant", WATERTOLERANT);
         this.markDirty();
         return compound;
     }
@@ -98,7 +105,14 @@ public class BlockSliderTE extends CommonTE implements ITickable {
                 {
                     BlockPos pos = this.getPos();
                     pos = pos.add(deltaX * (BLOCKSEXTENDED + 1), deltaY * (BLOCKSEXTENDED + 1), deltaZ * (BLOCKSEXTENDED + 1));
-                    if(getWorld().getBlockState(pos).getBlock() == Blocks.AIR)
+                    boolean isValidBlock = false;
+                    Block blockInQ = getWorld().getBlockState(pos).getBlock();
+                    if(blockInQ == Blocks.AIR) isValidBlock = true;
+                    if(WATERTOLERANT)
+                    {
+                        if(blockInQ instanceof BlockFluidBase || blockInQ instanceof BlockLiquid)isValidBlock = true;
+                    }
+                    if(isValidBlock)
                     {
                         BLOCKSEXTENDED++;
                         ItemBlock blockToPlace = (ItemBlock)piston.getItem();
@@ -134,7 +148,9 @@ public class BlockSliderTE extends CommonTE implements ITickable {
                     ItemStack piston = itemStackHandler.getStackInSlot(0);
                     if(getWorld().getBlockState(pos).getBlock() != Blocks.AIR) {
                         if(piston.getCount() == 0) {
-                            piston = getWorld().getBlockState(pos).getBlock().getPickBlock(getWorld().getBlockState(pos), null, getWorld(), pos, null);
+                            FakePlayer fakePlayer = new FakePlayer(getWorld().getMinecraftServer().getWorld(0),new GameProfile(new UUID(0, 0), "fakePlayerSlider"));
+                            RayTraceResult rayTraceResult = new RayTraceResult(fakePlayer);
+                            piston = getWorld().getBlockState(pos).getBlock().getPickBlock(getWorld().getBlockState(pos), rayTraceResult, getWorld(), pos, fakePlayer);
                         } else {
                             FakePlayer fakePlayer = new FakePlayer(getWorld().getMinecraftServer().getWorld(0),new GameProfile(new UUID(0, 0), "fakePlayerSlider"));
                             IBlockState newBlock = ((ItemBlock)piston.getItem()).getBlock().getStateForPlacement(getWorld(), pos, EnumFacing.getFront(FACING & 7), pos.getX(), pos.getY(), pos.getZ(), piston.getMetadata(), fakePlayer);

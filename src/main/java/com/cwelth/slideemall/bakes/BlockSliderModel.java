@@ -33,7 +33,6 @@ public class BlockSliderModel implements IModel {
                 new ResourceLocation(ModMain.MODID, "blocks/blockslider_west"),
                 new ResourceLocation(ModMain.MODID, "blocks/blockslider_top"),
                 new ResourceLocation(ModMain.MODID, "blocks/blockslider_bottom"),
-                new ResourceLocation(ModMain.MODID, "blocks/blocksliderhole"),
                 new ResourceLocation(ModMain.MODID, "blocks/blocksliderhole_round"),
                 new ResourceLocation(ModMain.MODID, "blocks/blocksliderhole_cross"),
                 new ResourceLocation(ModMain.MODID, "blocks/blocksliderhole_box"));

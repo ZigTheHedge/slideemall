@@ -22,11 +22,12 @@ public class ClientProxy extends CommonProxy {
     @SubscribeEvent
     public static void registerModels(ModelRegistryEvent event) {
         InitContent.initModels();
+        InitContent.initItemModels();
     }
 
     @Override
     public void postInit(FMLPostInitializationEvent e) {
-        InitContent.initItemModels();
+        InitContent.initBlockItemModels();
         super.postInit(e);
     }
 }

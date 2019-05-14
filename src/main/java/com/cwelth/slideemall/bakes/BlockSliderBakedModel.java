@@ -2,6 +2,7 @@ package com.cwelth.slideemall.bakes;
 
 import com.cwelth.slideemall.ModMain;
 import com.cwelth.slideemall.blocks.BlockSlider;
+
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
@@ -16,8 +17,12 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraftforge.client.model.pipeline.UnpackedBakedQuad;
 import net.minecraftforge.common.model.IModelState;
 import net.minecraftforge.common.property.IExtendedBlockState;
+import org.apache.commons.lang3.tuple.Pair;
 
 import javax.annotation.Nullable;
+import javax.vecmath.Matrix4f;
+import javax.vecmath.Quat4f;
+import javax.vecmath.Vector3f;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -113,13 +118,13 @@ public class BlockSliderBakedModel implements IBakedModel {
         if(facing == EnumFacing.EAST) {
 
             //bottom
-            if(disguise == null) sprite = tGetter.apply(new ResourceLocation(ModMain.MODID, "blocks/blockslider_east"));
+            if(disguise == null) sprite = tGetter.apply(new ResourceLocation(ModMain.MODID, "blocks/blockslider_bottom"));
             else sprite = Minecraft.getMinecraft().getBlockRendererDispatcher().getBlockModelShapes().getTexture(newBlock);
-            quads.add(createQuad(new Vec3d(0, 0, 1), new Vec3d(0,0,0), new Vec3d(1, 0, 0), new Vec3d(1, 0, 1), sprite));
+            quads.add(createQuad(new Vec3d(0,0,0), new Vec3d(1, 0, 0), new Vec3d(1, 0, 1), new Vec3d(0, 0, 1), sprite));
             //top
-            if(disguise == null) sprite = tGetter.apply(new ResourceLocation(ModMain.MODID, "blocks/blockslider_east"));
+            if(disguise == null) sprite = tGetter.apply(new ResourceLocation(ModMain.MODID, "blocks/blockslider_top"));
             else sprite = Minecraft.getMinecraft().getBlockRendererDispatcher().getBlockModelShapes().getTexture(newBlock);
-            quads.add(createQuad(new Vec3d(0, 1, 0), new Vec3d(0, 1, 1), new Vec3d(1, 1, 1), new Vec3d(1,1,0), sprite));
+            quads.add(createQuad(new Vec3d(1,1,0), new Vec3d(0, 1, 0), new Vec3d(0, 1, 1), new Vec3d(1, 1, 1), sprite));
             //east
             if(disguise == null) sprite = tGetter.apply(new ResourceLocation(ModMain.MODID, "blocks/blockslider_east"));
             else sprite = Minecraft.getMinecraft().getBlockRendererDispatcher().getBlockModelShapes().getTexture(newBlock);
@@ -141,13 +146,13 @@ public class BlockSliderBakedModel implements IBakedModel {
         if(facing == EnumFacing.SOUTH) {
 
             //bottom
-            if(disguise == null) sprite = tGetter.apply(new ResourceLocation(ModMain.MODID, "blocks/blockslider_top"));
-            else sprite = Minecraft.getMinecraft().getBlockRendererDispatcher().getBlockModelShapes().getTexture(newBlock);
-            quads.add(createQuad(new Vec3d(0, 0, 1), new Vec3d(0,0,0), new Vec3d(1, 0, 0), new Vec3d(1, 0, 1), sprite));
-            //top
             if(disguise == null) sprite = tGetter.apply(new ResourceLocation(ModMain.MODID, "blocks/blockslider_bottom"));
             else sprite = Minecraft.getMinecraft().getBlockRendererDispatcher().getBlockModelShapes().getTexture(newBlock);
-            quads.add(createQuad(new Vec3d(0, 1, 0), new Vec3d(0, 1, 1), new Vec3d(1, 1, 1), new Vec3d(1,1,0), sprite));
+            quads.add(createQuad(new Vec3d(1, 0, 0), new Vec3d(1, 0, 1), new Vec3d(0, 0, 1), new Vec3d(0,0,0), sprite));
+            //top
+            if(disguise == null) sprite = tGetter.apply(new ResourceLocation(ModMain.MODID, "blocks/blockslider_top"));
+            else sprite = Minecraft.getMinecraft().getBlockRendererDispatcher().getBlockModelShapes().getTexture(newBlock);
+            quads.add(createQuad(new Vec3d(1, 1, 1), new Vec3d(1,1,0), new Vec3d(0, 1, 0), new Vec3d(0, 1, 1), sprite));
             //east
             if(disguise == null) sprite = tGetter.apply(new ResourceLocation(ModMain.MODID, "blocks/"+holeTexture));
             else sprite = Minecraft.getMinecraft().getBlockRendererDispatcher().getBlockModelShapes().getTexture(newBlock);
@@ -169,13 +174,13 @@ public class BlockSliderBakedModel implements IBakedModel {
         if(facing == EnumFacing.WEST) {
 
             //bottom
-            if(disguise == null) sprite = tGetter.apply(new ResourceLocation(ModMain.MODID, "blocks/blockslider_west"));
+            if(disguise == null) sprite = tGetter.apply(new ResourceLocation(ModMain.MODID, "blocks/blockslider_bottom"));
             else sprite = Minecraft.getMinecraft().getBlockRendererDispatcher().getBlockModelShapes().getTexture(newBlock);
-            quads.add(createQuad(new Vec3d(0, 0, 1), new Vec3d(0,0,0), new Vec3d(1, 0, 0), new Vec3d(1, 0, 1), sprite));
+            quads.add(createQuad(new Vec3d(1, 0, 1), new Vec3d(0, 0, 1), new Vec3d(0,0,0), new Vec3d(1, 0, 0), sprite));
             //top
-            if(disguise == null) sprite = tGetter.apply(new ResourceLocation(ModMain.MODID, "blocks/blockslider_west"));
+            if(disguise == null) sprite = tGetter.apply(new ResourceLocation(ModMain.MODID, "blocks/blockslider_top"));
             else sprite = Minecraft.getMinecraft().getBlockRendererDispatcher().getBlockModelShapes().getTexture(newBlock);
-            quads.add(createQuad(new Vec3d(0, 1, 0), new Vec3d(0, 1, 1), new Vec3d(1, 1, 1), new Vec3d(1,1,0), sprite));
+            quads.add(createQuad( new Vec3d(0, 1, 1), new Vec3d(1, 1, 1), new Vec3d(1,1,0), new Vec3d(0, 1, 0),sprite));
             //east
             if(disguise == null) sprite = tGetter.apply(new ResourceLocation(ModMain.MODID, "blocks/blockslider_west"));
             else sprite = Minecraft.getMinecraft().getBlockRendererDispatcher().getBlockModelShapes().getTexture(newBlock);
@@ -307,7 +312,21 @@ public class BlockSliderBakedModel implements IBakedModel {
     }
 
     @Override
-    public ItemCameraTransforms getItemCameraTransforms() {
-        return ItemCameraTransforms.DEFAULT;
+    public Pair<? extends IBakedModel, Matrix4f> handlePerspective(ItemCameraTransforms.TransformType cameraTransformType) {
+        switch(cameraTransformType) {
+            case FIRST_PERSON_RIGHT_HAND:
+            case FIRST_PERSON_LEFT_HAND:
+            case THIRD_PERSON_RIGHT_HAND:
+            case THIRD_PERSON_LEFT_HAND:
+                return Pair.of(this, new Matrix4f(new Quat4f(0, 1, 2, 0), new Vector3f(0, 0, 0), 0.5F));
+            case FIXED:
+                return Pair.of(this, new Matrix4f(new Quat4f(0, 0, 0, 1), new Vector3f(0, -.2F, 0), 0.5F));
+            case GROUND:
+            case GUI:
+                return Pair.of(this, new Matrix4f(new Quat4f(0, -0.5F, 0.85F, 1), new Vector3f(0, 0, 0), 0.6875F));
+            default:
+                return IBakedModel.super.handlePerspective(cameraTransformType);
+        }
     }
+
 }
