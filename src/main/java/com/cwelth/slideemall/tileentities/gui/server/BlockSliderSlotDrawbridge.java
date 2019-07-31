@@ -1,12 +1,9 @@
-package com.cwelth.slideemall.tes.gui.server;
+package com.cwelth.slideemall.tileentities.gui.server;
 
 import com.cwelth.slideemall.ModMain;
 import net.minecraft.block.Block;
-import net.minecraft.block.ITileEntityProvider;
-import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
 

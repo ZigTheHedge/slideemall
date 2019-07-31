@@ -1,4 +1,4 @@
-package com.cwelth.slideemall.bakes;
+package com.cwelth.slideemall.utils;
 
 import net.minecraft.util.IStringSerializable;
 

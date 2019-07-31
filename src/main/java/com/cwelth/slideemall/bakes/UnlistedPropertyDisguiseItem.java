@@ -1,9 +1,10 @@
 package com.cwelth.slideemall.bakes;
 
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.property.IUnlistedProperty;
 
-public class UnlistedPropertyDisguiseItem implements IUnlistedProperty<ItemStack> {
+public class UnlistedPropertyDisguiseItem implements IUnlistedProperty<IBlockState> {
 
     private final String name;
 
@@ -16,17 +17,17 @@ public class UnlistedPropertyDisguiseItem implements IUnlistedProperty<ItemStack
     }
 
     @Override
-    public boolean isValid(ItemStack value) {
+    public boolean isValid(IBlockState value) {
         return true;
     }
 
     @Override
-    public Class<ItemStack> getType() {
-        return ItemStack.class;
+    public Class<IBlockState> getType() {
+        return IBlockState.class;
     }
 
     @Override
-    public String valueToString(ItemStack value) {
+    public String valueToString(IBlockState value) {
         return value.toString();
     }
 }

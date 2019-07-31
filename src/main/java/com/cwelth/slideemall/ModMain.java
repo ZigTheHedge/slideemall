@@ -1,9 +1,10 @@
 package com.cwelth.slideemall;
 
+import com.cwelth.slideemall.network.DisguiseGUISync;
 import com.cwelth.slideemall.network.SliderDropModule;
 import com.cwelth.slideemall.network.SliderGUISync;
 import com.cwelth.slideemall.proxy.CommonProxy;
-import com.cwelth.slideemall.tes.gui.BlockSliderGUIHandlier;
+import com.cwelth.slideemall.tileentities.gui.BlockGUIHandlier;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
@@ -27,7 +28,7 @@ public class ModMain {
 
     public static final String NAME = "Slide'em All!";
     public static final String MODID = "slideemall";
-    public static final String VERSION = "0.95";
+    public static final String VERSION = "0.96";
 
     public Configuration config;
     public static int maxExtend = 64;
@@ -67,8 +68,9 @@ public class ModMain {
     public void init(FMLInitializationEvent e)
     {
         proxy.init(e);
-        NetworkRegistry.INSTANCE.registerGuiHandler(instance, new BlockSliderGUIHandlier());
+        NetworkRegistry.INSTANCE.registerGuiHandler(instance, new BlockGUIHandlier());
 
+        network.registerMessage(DisguiseGUISync.class, DisguiseGUISync.Packet.class, 2, Side.SERVER);
         network.registerMessage(SliderGUISync.class, SliderGUISync.Packet.class, 1, Side.SERVER);
         network.registerMessage(SliderDropModule.class, SliderDropModule.Packet.class, 0, Side.SERVER);
     }

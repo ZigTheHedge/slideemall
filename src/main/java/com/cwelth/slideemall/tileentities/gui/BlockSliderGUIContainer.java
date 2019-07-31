@@ -1,26 +1,21 @@
-package com.cwelth.slideemall.tes.gui;
+package com.cwelth.slideemall.tileentities.gui;
 
-import com.cwelth.slideemall.InitContent;
 import com.cwelth.slideemall.ModMain;
-import com.cwelth.slideemall.bakes.EnumHoleTypes;
-import com.cwelth.slideemall.blocks.BlockSlider;
+import com.cwelth.slideemall.utils.EnumHoleTypes;
 import com.cwelth.slideemall.network.SliderDropModule;
 import com.cwelth.slideemall.network.SliderGUISync;
-import com.cwelth.slideemall.tes.BlockSliderTE;
-import com.cwelth.slideemall.tes.CommonTE;
-import com.cwelth.slideemall.tes.gui.server.CommonContainer;
+import com.cwelth.slideemall.tileentities.BlockSliderTE;
+import com.cwelth.slideemall.tileentities.CommonTE;
+import com.cwelth.slideemall.tileentities.gui.server.CommonContainer;
 import com.google.common.collect.Lists;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiButtonImage;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.InventoryHelper;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.fluids.BlockFluidBase;
 
 import java.io.IOException;
 import java.util.List;

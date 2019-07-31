@@ -2,11 +2,9 @@ package com.cwelth.slideemall.blocks;
 
 import com.cwelth.slideemall.InitContent;
 import com.cwelth.slideemall.ModMain;
-import com.cwelth.slideemall.bakes.BlockSliderBakedModel;
-import com.cwelth.slideemall.bakes.BlockSliderModel;
 import com.cwelth.slideemall.bakes.UnlistedPropertyDisguiseItem;
 import com.cwelth.slideemall.bakes.UnlistedPropertyHoleType;
-import com.cwelth.slideemall.tes.BlockSliderTE;
+import com.cwelth.slideemall.tileentities.BlockSliderTE;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
@@ -14,24 +12,26 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraft.client.renderer.block.statemap.StateMapperBase;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.tileentity.TileEntityFurnace;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.client.model.ModelLoader;
+import net.minecraft.world.WorldServer;
+import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.property.ExtendedBlockState;
 import net.minecraftforge.common.property.IExtendedBlockState;
 import net.minecraftforge.common.property.IUnlistedProperty;
+import net.minecraftforge.common.util.FakePlayer;
+import net.minecraftforge.common.util.FakePlayerFactory;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -93,7 +93,7 @@ public class BlockSlider extends CommonTEBlock<BlockSliderTE> {
         }
 
         if(playerIn.isSneaking()) {
-            playerIn.openGui(ModMain.instance, 1, worldIn, pos.getX(), pos.getY(), pos.getZ());
+            playerIn.openGui(ModMain.instance, 0, worldIn, pos.getX(), pos.getY(), pos.getZ());
             return true;
         }
 
@@ -186,7 +186,14 @@ public class BlockSlider extends CommonTEBlock<BlockSliderTE> {
         TileEntity te = world.getTileEntity(pos);
         if(te instanceof BlockSliderTE)
         {
-            return extendedBlockState.withProperty(DISGUISE_ITEM, ((BlockSliderTE) te).itemStackHandler.getStackInSlot(1)).withProperty(HOLE_TYPE, ((BlockSliderTE)te).HOLE_TYPE).withProperty(FACING, state.getValue(FACING));
+                EnumFacing facing = state.getValue(FACING);
+                FakePlayer fakePlayer = FakePlayerFactory.getMinecraft(DimensionManager.getWorld(0));
+
+                IBlockState disguiseBS = null;
+                if(((BlockSliderTE) te).itemStackHandler.getStackInSlot(1).getCount() > 0)
+                    disguiseBS = ((ItemBlock) ((BlockSliderTE) te).itemStackHandler.getStackInSlot(1).getItem()).getBlock().getStateForPlacement(
+                        te.getWorld(), te.getPos(), facing, 0, 0, 0, ((BlockSliderTE) te).itemStackHandler.getStackInSlot(1).getMetadata(), fakePlayer, null);
+            return extendedBlockState.withProperty(DISGUISE_ITEM, disguiseBS).withProperty(HOLE_TYPE, ((BlockSliderTE)te).HOLE_TYPE).withProperty(FACING, state.getValue(FACING));
         } else
             throw new UnsupportedOperationException("Tileentity is NULL");
     }

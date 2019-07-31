@@ -11,46 +11,25 @@ public class InitContent {
     @GameRegistry.ObjectHolder("slideemall:blockslider")
     public static BlockSlider blockSlider;
 
-
-    @GameRegistry.ObjectHolder("slideemall:blockprofilerail")
-    public static BlockProfileRail blockProfileRail;
+    @GameRegistry.ObjectHolder("slideemall:blockhm")
+    public static BlockHiddenManager blockHiddenManager;
 
     @GameRegistry.ObjectHolder("slideemall:itemliquidmodule")
     public static ItemLiquidModule itemLiquidModule;
-    /*
-    @GameRegistry.ObjectHolder("slideemall:blockgearbox")
-    public static BlockGearBox blockGearbox;
 
-    @GameRegistry.ObjectHolder("slideemall:blockconnector")
-    public static BlockConnector blockConnector;
-
-    @GameRegistry.ObjectHolder("slideemall:blockgatepanel")
-    public static BlockGatePanel blockGatePanel;
-
-    */
 
     @SideOnly(Side.CLIENT)
     public static void initModels() {
-
         blockSlider.initModel();
-        /*
-        blockProfileRail.initModel();
-        blockGearbox.initModel();
-        blockConnector.initModel();
-        blockGatePanel.initModel();
+        blockHiddenManager.initModel();
 
-        */
     }
 
     @SideOnly(Side.CLIENT)
     public static void initBlockItemModels() {
         blockSlider.initItemModel();
-        /*
-        blockProfileRail.initItemModel();
-        blockGearbox.initItemModel();
-        blockConnector.initItemModel();
-        blockGatePanel.initItemModel();
-        */
+        blockHiddenManager.initItemModel();
+
     }
 
     @SideOnly(Side.CLIENT)

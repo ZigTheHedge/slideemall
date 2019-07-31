@@ -1,40 +1,39 @@
 package com.cwelth.slideemall.network;
 
-import com.cwelth.slideemall.InitContent;
 import com.cwelth.slideemall.ModMain;
+import com.cwelth.slideemall.tileentities.BlockHiddenManagerTE;
 import com.cwelth.slideemall.tileentities.BlockSliderTE;
+import com.cwelth.slideemall.tileentities.CommonTE;
+import com.cwelth.slideemall.utils.EnumHoleTypes;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.inventory.InventoryHelper;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
-public class SliderDropModule implements IMessageHandler<SliderDropModule.Packet, IMessage> {
+public class DisguiseGUISync implements IMessageHandler<DisguiseGUISync.Packet, IMessage> {
 
     @Override
-    public IMessage onMessage(SliderDropModule.Packet message, MessageContext ctx) {
+    public IMessage onMessage(DisguiseGUISync.Packet message, MessageContext ctx) {
         EntityPlayerMP player = ctx.getServerHandler().player;
         player.getServerWorld().addScheduledTask(() -> {
             World world = player.world;
-            InventoryHelper.spawnItemStack(world, message.tePos.getX(), message.tePos.getY() + 1, message.tePos.getZ(), new ItemStack(InitContent.itemLiquidModule));
-            //ModMain.logger.warning("TE synced. Side: " + ctx.side + ", Data follows: X: "+message.tePos.getX() + ", Y: "+message.tePos.getY()+", Z: "+message.tePos.getZ()+", HOLE_TYPE:"+message.holeType);
+            world.notifyBlockUpdate(message.tePos, world.getBlockState(message.tePos), world.getBlockState(message.tePos), 3);
         });
         return null;
     }
 
-    public static void send(BlockSliderTE te)
+    public static void send(CommonTE te)
     {
-        ModMain.network.sendToServer(new SliderDropModule.Packet(te));
+        ModMain.network.sendToServer(new DisguiseGUISync.Packet(te));
     }
 
     public static class Packet implements IMessage {
         public BlockPos tePos;
 
-        public Packet(BlockSliderTE te) {
+        public Packet(CommonTE te) {
             tePos = te.getPos();
         }
 

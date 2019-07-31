@@ -1,6 +1,5 @@
-package com.cwelth.slideemall.tes;
+package com.cwelth.slideemall.tileentities;
 
-import com.cwelth.slideemall.ModMain;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;

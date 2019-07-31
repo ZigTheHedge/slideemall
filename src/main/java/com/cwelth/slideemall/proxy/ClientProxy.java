@@ -1,7 +1,7 @@
 package com.cwelth.slideemall.proxy;
 
 import com.cwelth.slideemall.InitContent;
-import com.cwelth.slideemall.bakes.BlockSliderModelLoader;
+import com.cwelth.slideemall.bakes.DisguiseModelLoader;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.model.ModelLoaderRegistry;
 import net.minecraftforge.fml.common.Mod;
@@ -15,7 +15,7 @@ import net.minecraftforge.fml.relauncher.Side;
 public class ClientProxy extends CommonProxy {
     @Override
     public void preInit(FMLPreInitializationEvent e) {
-        ModelLoaderRegistry.registerLoader(new BlockSliderModelLoader());
+        ModelLoaderRegistry.registerLoader(new DisguiseModelLoader());
         super.preInit(e);
     }
 

@@ -1,5 +1,6 @@
 package com.cwelth.slideemall.bakes;
 
+import com.cwelth.slideemall.utils.EnumHoleTypes;
 import net.minecraftforge.common.property.IUnlistedProperty;
 
 public class UnlistedPropertyHoleType implements IUnlistedProperty<EnumHoleTypes> {

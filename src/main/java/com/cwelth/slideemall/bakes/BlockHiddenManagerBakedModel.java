@@ -1,43 +1,26 @@
 package com.cwelth.slideemall.bakes;
 
 import com.cwelth.slideemall.ModMain;
-import com.cwelth.slideemall.blocks.BlockSlider;
-
-import com.cwelth.slideemall.utils.EnumHoleTypes;
+import com.cwelth.slideemall.blocks.BlockHiddenManager;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.block.model.*;
+import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.vertex.VertexFormat;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.inventory.EntityEquipmentSlot;
-import net.minecraft.item.ItemBlock;
-import net.minecraft.item.ItemStack;
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHandSide;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.Vec3d;
-import net.minecraft.world.WorldServer;
-import net.minecraftforge.client.model.pipeline.UnpackedBakedQuad;
 import net.minecraftforge.common.model.IModelState;
 import net.minecraftforge.common.property.IExtendedBlockState;
-import net.minecraftforge.common.util.FakePlayer;
-import net.minecraftforge.common.util.FakePlayerFactory;
-import org.apache.commons.lang3.tuple.Pair;
 
 import javax.annotation.Nullable;
-import javax.vecmath.Matrix4f;
-import javax.vecmath.Quat4f;
-import javax.vecmath.Vector3f;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.function.Function;
 
-public class BlockSliderBakedModel extends BakedCubeModel {
-
-    public BlockSliderBakedModel(IModelState state, VertexFormat format, Function<ResourceLocation, TextureAtlasSprite> bakedTextureGetter) {
+public class BlockHiddenManagerBakedModel extends BakedCubeModel {
+    public BlockHiddenManagerBakedModel(IModelState state, VertexFormat format, Function<ResourceLocation, TextureAtlasSprite> bakedTextureGetter) {
         super(state, format, bakedTextureGetter);
     }
 
@@ -51,46 +34,38 @@ public class BlockSliderBakedModel extends BakedCubeModel {
 
         EnumFacing facing;
         IBlockState newBlock = null;
-        EnumHoleTypes holeType = null;
 
         if(state != null) {
             IExtendedBlockState extendedBlockState = (IExtendedBlockState) state;
-            facing = extendedBlockState.getValue(BlockSlider.FACING);
-            newBlock = extendedBlockState.getValue(BlockSlider.DISGUISE_ITEM);
-            holeType = extendedBlockState.getValue(BlockSlider.HOLE_TYPE);
+            facing = extendedBlockState.getValue(BlockHiddenManager.FACING);
+            newBlock = extendedBlockState.getValue(BlockHiddenManager.DISGUISE_ITEM);
         } else
             facing = EnumFacing.SOUTH;
-
-        String holeTexture = "blocksliderhole_round";
-
-        if(holeType == EnumHoleTypes.ROUND)holeTexture = "blocksliderhole_round";
-        if(holeType == EnumHoleTypes.SQUARE)holeTexture = "blocksliderhole_box";
-        if(holeType == EnumHoleTypes.CROSS)holeTexture = "blocksliderhole_cross";
 
         if(facing == EnumFacing.EAST) {
 
             //bottom
-            if(newBlock == null) sprite = tGetter.apply(new ResourceLocation(ModMain.MODID, "blocks/blockslider_bottom"));
+            if(newBlock == null) sprite = tGetter.apply(new ResourceLocation(ModMain.MODID, "blocks/blockhm_tb"));
             else sprite = Minecraft.getMinecraft().getBlockRendererDispatcher().getBlockModelShapes().getModelForState(newBlock).getQuads(newBlock, EnumFacing.DOWN, 0).get(0).getSprite();
             quads.add(createQuad(new Vec3d(0,0,0), new Vec3d(1, 0, 0), new Vec3d(1, 0, 1), new Vec3d(0, 0, 1), sprite));
             //top
-            if(newBlock == null) sprite = tGetter.apply(new ResourceLocation(ModMain.MODID, "blocks/blockslider_top"));
+            if(newBlock == null) sprite = tGetter.apply(new ResourceLocation(ModMain.MODID, "blocks/blockhm_tb"));
             else sprite = Minecraft.getMinecraft().getBlockRendererDispatcher().getBlockModelShapes().getModelForState(newBlock).getQuads(newBlock, EnumFacing.UP, 0).get(0).getSprite();
             quads.add(createQuad(new Vec3d(1,1,0), new Vec3d(0, 1, 0), new Vec3d(0, 1, 1), new Vec3d(1, 1, 1), sprite));
             //east
-            if(newBlock == null) sprite = tGetter.apply(new ResourceLocation(ModMain.MODID, "blocks/blockslider_east"));
+            if(newBlock == null) sprite = tGetter.apply(new ResourceLocation(ModMain.MODID, "blocks/blockhm_side"));
             else sprite = Minecraft.getMinecraft().getBlockRendererDispatcher().getBlockModelShapes().getModelForState(newBlock).getQuads(newBlock, EnumFacing.EAST, 0).get(0).getSprite();
             quads.add(createQuad(new Vec3d(0, 1, 1), new Vec3d(0, 0, 1), new Vec3d(1,0,1), new Vec3d(1, 1, 1), sprite));
             //west
-            if(newBlock == null) sprite = tGetter.apply(new ResourceLocation(ModMain.MODID, "blocks/blockslider_west"));
+            if(newBlock == null) sprite = tGetter.apply(new ResourceLocation(ModMain.MODID, "blocks/blockhm_side"));
             else sprite = Minecraft.getMinecraft().getBlockRendererDispatcher().getBlockModelShapes().getModelForState(newBlock).getQuads(newBlock, EnumFacing.WEST, 0).get(0).getSprite();
             quads.add(createQuad(new Vec3d(1, 1, 0), new Vec3d(1, 0, 0), new Vec3d(0,0,0), new Vec3d(0, 1, 0), sprite));
             //front
-            if(newBlock == null) sprite = tGetter.apply(new ResourceLocation(ModMain.MODID, "blocks/"+holeTexture));
+            if(newBlock == null) sprite = tGetter.apply(new ResourceLocation(ModMain.MODID, "blocks/blockhm_side"));
             else sprite = Minecraft.getMinecraft().getBlockRendererDispatcher().getBlockModelShapes().getModelForState(newBlock).getQuads(newBlock, EnumFacing.NORTH, 0).get(0).getSprite();
             quads.add(createQuad(new Vec3d(1, 1, 1), new Vec3d(1, 0, 1), new Vec3d(1,0,0), new Vec3d(1, 1, 0), sprite));
             //back
-            if(newBlock == null) sprite = tGetter.apply(new ResourceLocation(ModMain.MODID, "blocks/blockslider"));
+            if(newBlock == null) sprite = tGetter.apply(new ResourceLocation(ModMain.MODID, "blocks/blockhm_side"));
             else sprite = Minecraft.getMinecraft().getBlockRendererDispatcher().getBlockModelShapes().getModelForState(newBlock).getQuads(newBlock, EnumFacing.SOUTH, 0).get(0).getSprite();
             quads.add(createQuad(new Vec3d(0, 1, 0), new Vec3d(0, 0, 0), new Vec3d(0,0,1), new Vec3d(0, 1, 1), sprite));
 
@@ -98,27 +73,27 @@ public class BlockSliderBakedModel extends BakedCubeModel {
         if(facing == EnumFacing.SOUTH) {
 
             //bottom
-            if(newBlock == null) sprite = tGetter.apply(new ResourceLocation(ModMain.MODID, "blocks/blockslider_bottom"));
+            if(newBlock == null) sprite = tGetter.apply(new ResourceLocation(ModMain.MODID, "blocks/blockhm_tb"));
             else sprite = Minecraft.getMinecraft().getBlockRendererDispatcher().getBlockModelShapes().getModelForState(newBlock).getQuads(newBlock, EnumFacing.DOWN, 0).get(0).getSprite();
             quads.add(createQuad(new Vec3d(1, 0, 0), new Vec3d(1, 0, 1), new Vec3d(0, 0, 1), new Vec3d(0,0,0), sprite));
             //top
-            if(newBlock == null) sprite = tGetter.apply(new ResourceLocation(ModMain.MODID, "blocks/blockslider_top"));
+            if(newBlock == null) sprite = tGetter.apply(new ResourceLocation(ModMain.MODID, "blocks/blockhm_tb"));
             else sprite = Minecraft.getMinecraft().getBlockRendererDispatcher().getBlockModelShapes().getModelForState(newBlock).getQuads(newBlock, EnumFacing.UP, 0).get(0).getSprite();
             quads.add(createQuad(new Vec3d(1, 1, 1), new Vec3d(1,1,0), new Vec3d(0, 1, 0), new Vec3d(0, 1, 1), sprite));
             //east
-            if(newBlock == null) sprite = tGetter.apply(new ResourceLocation(ModMain.MODID, "blocks/"+holeTexture));
+            if(newBlock == null) sprite = tGetter.apply(new ResourceLocation(ModMain.MODID, "blocks/blockhm_side"));
             else sprite = Minecraft.getMinecraft().getBlockRendererDispatcher().getBlockModelShapes().getModelForState(newBlock).getQuads(newBlock, EnumFacing.NORTH, 0).get(0).getSprite();
             quads.add(createQuad(new Vec3d(0, 1, 1), new Vec3d(0, 0, 1), new Vec3d(1,0,1), new Vec3d(1, 1, 1), sprite));
             //west
-            if(newBlock == null) sprite = tGetter.apply(new ResourceLocation(ModMain.MODID, "blocks/blockslider"));
+            if(newBlock == null) sprite = tGetter.apply(new ResourceLocation(ModMain.MODID, "blocks/blockhm_side"));
             else sprite = Minecraft.getMinecraft().getBlockRendererDispatcher().getBlockModelShapes().getModelForState(newBlock).getQuads(newBlock, EnumFacing.SOUTH, 0).get(0).getSprite();
             quads.add(createQuad(new Vec3d(1, 1, 0), new Vec3d(1, 0, 0), new Vec3d(0,0,0), new Vec3d(0, 1, 0), sprite));
             //front
-            if(newBlock == null) sprite = tGetter.apply(new ResourceLocation(ModMain.MODID, "blocks/blockslider_west"));
+            if(newBlock == null) sprite = tGetter.apply(new ResourceLocation(ModMain.MODID, "blocks/blockhm_side"));
             else sprite = Minecraft.getMinecraft().getBlockRendererDispatcher().getBlockModelShapes().getModelForState(newBlock).getQuads(newBlock, EnumFacing.WEST, 0).get(0).getSprite();
             quads.add(createQuad(new Vec3d(1, 1, 1), new Vec3d(1, 0, 1), new Vec3d(1,0,0), new Vec3d(1, 1, 0), sprite));
             //back
-            if(newBlock == null) sprite = tGetter.apply(new ResourceLocation(ModMain.MODID, "blocks/blockslider_east"));
+            if(newBlock == null) sprite = tGetter.apply(new ResourceLocation(ModMain.MODID, "blocks/blockhm_side"));
             else sprite = Minecraft.getMinecraft().getBlockRendererDispatcher().getBlockModelShapes().getModelForState(newBlock).getQuads(newBlock, EnumFacing.EAST, 0).get(0).getSprite();
             quads.add(createQuad(new Vec3d(0, 1, 0), new Vec3d(0, 0, 0), new Vec3d(0,0,1), new Vec3d(0, 1, 1), sprite));
 
@@ -126,27 +101,27 @@ public class BlockSliderBakedModel extends BakedCubeModel {
         if(facing == EnumFacing.WEST) {
 
             //bottom
-            if(newBlock == null) sprite = tGetter.apply(new ResourceLocation(ModMain.MODID, "blocks/blockslider_bottom"));
+            if(newBlock == null) sprite = tGetter.apply(new ResourceLocation(ModMain.MODID, "blocks/blockhm_tb"));
             else sprite = Minecraft.getMinecraft().getBlockRendererDispatcher().getBlockModelShapes().getModelForState(newBlock).getQuads(newBlock, EnumFacing.DOWN, 0).get(0).getSprite();
             quads.add(createQuad(new Vec3d(1, 0, 1), new Vec3d(0, 0, 1), new Vec3d(0,0,0), new Vec3d(1, 0, 0), sprite));
             //top
-            if(newBlock == null) sprite = tGetter.apply(new ResourceLocation(ModMain.MODID, "blocks/blockslider_top"));
+            if(newBlock == null) sprite = tGetter.apply(new ResourceLocation(ModMain.MODID, "blocks/blockhm_tb"));
             else sprite = Minecraft.getMinecraft().getBlockRendererDispatcher().getBlockModelShapes().getModelForState(newBlock).getQuads(newBlock, EnumFacing.UP, 0).get(0).getSprite();
             quads.add(createQuad( new Vec3d(0, 1, 1), new Vec3d(1, 1, 1), new Vec3d(1,1,0), new Vec3d(0, 1, 0),sprite));
             //east
-            if(newBlock == null) sprite = tGetter.apply(new ResourceLocation(ModMain.MODID, "blocks/blockslider_west"));
+            if(newBlock == null) sprite = tGetter.apply(new ResourceLocation(ModMain.MODID, "blocks/blockhm_side"));
             else sprite = Minecraft.getMinecraft().getBlockRendererDispatcher().getBlockModelShapes().getModelForState(newBlock).getQuads(newBlock, EnumFacing.WEST, 0).get(0).getSprite();
             quads.add(createQuad(new Vec3d(0, 1, 1), new Vec3d(0, 0, 1), new Vec3d(1,0,1), new Vec3d(1, 1, 1), sprite));
             //west
-            if(newBlock == null) sprite = tGetter.apply(new ResourceLocation(ModMain.MODID, "blocks/blockslider_east"));
+            if(newBlock == null) sprite = tGetter.apply(new ResourceLocation(ModMain.MODID, "blocks/blockhm_side"));
             else sprite = Minecraft.getMinecraft().getBlockRendererDispatcher().getBlockModelShapes().getModelForState(newBlock).getQuads(newBlock, EnumFacing.EAST, 0).get(0).getSprite();
             quads.add(createQuad(new Vec3d(1, 1, 0), new Vec3d(1, 0, 0), new Vec3d(0,0,0), new Vec3d(0, 1, 0), sprite));
             //front
-            if(newBlock == null) sprite = tGetter.apply(new ResourceLocation(ModMain.MODID, "blocks/blockslider"));
+            if(newBlock == null) sprite = tGetter.apply(new ResourceLocation(ModMain.MODID, "blocks/blockhm_side"));
             else sprite = Minecraft.getMinecraft().getBlockRendererDispatcher().getBlockModelShapes().getModelForState(newBlock).getQuads(newBlock, EnumFacing.SOUTH, 0).get(0).getSprite();
             quads.add(createQuad(new Vec3d(1, 1, 1), new Vec3d(1, 0, 1), new Vec3d(1,0,0), new Vec3d(1, 1, 0), sprite));
             //back
-            if(newBlock == null) sprite = tGetter.apply(new ResourceLocation(ModMain.MODID, "blocks/"+holeTexture));
+            if(newBlock == null) sprite = tGetter.apply(new ResourceLocation(ModMain.MODID, "blocks/blockhm_side"));
             else sprite = Minecraft.getMinecraft().getBlockRendererDispatcher().getBlockModelShapes().getModelForState(newBlock).getQuads(newBlock, EnumFacing.NORTH, 0).get(0).getSprite();
             quads.add(createQuad(new Vec3d(0, 1, 0), new Vec3d(0, 0, 0), new Vec3d(0,0,1), new Vec3d(0, 1, 1), sprite));
 
@@ -154,27 +129,27 @@ public class BlockSliderBakedModel extends BakedCubeModel {
         if(facing == EnumFacing.NORTH) {
 
             //bottom
-            if(newBlock == null) sprite = tGetter.apply(new ResourceLocation(ModMain.MODID, "blocks/blockslider_bottom"));
+            if(newBlock == null) sprite = tGetter.apply(new ResourceLocation(ModMain.MODID, "blocks/blockhm_tb"));
             else sprite = Minecraft.getMinecraft().getBlockRendererDispatcher().getBlockModelShapes().getModelForState(newBlock).getQuads(newBlock, EnumFacing.DOWN, 0).get(0).getSprite();
             quads.add(createQuad(new Vec3d(0, 0, 1), new Vec3d(0,0,0), new Vec3d(1, 0, 0), new Vec3d(1, 0, 1), sprite));
             //top
-            if(newBlock == null) sprite = tGetter.apply(new ResourceLocation(ModMain.MODID, "blocks/blockslider_top"));
+            if(newBlock == null) sprite = tGetter.apply(new ResourceLocation(ModMain.MODID, "blocks/blockhm_tb"));
             else sprite = Minecraft.getMinecraft().getBlockRendererDispatcher().getBlockModelShapes().getModelForState(newBlock).getQuads(newBlock, EnumFacing.UP, 0).get(0).getSprite();
             quads.add(createQuad(new Vec3d(0, 1, 0), new Vec3d(0, 1, 1), new Vec3d(1, 1, 1), new Vec3d(1,1,0), sprite));
             //east
-            if(newBlock == null) sprite = tGetter.apply(new ResourceLocation(ModMain.MODID, "blocks/blockslider"));
+            if(newBlock == null) sprite = tGetter.apply(new ResourceLocation(ModMain.MODID, "blocks/blockhm_side"));
             else sprite = Minecraft.getMinecraft().getBlockRendererDispatcher().getBlockModelShapes().getModelForState(newBlock).getQuads(newBlock, EnumFacing.SOUTH, 0).get(0).getSprite();
             quads.add(createQuad(new Vec3d(0, 1, 1), new Vec3d(0, 0, 1), new Vec3d(1,0,1), new Vec3d(1, 1, 1), sprite));
             //west
-            if(newBlock == null) sprite = tGetter.apply(new ResourceLocation(ModMain.MODID, "blocks/"+holeTexture));
+            if(newBlock == null) sprite = tGetter.apply(new ResourceLocation(ModMain.MODID, "blocks/blockhm_side"));
             else sprite = Minecraft.getMinecraft().getBlockRendererDispatcher().getBlockModelShapes().getModelForState(newBlock).getQuads(newBlock, EnumFacing.NORTH, 0).get(0).getSprite();
             quads.add(createQuad(new Vec3d(1, 1, 0), new Vec3d(1, 0, 0), new Vec3d(0,0,0), new Vec3d(0, 1, 0), sprite));
             //front
-            if(newBlock == null) sprite = tGetter.apply(new ResourceLocation(ModMain.MODID, "blocks/blockslider_east"));
+            if(newBlock == null) sprite = tGetter.apply(new ResourceLocation(ModMain.MODID, "blocks/blockhm_side"));
             else sprite = Minecraft.getMinecraft().getBlockRendererDispatcher().getBlockModelShapes().getModelForState(newBlock).getQuads(newBlock, EnumFacing.EAST, 0).get(0).getSprite();
             quads.add(createQuad(new Vec3d(1, 1, 1), new Vec3d(1, 0, 1), new Vec3d(1,0,0), new Vec3d(1, 1, 0), sprite));
             //back
-            if(newBlock == null) sprite = tGetter.apply(new ResourceLocation(ModMain.MODID, "blocks/blockslider_west"));
+            if(newBlock == null) sprite = tGetter.apply(new ResourceLocation(ModMain.MODID, "blocks/blockhm_side"));
             else sprite = Minecraft.getMinecraft().getBlockRendererDispatcher().getBlockModelShapes().getModelForState(newBlock).getQuads(newBlock, EnumFacing.WEST, 0).get(0).getSprite();
             quads.add(createQuad(new Vec3d(0, 1, 0), new Vec3d(0, 0, 0), new Vec3d(0,0,1), new Vec3d(0, 1, 1), sprite));
 
@@ -182,27 +157,27 @@ public class BlockSliderBakedModel extends BakedCubeModel {
         if(facing == EnumFacing.UP) {
 
             //bottom
-            if(newBlock == null) sprite = tGetter.apply(new ResourceLocation(ModMain.MODID, "blocks/blockslider"));
+            if(newBlock == null) sprite = tGetter.apply(new ResourceLocation(ModMain.MODID, "blocks/blockhm_tb"));
             else sprite = Minecraft.getMinecraft().getBlockRendererDispatcher().getBlockModelShapes().getModelForState(newBlock).getQuads(newBlock, EnumFacing.SOUTH, 0).get(0).getSprite();
             quads.add(createQuad(new Vec3d(0, 0, 1), new Vec3d(0,0,0), new Vec3d(1, 0, 0), new Vec3d(1, 0, 1), sprite));
             //top
-            if(newBlock == null) sprite = tGetter.apply(new ResourceLocation(ModMain.MODID, "blocks/"+holeTexture));
+            if(newBlock == null) sprite = tGetter.apply(new ResourceLocation(ModMain.MODID, "blocks/blockhm_tb"));
             else sprite = Minecraft.getMinecraft().getBlockRendererDispatcher().getBlockModelShapes().getModelForState(newBlock).getQuads(newBlock, EnumFacing.NORTH, 0).get(0).getSprite();
             quads.add(createQuad(new Vec3d(0, 1, 0), new Vec3d(0, 1, 1), new Vec3d(1, 1, 1), new Vec3d(1,1,0), sprite));
             //east
-            if(newBlock == null) sprite = tGetter.apply(new ResourceLocation(ModMain.MODID, "blocks/blockslider_top"));
+            if(newBlock == null) sprite = tGetter.apply(new ResourceLocation(ModMain.MODID, "blocks/blockhm_side"));
             else sprite = Minecraft.getMinecraft().getBlockRendererDispatcher().getBlockModelShapes().getModelForState(newBlock).getQuads(newBlock, EnumFacing.UP, 0).get(0).getSprite();
             quads.add(createQuad(new Vec3d(0, 1, 1), new Vec3d(0, 0, 1), new Vec3d(1,0,1), new Vec3d(1, 1, 1), sprite));
             //west
-            if(newBlock == null) sprite = tGetter.apply(new ResourceLocation(ModMain.MODID, "blocks/blockslider_top"));
+            if(newBlock == null) sprite = tGetter.apply(new ResourceLocation(ModMain.MODID, "blocks/blockhm_side"));
             else sprite = Minecraft.getMinecraft().getBlockRendererDispatcher().getBlockModelShapes().getModelForState(newBlock).getQuads(newBlock, EnumFacing.DOWN, 0).get(0).getSprite();
             quads.add(createQuad(new Vec3d(1, 1, 0), new Vec3d(1, 0, 0), new Vec3d(0,0,0), new Vec3d(0, 1, 0), sprite));
             //front
-            if(newBlock == null) sprite = tGetter.apply(new ResourceLocation(ModMain.MODID, "blocks/blockslider_top"));
+            if(newBlock == null) sprite = tGetter.apply(new ResourceLocation(ModMain.MODID, "blocks/blockhm_side"));
             else sprite = Minecraft.getMinecraft().getBlockRendererDispatcher().getBlockModelShapes().getModelForState(newBlock).getQuads(newBlock, EnumFacing.EAST, 0).get(0).getSprite();
             quads.add(createQuad(new Vec3d(1, 1, 1), new Vec3d(1, 0, 1), new Vec3d(1,0,0), new Vec3d(1, 1, 0), sprite));
             //back
-            if(newBlock == null) sprite = tGetter.apply(new ResourceLocation(ModMain.MODID, "blocks/blockslider_top"));
+            if(newBlock == null) sprite = tGetter.apply(new ResourceLocation(ModMain.MODID, "blocks/blockhm_side"));
             else sprite = Minecraft.getMinecraft().getBlockRendererDispatcher().getBlockModelShapes().getModelForState(newBlock).getQuads(newBlock, EnumFacing.WEST, 0).get(0).getSprite();
             quads.add(createQuad(new Vec3d(0, 1, 0), new Vec3d(0, 0, 0), new Vec3d(0,0,1), new Vec3d(0, 1, 1), sprite));
 
@@ -210,27 +185,27 @@ public class BlockSliderBakedModel extends BakedCubeModel {
         if(facing == EnumFacing.DOWN) {
 
             //bottom
-            if(newBlock == null) sprite = tGetter.apply(new ResourceLocation(ModMain.MODID, "blocks/"+holeTexture));
+            if(newBlock == null) sprite = tGetter.apply(new ResourceLocation(ModMain.MODID, "blocks/blockhm_tb"));
             else sprite = Minecraft.getMinecraft().getBlockRendererDispatcher().getBlockModelShapes().getModelForState(newBlock).getQuads(newBlock, EnumFacing.NORTH, 0).get(0).getSprite();
             quads.add(createQuad(new Vec3d(0, 0, 1), new Vec3d(0,0,0), new Vec3d(1, 0, 0), new Vec3d(1, 0, 1), sprite));
             //top
-            if(newBlock == null) sprite = tGetter.apply(new ResourceLocation(ModMain.MODID, "blocks/blockslider"));
+            if(newBlock == null) sprite = tGetter.apply(new ResourceLocation(ModMain.MODID, "blocks/blockhm_tb"));
             else sprite = Minecraft.getMinecraft().getBlockRendererDispatcher().getBlockModelShapes().getModelForState(newBlock).getQuads(newBlock, EnumFacing.SOUTH, 0).get(0).getSprite();
             quads.add(createQuad(new Vec3d(0, 1, 0), new Vec3d(0, 1, 1), new Vec3d(1, 1, 1), new Vec3d(1,1,0), sprite));
             //east
-            if(newBlock == null) sprite = tGetter.apply(new ResourceLocation(ModMain.MODID, "blocks/blockslider_bottom"));
+            if(newBlock == null) sprite = tGetter.apply(new ResourceLocation(ModMain.MODID, "blocks/blockhm_side"));
             else sprite = Minecraft.getMinecraft().getBlockRendererDispatcher().getBlockModelShapes().getModelForState(newBlock).getQuads(newBlock, EnumFacing.UP, 0).get(0).getSprite();
             quads.add(createQuad(new Vec3d(0, 1, 1), new Vec3d(0, 0, 1), new Vec3d(1,0,1), new Vec3d(1, 1, 1), sprite));
             //west
-            if(newBlock == null) sprite = tGetter.apply(new ResourceLocation(ModMain.MODID, "blocks/blockslider_bottom"));
+            if(newBlock == null) sprite = tGetter.apply(new ResourceLocation(ModMain.MODID, "blocks/blockhm_side"));
             else sprite = Minecraft.getMinecraft().getBlockRendererDispatcher().getBlockModelShapes().getModelForState(newBlock).getQuads(newBlock, EnumFacing.DOWN, 0).get(0).getSprite();
             quads.add(createQuad(new Vec3d(1, 1, 0), new Vec3d(1, 0, 0), new Vec3d(0,0,0), new Vec3d(0, 1, 0), sprite));
             //front
-            if(newBlock == null) sprite = tGetter.apply(new ResourceLocation(ModMain.MODID, "blocks/blockslider_bottom"));
+            if(newBlock == null) sprite = tGetter.apply(new ResourceLocation(ModMain.MODID, "blocks/blockhm_side"));
             else sprite = Minecraft.getMinecraft().getBlockRendererDispatcher().getBlockModelShapes().getModelForState(newBlock).getQuads(newBlock, EnumFacing.EAST, 0).get(0).getSprite();
             quads.add(createQuad(new Vec3d(1, 1, 1), new Vec3d(1, 0, 1), new Vec3d(1,0,0), new Vec3d(1, 1, 0), sprite));
             //back
-            if(newBlock == null) sprite = tGetter.apply(new ResourceLocation(ModMain.MODID, "blocks/blockslider_bottom"));
+            if(newBlock == null) sprite = tGetter.apply(new ResourceLocation(ModMain.MODID, "blocks/blockhm_side"));
             else sprite = Minecraft.getMinecraft().getBlockRendererDispatcher().getBlockModelShapes().getModelForState(newBlock).getQuads(newBlock, EnumFacing.WEST, 0).get(0).getSprite();
             quads.add(createQuad(new Vec3d(0, 1, 0), new Vec3d(0, 0, 0), new Vec3d(0,0,1), new Vec3d(0, 1, 1), sprite));
 

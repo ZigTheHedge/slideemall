@@ -1,11 +1,12 @@
-package com.cwelth.slideemall.tes;
+package com.cwelth.slideemall.tileentities;
 
 import com.cwelth.slideemall.ModMain;
-import com.cwelth.slideemall.bakes.EnumHoleTypes;
+import com.cwelth.slideemall.utils.EnumHoleTypes;
 import com.mojang.authlib.GameProfile;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.SoundEvents;
@@ -13,9 +14,6 @@ import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.network.NetworkManager;
-import net.minecraft.network.play.server.SPacketUpdateTileEntity;
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.SoundCategory;
@@ -82,6 +80,11 @@ public class BlockSliderTE extends CommonTE implements ITickable {
     {
         STATE = direction;
         delayCounter = 5;
+    }
+
+    public EntityLivingBase getFakePlayer()
+    {
+        return FakePlayerFactory.getMinecraft((WorldServer)this.getWorld());
     }
 
     @Override

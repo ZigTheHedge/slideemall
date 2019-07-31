@@ -1,6 +1,5 @@
-package com.cwelth.slideemall.tes.gui.server;
+package com.cwelth.slideemall.tileentities.gui.server;
 
-import com.cwelth.slideemall.ModMain;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
@@ -9,8 +8,8 @@ import net.minecraftforge.items.SlotItemHandler;
 
 import javax.annotation.Nonnull;
 
-public class BlockSliderSlotDisguise extends SlotItemHandler {
-    public BlockSliderSlotDisguise(IItemHandler itemHandler, int index, int xPosition, int yPosition) {
+public class SlotDisguiseItem extends SlotItemHandler {
+    public SlotDisguiseItem(IItemHandler itemHandler, int index, int xPosition, int yPosition) {
         super(itemHandler, index, xPosition, yPosition);
     }
 
