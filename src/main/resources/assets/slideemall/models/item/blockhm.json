@@ -1,5 +1,5 @@
 {
-  "parent": "slideemall:block/blockprofilerail",
+  "parent": "slideemall:block/blockhm",
   "display": {
     "thirdperson": {
       "rotation": [ 10, -45, 170 ],

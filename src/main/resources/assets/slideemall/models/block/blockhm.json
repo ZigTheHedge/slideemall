@@ -1,0 +1,12 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "particle": "slideemall:blocks/blockslider",
+    "down": "slideemall:blocks/blockslider_bottom",
+    "up": "slideemall:blocks/blockslider_top",
+    "east": "slideemall:blocks/blockslider_east",
+    "west": "slideemall:blocks/blockslider_west",
+    "north": "slideemall:blocks/blocksliderhole_round",
+    "south": "slideemall:blocks/blockslider"
+  }
+}

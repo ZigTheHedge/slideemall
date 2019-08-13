@@ -19,7 +19,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.function.Function;
 
-public class BlockHiddenManagerBakedModel extends BakedCubeModel {
+public class BlockHiddenManagerBakedModel extends BakedGenericModel {
     public BlockHiddenManagerBakedModel(IModelState state, VertexFormat format, Function<ResourceLocation, TextureAtlasSprite> bakedTextureGetter) {
         super(state, format, bakedTextureGetter);
     }

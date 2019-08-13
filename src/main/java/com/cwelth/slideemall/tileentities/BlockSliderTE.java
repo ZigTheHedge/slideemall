@@ -19,12 +19,7 @@ import net.minecraft.util.ITickable;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
-import net.minecraft.world.WorldServer;
-import net.minecraftforge.common.util.FakePlayer;
-import net.minecraftforge.common.util.FakePlayerFactory;
 import net.minecraftforge.fluids.BlockFluidBase;
-
-import java.util.UUID;
 
 public class BlockSliderTE extends CommonTE implements ITickable {
     public int FACING;
@@ -82,13 +77,9 @@ public class BlockSliderTE extends CommonTE implements ITickable {
         delayCounter = 5;
     }
 
-    public EntityLivingBase getFakePlayer()
-    {
-        return FakePlayerFactory.getMinecraft((WorldServer)this.getWorld());
-    }
-
     @Override
     public void update() {
+        if(world.isRemote)return;
         int deltaX = 0;
         int deltaY = 0;
         int deltaZ = 0;
@@ -120,9 +111,7 @@ public class BlockSliderTE extends CommonTE implements ITickable {
                         BLOCKSEXTENDED++;
                         ItemBlock blockToPlace = (ItemBlock)piston.getItem();
                         BlockPos posToPlace = pos.add(deltaX, deltaY, deltaZ);
-                        //FakePlayer fakePlayer = new FakePlayer(getWorld().getMinecraftServer().getWorld(0), new GameProfile(new UUID(0, 0), "fakePlayerSlider"));
-                        FakePlayer fakePlayer = FakePlayerFactory.getMinecraft((WorldServer)getWorld());
-                        IBlockState newBlock = blockToPlace.getBlock().getStateForPlacement(getWorld(), pos, EnumFacing.getFront(FACING & 7), posToPlace.getX(), posToPlace.getY(), posToPlace.getZ(), piston.getMetadata(), fakePlayer);
+                        IBlockState newBlock = blockToPlace.getBlock().getStateForPlacement(getWorld(), pos, EnumFacing.getFront(FACING & 7), posToPlace.getX(), posToPlace.getY(), posToPlace.getZ(), piston.getMetadata(), ModMain.getFakePlayer(this.world));
                         getWorld().setBlockState(pos, newBlock);
                         piston.setCount(piston.getCount() - 1);
                         itemStackHandler.setStackInSlot(0, piston);
@@ -151,12 +140,10 @@ public class BlockSliderTE extends CommonTE implements ITickable {
                     ItemStack piston = itemStackHandler.getStackInSlot(0);
                     if(getWorld().getBlockState(pos).getBlock() != Blocks.AIR) {
                         if(piston.getCount() == 0) {
-                            FakePlayer fakePlayer = new FakePlayer(getWorld().getMinecraftServer().getWorld(0),new GameProfile(new UUID(0, 0), "fakePlayerSlider"));
-                            RayTraceResult rayTraceResult = new RayTraceResult(fakePlayer);
-                            piston = getWorld().getBlockState(pos).getBlock().getPickBlock(getWorld().getBlockState(pos), rayTraceResult, getWorld(), pos, fakePlayer);
+                            RayTraceResult rayTraceResult = new RayTraceResult(ModMain.getFakePlayer(this.world));
+                            piston = getWorld().getBlockState(pos).getBlock().getPickBlock(getWorld().getBlockState(pos), rayTraceResult, getWorld(), pos, ModMain.getFakePlayer(this.world));
                         } else {
-                            FakePlayer fakePlayer = new FakePlayer(getWorld().getMinecraftServer().getWorld(0),new GameProfile(new UUID(0, 0), "fakePlayerSlider"));
-                            IBlockState newBlock = ((ItemBlock)piston.getItem()).getBlock().getStateForPlacement(getWorld(), pos, EnumFacing.getFront(FACING & 7), pos.getX(), pos.getY(), pos.getZ(), piston.getMetadata(), fakePlayer);
+                            IBlockState newBlock = ((ItemBlock)piston.getItem()).getBlock().getStateForPlacement(getWorld(), pos, EnumFacing.getFront(FACING & 7), pos.getX(), pos.getY(), pos.getZ(), piston.getMetadata(), ModMain.getFakePlayer(this.world));
                             //if (getWorld().getBlockState(pos).getBlock() == ((ItemBlock) piston.getItem()).getBlock() && getWorld().getBlockState(pos).getBlock().getMetaFromState(getWorld().getBlockState(pos)) == piston.getMetadata())
                             if (getWorld().getBlockState(pos) == newBlock)
                                 piston.setCount(piston.getCount() + 1);

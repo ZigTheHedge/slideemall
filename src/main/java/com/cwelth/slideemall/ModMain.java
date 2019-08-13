@@ -5,7 +5,13 @@ import com.cwelth.slideemall.network.SliderDropModule;
 import com.cwelth.slideemall.network.SliderGUISync;
 import com.cwelth.slideemall.proxy.CommonProxy;
 import com.cwelth.slideemall.tileentities.gui.BlockGUIHandlier;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.world.World;
+import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.config.Configuration;
+import net.minecraftforge.common.util.FakePlayer;
+import net.minecraftforge.common.util.FakePlayerFactory;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -28,11 +34,13 @@ public class ModMain {
 
     public static final String NAME = "Slide'em All!";
     public static final String MODID = "slideemall";
-    public static final String VERSION = "0.96";
+    public static final String VERSION = "0.97";
 
     public Configuration config;
     public static int maxExtend = 64;
     public static final Logger logger = Logger.getLogger(NAME);
+    public static FakePlayer sliderFakePlayer = null;
+
 
     public void saveConfig()
     {
@@ -47,6 +55,19 @@ public class ModMain {
         maxExtend = config.get("Slider params", "maxExtend", 64).getInt();
         config.save();
     }
+
+    public static EntityPlayer getFakePlayer(World world)
+    {
+        if(sliderFakePlayer == null) {
+            if (world instanceof WorldServer) {
+                sliderFakePlayer = FakePlayerFactory.getMinecraft((WorldServer)world);
+                return sliderFakePlayer;
+            } else
+                return null;
+        } else
+            return sliderFakePlayer;
+    }
+
 
     public static SimpleNetworkWrapper network = NetworkRegistry.INSTANCE.newSimpleChannel(MODID);
 

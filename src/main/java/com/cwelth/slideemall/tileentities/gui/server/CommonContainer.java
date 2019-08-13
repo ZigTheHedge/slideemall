@@ -39,10 +39,9 @@ public abstract class CommonContainer<TE extends CommonTE> extends Container {
 
     protected abstract void addOwnSlots();
 
-    @Nullable
     @Override
     public ItemStack transferStackInSlot(EntityPlayer playerIn, int index) {
-        ItemStack itemstack = null;
+        ItemStack itemstack = ItemStack.EMPTY;
         Slot slot = this.inventorySlots.get(index);
 
         if (slot != null && slot.getHasStack()) {
@@ -51,10 +50,10 @@ public abstract class CommonContainer<TE extends CommonTE> extends Container {
 
             if (index < TE.INVSIZE) {
                 if (!this.mergeItemStack(itemstack1, TE.INVSIZE, this.inventorySlots.size(), true)) {
-                    return null;
+                    return ItemStack.EMPTY;
                 }
             } else if (!this.mergeItemStack(itemstack1, 0, TE.INVSIZE, false)) {
-                return null;
+                return ItemStack.EMPTY;
             }
 
             if (itemstack1.isEmpty()) {

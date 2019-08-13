@@ -187,12 +187,10 @@ public class BlockSlider extends CommonTEBlock<BlockSliderTE> {
         if(te instanceof BlockSliderTE)
         {
                 EnumFacing facing = state.getValue(FACING);
-                FakePlayer fakePlayer = FakePlayerFactory.getMinecraft(DimensionManager.getWorld(0));
-
                 IBlockState disguiseBS = null;
                 if(((BlockSliderTE) te).itemStackHandler.getStackInSlot(1).getCount() > 0)
                     disguiseBS = ((ItemBlock) ((BlockSliderTE) te).itemStackHandler.getStackInSlot(1).getItem()).getBlock().getStateForPlacement(
-                        te.getWorld(), te.getPos(), facing, 0, 0, 0, ((BlockSliderTE) te).itemStackHandler.getStackInSlot(1).getMetadata(), fakePlayer, null);
+                        te.getWorld(), te.getPos(), facing, 0, 0, 0, ((BlockSliderTE) te).itemStackHandler.getStackInSlot(1).getMetadata(), ModMain.getFakePlayer(null), null);
             return extendedBlockState.withProperty(DISGUISE_ITEM, disguiseBS).withProperty(HOLE_TYPE, ((BlockSliderTE)te).HOLE_TYPE).withProperty(FACING, state.getValue(FACING));
         } else
             throw new UnsupportedOperationException("Tileentity is NULL");
