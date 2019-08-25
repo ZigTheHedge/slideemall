@@ -1,6 +1,7 @@
 package com.cwelth.slideemall.tileentities;
 
 import com.cwelth.slideemall.ModMain;
+import com.cwelth.slideemall.blocks.CommonBlock;
 import com.cwelth.slideemall.utils.EnumHoleTypes;
 import com.mojang.authlib.GameProfile;
 import net.minecraft.block.Block;
@@ -19,6 +20,7 @@ import net.minecraft.util.ITickable;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.world.World;
 import net.minecraftforge.fluids.BlockFluidBase;
 
 public class BlockSliderTE extends CommonTE implements ITickable {
@@ -75,6 +77,12 @@ public class BlockSliderTE extends CommonTE implements ITickable {
     {
         STATE = direction;
         delayCounter = 5;
+    }
+
+    @Override
+    public boolean shouldRefresh(World world, BlockPos pos, IBlockState oldState, IBlockState newSate) {
+        FACING = newSate.getValue(CommonBlock.FACING).getIndex();
+        return !(oldState.getBlock() == newSate.getBlock());
     }
 
     @Override

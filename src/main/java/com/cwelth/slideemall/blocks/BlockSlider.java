@@ -22,6 +22,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -112,6 +113,12 @@ public class BlockSlider extends CommonTEBlock<BlockSliderTE> {
 
         return false;
     }
+
+    @Override
+    public IBlockState withRotation(IBlockState state, Rotation rot) {
+        return super.withRotation(state, rot);
+    }
+
 
 
     @Override

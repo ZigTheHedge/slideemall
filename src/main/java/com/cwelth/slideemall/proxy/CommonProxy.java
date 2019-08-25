@@ -6,7 +6,6 @@ import com.cwelth.slideemall.blocks.*;
 import com.cwelth.slideemall.items.ItemLiquidModule;
 import com.cwelth.slideemall.tileentities.BlockHiddenManagerTE;
 import com.cwelth.slideemall.tileentities.BlockSliderTE;
-import com.cwelth.slideemall.tileentities.SlidingPanelTE;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
