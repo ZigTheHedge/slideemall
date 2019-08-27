@@ -1,5 +1,6 @@
 package com.cwelth.slideemall.tileentities;
 
+import com.cwelth.slideemall.InitContent;
 import com.cwelth.slideemall.ModMain;
 import com.cwelth.slideemall.blocks.CommonBlock;
 import com.cwelth.slideemall.utils.EnumHoleTypes;
@@ -81,13 +82,13 @@ public class BlockSliderTE extends CommonTE implements ITickable {
 
     @Override
     public boolean shouldRefresh(World world, BlockPos pos, IBlockState oldState, IBlockState newSate) {
-        FACING = newSate.getValue(CommonBlock.FACING).getIndex();
         return !(oldState.getBlock() == newSate.getBlock());
     }
 
     @Override
     public void update() {
         if(world.isRemote)return;
+        FACING = world.getBlockState(pos).getValue(CommonBlock.FACING).getIndex();
         int deltaX = 0;
         int deltaY = 0;
         int deltaZ = 0;
