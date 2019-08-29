@@ -29,10 +29,7 @@ public class BlockSliderModel implements IModel {
     public Collection<ResourceLocation> getTextures() {
         return ImmutableSet.of(
                 new ResourceLocation(ModMain.MODID, "blocks/blockslider"),
-                new ResourceLocation(ModMain.MODID, "blocks/blockslider_east"),
-                new ResourceLocation(ModMain.MODID, "blocks/blockslider_west"),
-                new ResourceLocation(ModMain.MODID, "blocks/blockslider_top"),
-                new ResourceLocation(ModMain.MODID, "blocks/blockslider_bottom"),
+                new ResourceLocation(ModMain.MODID, "blocks/blockslider_side"),
                 new ResourceLocation(ModMain.MODID, "blocks/blocksliderhole_round"),
                 new ResourceLocation(ModMain.MODID, "blocks/blocksliderhole_cross"),
                 new ResourceLocation(ModMain.MODID, "blocks/blocksliderhole_box"));

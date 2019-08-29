@@ -4,6 +4,7 @@ import com.cwelth.slideemall.InitContent;
 import com.cwelth.slideemall.ModMain;
 import com.cwelth.slideemall.bakes.UnlistedPropertyDisguiseItem;
 import com.cwelth.slideemall.bakes.UnlistedPropertyHoleType;
+import com.cwelth.slideemall.bakes.UnlistedPropertyInteger;
 import com.cwelth.slideemall.tileentities.BlockSliderTE;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -19,10 +20,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.Rotation;
+import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -43,6 +41,8 @@ import javax.annotation.Nullable;
 public class BlockSlider extends CommonTEBlock<BlockSliderTE> {
     public static final UnlistedPropertyDisguiseItem DISGUISE_ITEM = new UnlistedPropertyDisguiseItem("disguise");
     public static final UnlistedPropertyHoleType HOLE_TYPE = new UnlistedPropertyHoleType("hole");
+    public static final UnlistedPropertyInteger TINT = new UnlistedPropertyInteger("tint");
+    public static final UnlistedPropertyInteger DISGUISE_FACING = new UnlistedPropertyInteger("disguise_facing");
     public BlockSlider(Material material, String name) {
         super(material, name);
     }
@@ -130,6 +130,7 @@ public class BlockSlider extends CommonTEBlock<BlockSliderTE> {
         {
             return;
         }
+
         ((BlockSliderTE) tileentity).FACING = getFacingFromEntity(pos, placer).getIndex();
     }
 
@@ -182,7 +183,7 @@ public class BlockSlider extends CommonTEBlock<BlockSliderTE> {
     @Override
     protected BlockStateContainer createBlockState() {
         IProperty[] listedProperties = new IProperty[] { FACING };
-        IUnlistedProperty[] unlistedProperties = new IUnlistedProperty[] { DISGUISE_ITEM, HOLE_TYPE };
+        IUnlistedProperty[] unlistedProperties = new IUnlistedProperty[] { DISGUISE_ITEM, HOLE_TYPE, TINT, DISGUISE_FACING };
         return new ExtendedBlockState(this, listedProperties, unlistedProperties);
     }
 
@@ -193,13 +194,25 @@ public class BlockSlider extends CommonTEBlock<BlockSliderTE> {
         TileEntity te = world.getTileEntity(pos);
         if(te instanceof BlockSliderTE)
         {
-                EnumFacing facing = state.getValue(FACING);
-                IBlockState disguiseBS = null;
-                if(((BlockSliderTE) te).itemStackHandler.getStackInSlot(1).getCount() > 0)
-                    disguiseBS = ((ItemBlock) ((BlockSliderTE) te).itemStackHandler.getStackInSlot(1).getItem()).getBlock().getStateForPlacement(
-                        te.getWorld(), te.getPos(), facing, 0, 0, 0, ((BlockSliderTE) te).itemStackHandler.getStackInSlot(1).getMetadata(), ModMain.getFakePlayer(null), null);
-            return extendedBlockState.withProperty(DISGUISE_ITEM, disguiseBS).withProperty(HOLE_TYPE, ((BlockSliderTE)te).HOLE_TYPE).withProperty(FACING, state.getValue(FACING));
+            EnumFacing facing = state.getValue(FACING);
+            IBlockState disguiseBS = null;
+            EntityPlayer sliderPlayer = ModMain.getFakePlayer(null);
+            //sliderPlayer.setPositionAndRotation(pos.getX(), pos.up().getY(), pos.getZ(), );
+            if(((BlockSliderTE) te).itemStackHandler.getStackInSlot(1).getCount() > 0)
+                disguiseBS = ((ItemBlock) ((BlockSliderTE) te).itemStackHandler.getStackInSlot(1).getItem()).getBlock().getStateForPlacement(
+                    te.getWorld(), te.getPos(), facing, 0, 0, 0, ((BlockSliderTE) te).itemStackHandler.getStackInSlot(1).getMetadata(), sliderPlayer, EnumHand.MAIN_HAND);
+            return extendedBlockState.withProperty(DISGUISE_ITEM, disguiseBS)
+                    .withProperty(HOLE_TYPE, ((BlockSliderTE)te).HOLE_TYPE)
+                    .withProperty(TINT, world.getBiome(pos).getGrassColorAtPos(pos))
+                    .withProperty(DISGUISE_FACING, ((BlockSliderTE) te).disguiseFacing)
+                    .withProperty(FACING, state.getValue(FACING));
+            //Minecraft.getMinecraft().getBlockColors().registerBlockColorHandler();
         } else
             throw new UnsupportedOperationException("Tileentity is NULL");
+    }
+
+    @Override
+    public BlockRenderLayer getBlockLayer() {
+        return BlockRenderLayer.CUTOUT;
     }
 }

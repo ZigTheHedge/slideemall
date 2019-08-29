@@ -1,6 +1,7 @@
 package com.cwelth.slideemall.tileentities.gui;
 
 import com.cwelth.slideemall.ModMain;
+import com.cwelth.slideemall.blocks.CommonBlock;
 import com.cwelth.slideemall.utils.EnumHoleTypes;
 import com.cwelth.slideemall.network.SliderDropModule;
 import com.cwelth.slideemall.network.SliderGUISync;
@@ -23,7 +24,7 @@ import java.util.List;
 public class BlockSliderGUIContainer<TE extends CommonTE, CNT extends CommonContainer> extends GuiContainer {
     public static final int WIDTH = 174;
     public static final int HEIGHT = 186;
-    private TE te;
+    private BlockSliderTE te;
     private EntityPlayer player;
 
     private List<GuiButton> holeTypeButtons = Lists.<GuiButton>newArrayList();
@@ -31,13 +32,14 @@ public class BlockSliderGUIContainer<TE extends CommonTE, CNT extends CommonCont
     private boolean isGuiInitialized = false;
     private static ResourceLocation background;
 
-    public BlockSliderGUIContainer(TE tileEntity, CNT container, String bg, EntityPlayer player) {
+    public BlockSliderGUIContainer(BlockSliderTE tileEntity, CNT container, String bg, EntityPlayer player) {
         super(container);
         this.player = player;
         te = tileEntity;
         background = new ResourceLocation(ModMain.MODID, bg);
         xSize = WIDTH;
         ySize = HEIGHT;
+        te.possibleFacing = CommonBlock.getFacingFromEntity(te.getPos(), player).getIndex();
     }
 
     @Override

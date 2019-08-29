@@ -1,8 +1,6 @@
 package com.cwelth.slideemall.tileentities.gui;
 
-import com.cwelth.slideemall.tileentities.BlockHiddenManagerTE;
 import com.cwelth.slideemall.tileentities.BlockSliderTE;
-import com.cwelth.slideemall.tileentities.gui.server.BlockHiddenManagerContainer;
 import com.cwelth.slideemall.tileentities.gui.server.BlockSliderContainer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.BlockPos;
@@ -20,10 +18,6 @@ public class BlockGUIHandlier implements IGuiHandler {
         if(ID == 0) {
             BlockSliderTE te = (BlockSliderTE) world.getTileEntity(pos);
             return new BlockSliderContainer(player.inventory, te);
-        } else if(ID == 1)
-        {
-            BlockHiddenManagerTE te = (BlockHiddenManagerTE) world.getTileEntity(pos);
-            return new BlockHiddenManagerContainer(player.inventory, te);
         } else
             return null;
     }
@@ -34,9 +28,6 @@ public class BlockGUIHandlier implements IGuiHandler {
         if(ID == 0) {
             BlockSliderTE te = (BlockSliderTE) world.getTileEntity(pos);
             return new BlockSliderGUIContainer(te, new BlockSliderContainer(player.inventory, te), "textures/gui/blockslider.png", player);
-        } else if(ID == 1) {
-            BlockHiddenManagerTE te = (BlockHiddenManagerTE) world.getTileEntity(pos);
-            return new BlockHiddenManagerGUIContainer(te, new BlockHiddenManagerContainer(player.inventory, te), "textures/gui/disguisegui.png", player);
         } else
             return null;
     }

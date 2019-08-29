@@ -23,6 +23,13 @@ public class CommonTE extends TileEntity {
             protected void onContentsChanged(int slot) {
                 // We need to tell the tile entity that something has changed so
                 // that the chest contents is persisted
+                if(CommonTE.this instanceof BlockSliderTE)
+                {
+                    if(slot == 1)
+                    {
+                        ((BlockSliderTE)CommonTE.this).acceptFacing();
+                    }
+                }
 
                 world.markBlockRangeForRenderUpdate(pos, pos);
                 CommonTE.this.markDirty();

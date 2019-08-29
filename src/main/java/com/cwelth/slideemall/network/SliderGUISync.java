@@ -22,6 +22,7 @@ public class SliderGUISync implements IMessageHandler<SliderGUISync.Packet, IMes
             te.HOLE_TYPE = message.holeType;
             te.isRedstoneHigh = message.isRedstoneHigh;
             te.WATERTOLERANT = message.WATERTOLERANT;
+
             //te.sendUpdates();
             world.notifyBlockUpdate(message.tePos, world.getBlockState(message.tePos), world.getBlockState(message.tePos), 3);
             //ModMain.logger.warning("TE synced. Side: " + ctx.side + ", Data follows: X: "+message.tePos.getX() + ", Y: "+message.tePos.getY()+", Z: "+message.tePos.getZ()+", HOLE_TYPE:"+message.holeType);
@@ -39,12 +40,14 @@ public class SliderGUISync implements IMessageHandler<SliderGUISync.Packet, IMes
         public EnumHoleTypes holeType;
         public boolean isRedstoneHigh;
         public boolean WATERTOLERANT;
+        public int disguiseFacing;
 
         public Packet(BlockSliderTE te) {
             tePos = te.getPos();
             holeType = te.HOLE_TYPE;
             isRedstoneHigh = te.isRedstoneHigh;
             WATERTOLERANT = te.WATERTOLERANT;
+            disguiseFacing = te.disguiseFacing;
         }
 
         public Packet(){}
@@ -55,6 +58,7 @@ public class SliderGUISync implements IMessageHandler<SliderGUISync.Packet, IMes
             holeType = EnumHoleTypes.values()[buf.readInt()];
             isRedstoneHigh = buf.readBoolean();
             WATERTOLERANT = buf.readBoolean();
+            disguiseFacing = buf.readInt();
         }
 
         @Override
@@ -65,6 +69,7 @@ public class SliderGUISync implements IMessageHandler<SliderGUISync.Packet, IMes
             buf.writeInt(holeType.getIndex());
             buf.writeBoolean(isRedstoneHigh);
             buf.writeBoolean(WATERTOLERANT);
+            buf.writeInt(disguiseFacing);
         }
 
     }

@@ -32,6 +32,8 @@ public class BlockSliderTE extends CommonTE implements ITickable {
     public EnumHoleTypes HOLE_TYPE;
     private int delayCounter = 10;
     public boolean isRedstoneHigh = true;
+    public int disguiseFacing = 0;
+    public int possibleFacing = 0;
 
     public BlockSliderTE() {
         super(2);
@@ -58,6 +60,8 @@ public class BlockSliderTE extends CommonTE implements ITickable {
             isRedstoneHigh = compound.getBoolean("redstonehigh");
         if(compound.hasKey("watertolerant"))
             WATERTOLERANT = compound.getBoolean("watertolerant");
+        if(compound.hasKey("disguiseFacing"))
+            disguiseFacing = compound.getInteger("disguiseFacing");
     }
 
     @Override
@@ -70,6 +74,7 @@ public class BlockSliderTE extends CommonTE implements ITickable {
         compound.setInteger("holetype", HOLE_TYPE.getIndex());
         compound.setBoolean("redstonehigh", isRedstoneHigh);
         compound.setBoolean("watertolerant", WATERTOLERANT);
+        compound.setInteger("disguiseFacing", disguiseFacing);
         this.markDirty();
         return compound;
     }
@@ -84,6 +89,13 @@ public class BlockSliderTE extends CommonTE implements ITickable {
     public boolean shouldRefresh(World world, BlockPos pos, IBlockState oldState, IBlockState newSate) {
         return !(oldState.getBlock() == newSate.getBlock());
     }
+
+    public void acceptFacing()
+    {
+        disguiseFacing = possibleFacing;
+        markDirty();
+    }
+
 
     @Override
     public void update() {

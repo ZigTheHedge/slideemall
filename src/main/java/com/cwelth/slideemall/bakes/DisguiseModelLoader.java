@@ -8,13 +8,11 @@ import net.minecraftforge.client.model.IModel;
 
 public class DisguiseModelLoader implements ICustomModelLoader {
     public static final BlockSliderModel SLIDER_MODEL = new BlockSliderModel();
-    public static final BlockHiddenManagerModel HM_MODEL = new BlockHiddenManagerModel();
 
     @Override
     public boolean accepts(ResourceLocation modelLocation) {
         if(modelLocation.getResourceDomain().equals(ModMain.MODID)) {
-            return "blockslider".equals(modelLocation.getResourcePath())
-                    || "blockhm".equals(modelLocation.getResourcePath());
+            return "blockslider".equals(modelLocation.getResourcePath());
         } else
             return false;
     }
@@ -23,8 +21,6 @@ public class DisguiseModelLoader implements ICustomModelLoader {
     public IModel loadModel(ResourceLocation modelLocation) throws Exception {
         if("blockslider".equals(modelLocation.getResourcePath()))
             return SLIDER_MODEL;
-        if("blockhm".equals(modelLocation.getResourcePath()))
-            return HM_MODEL;
         return null;
     }
 
