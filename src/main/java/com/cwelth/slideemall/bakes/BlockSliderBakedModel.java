@@ -190,7 +190,7 @@ public class BlockSliderBakedModel extends BakedGenericModel {
         } else
         {
             sprite = Minecraft.getMinecraft().getBlockRendererDispatcher().getBlockModelShapes().getModelForState(newBlock).getQuads(newBlock, EnumFacing.DOWN, 0).get(0).getSprite();
-            quads.add(createQuadCW(new Vec3d(0, 0, 1), new Vec3d(1, 0, 1), new Vec3d(1, 0, 0), new Vec3d(0, 0, 0), sprite, 0xFFFFFFFF));
+            quads.add(createQuadCW(new Vec3d(1, 0, 1), new Vec3d(1, 0, 0), new Vec3d(0, 0, 0), new Vec3d(0, 0, 1), sprite, 0xFFFFFFFF));
 
             sprite = Minecraft.getMinecraft().getBlockRendererDispatcher().getBlockModelShapes().getModelForState(newBlock).getQuads(newBlock, EnumFacing.UP, 0).get(0).getSprite();
             quads.add(createQuadCW(new Vec3d(1, 1, 0), new Vec3d(1, 1, 1), new Vec3d(0, 1, 1), new Vec3d(0, 1, 0), sprite, tint));
