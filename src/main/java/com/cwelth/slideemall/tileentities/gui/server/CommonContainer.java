@@ -25,7 +25,7 @@ public abstract class CommonContainer<TE extends CommonTE> extends Container {
             for (int col = 0; col < 9; ++col) {
                 int x = 7 + col * 18;
                 int y = row * 18 + 105;
-                this.addSlotToContainer(new Slot(playerInventory, col + row * 9 + 10, x, y));
+                this.addSlotToContainer(new Slot(playerInventory, col + row * 9 + 10 - 1, x, y));
             }
         }
 
