@@ -4,11 +4,13 @@ import com.cwelth.slideemall.InitContent;
 import com.cwelth.slideemall.bakes.DisguiseModelLoader;
 import com.cwelth.slideemall.blocks.BlockSlider;
 import com.cwelth.slideemall.tileentities.BlockSliderTE;
+import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.color.IBlockColor;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
+import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.client.event.ModelRegistryEvent;
@@ -46,5 +48,10 @@ public class ClientProxy extends CommonProxy {
     public void postInit(FMLPostInitializationEvent e) {
         InitContent.initBlockItemModels();
         super.postInit(e);
+    }
+
+    @Override
+    public BlockRenderLayer getBlockRenderLayer(Block biq) {
+        return biq.getBlockLayer();
     }
 }

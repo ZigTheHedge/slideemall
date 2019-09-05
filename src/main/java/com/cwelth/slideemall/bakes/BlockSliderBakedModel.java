@@ -4,6 +4,7 @@ import com.cwelth.slideemall.ModMain;
 import com.cwelth.slideemall.blocks.BlockSlider;
 
 import com.cwelth.slideemall.utils.EnumHoleTypes;
+import com.google.common.collect.ImmutableList;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
@@ -189,7 +190,8 @@ public class BlockSliderBakedModel extends BakedGenericModel {
             }
         } else
         {
-            sprite = Minecraft.getMinecraft().getBlockRendererDispatcher().getBlockModelShapes().getModelForState(newBlock).getQuads(newBlock, EnumFacing.DOWN, 0).get(0).getSprite();
+            List<BakedQuad> quadsList = Minecraft.getMinecraft().getBlockRendererDispatcher().getBlockModelShapes().getModelForState(newBlock).getQuads(newBlock, EnumFacing.DOWN, 0);
+            sprite = quadsList.get(0).getSprite();
             quads.add(createQuadCW(new Vec3d(1, 0, 1), new Vec3d(1, 0, 0), new Vec3d(0, 0, 0), new Vec3d(0, 0, 1), sprite, 0xFFFFFFFF));
 
             sprite = Minecraft.getMinecraft().getBlockRendererDispatcher().getBlockModelShapes().getModelForState(newBlock).getQuads(newBlock, EnumFacing.UP, 0).get(0).getSprite();

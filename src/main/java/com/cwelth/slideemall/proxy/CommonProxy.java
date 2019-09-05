@@ -10,6 +10,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
+import net.minecraft.util.BlockRenderLayer;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -35,7 +36,8 @@ public class CommonProxy {
     }
     @SubscribeEvent
     public static void registerBlocks(RegistryEvent.Register<Block> event) {
-        event.getRegistry().register(new BlockSlider(Material.ROCK, "blockslider").setHardness(5F).setCreativeTab(CreativeTabs.MATERIALS));
+        event.getRegistry().register(new BlockSlider(false, Material.ROCK, "blockslider").setHardness(5F).setCreativeTab(CreativeTabs.MATERIALS));
+        event.getRegistry().register(new BlockSlider(true, Material.ROCK, "blockslidercutout").setHardness(5F).setCreativeTab(CreativeTabs.MATERIALS));
 
         GameRegistry.registerTileEntity(BlockSliderTE.class, ModMain.MODID + "_blocksliderte");
     }
@@ -51,5 +53,10 @@ public class CommonProxy {
     public static void createFakePlayer(WorldEvent.Load event)
     {
         ModMain.getFakePlayer(event.getWorld());
+    }
+
+    public BlockRenderLayer getBlockRenderLayer(Block biq)
+    {
+        return null;
     }
 }

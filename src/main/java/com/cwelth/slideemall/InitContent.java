@@ -11,6 +11,10 @@ public class InitContent {
     @GameRegistry.ObjectHolder("slideemall:blockslider")
     public static BlockSlider blockSlider;
 
+    @GameRegistry.ObjectHolder("slideemall:blockslidercutout")
+    public static BlockSlider blockSliderCutout;
+
+
     @GameRegistry.ObjectHolder("slideemall:itemliquidmodule")
     public static ItemLiquidModule itemLiquidModule;
 
@@ -18,6 +22,7 @@ public class InitContent {
     @SideOnly(Side.CLIENT)
     public static void initModels() {
         blockSlider.initModel();
+        blockSliderCutout.initModel();
     }
 
     @SideOnly(Side.CLIENT)

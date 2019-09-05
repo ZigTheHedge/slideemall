@@ -12,14 +12,14 @@ public class DisguiseModelLoader implements ICustomModelLoader {
     @Override
     public boolean accepts(ResourceLocation modelLocation) {
         if(modelLocation.getResourceDomain().equals(ModMain.MODID)) {
-            return "blockslider".equals(modelLocation.getResourcePath());
+            return "blockslider".equals(modelLocation.getResourcePath()) || "blockslidercutout".equals(modelLocation.getResourcePath());
         } else
             return false;
     }
 
     @Override
     public IModel loadModel(ResourceLocation modelLocation) throws Exception {
-        if("blockslider".equals(modelLocation.getResourcePath()))
+        if("blockslider".equals(modelLocation.getResourcePath()) || "blockslidercutout".equals(modelLocation.getResourcePath()))
             return SLIDER_MODEL;
         return null;
     }

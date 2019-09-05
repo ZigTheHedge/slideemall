@@ -86,8 +86,10 @@ public class BlockSliderTE extends CommonTE implements ITickable {
     }
 
     @Override
-    public boolean shouldRefresh(World world, BlockPos pos, IBlockState oldState, IBlockState newSate) {
-        return !(oldState.getBlock() == newSate.getBlock());
+    public boolean shouldRefresh(World world, BlockPos pos, IBlockState oldState, IBlockState newState) {
+        //boolean retvalue = newState.getBlock() == InitContent.blockSlider || newState.getBlock() == InitContent.blockSliderCutout;
+        boolean retvalue = newState.getBlock() == oldState.getBlock();
+        return !retvalue;
     }
 
     public void acceptFacing()
@@ -95,7 +97,6 @@ public class BlockSliderTE extends CommonTE implements ITickable {
         disguiseFacing = possibleFacing;
         markDirty();
     }
-
 
     @Override
     public void update() {
