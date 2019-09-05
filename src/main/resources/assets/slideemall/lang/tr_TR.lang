@@ -1,0 +1,11 @@
+tile.slideemall.blockslider.name=Kaydırıcı Makara
+tile.slideemall.blockprofilerail.name=Profil Rayı
+tile.slideemall.blockgearbox.name=Dişli Kutusu
+tile.slideemall.blockconnector.name=Dişli Bağlandırıcı Çubuk
+
+item.slideemall.itemliquidmodule.name=Sıvıya Dayanıklılık Modülü
+
+slider.slot0.desc=Açılır köprü blokları:
+slider.slot1.desc=Saklanan blok:
+slider.texture.desc=Delik tipi:
+slider.redstone.desc=Uzatılan:
