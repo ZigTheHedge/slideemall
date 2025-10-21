@@ -160,10 +160,16 @@ public class BlockSliderTE extends CommonTE implements ITickable {
                     BlockPos pos = this.getPos();
                     pos = pos.add(deltaX * (BLOCKSEXTENDED), deltaY * (BLOCKSEXTENDED), deltaZ * (BLOCKSEXTENDED));
                     ItemStack piston = itemStackHandler.getStackInSlot(0);
+                    boolean shouldHarvest = false;
+                    Block checkBlock = getWorld().getBlockState(pos).getBlock();
+                    float blockHardness = checkBlock.getBlockHardness(checkBlock.getDefaultState(), getWorld(), pos);
+                    if(blockHardness > 0)
+                        shouldHarvest = true;
                     if(getWorld().getBlockState(pos).getBlock() != Blocks.AIR) {
                         if(piston.getCount() == 0) {
                             RayTraceResult rayTraceResult = new RayTraceResult(ModMain.getFakePlayer(this.world));
-                            piston = getWorld().getBlockState(pos).getBlock().getPickBlock(getWorld().getBlockState(pos), rayTraceResult, getWorld(), pos, ModMain.getFakePlayer(this.world));
+                            if(shouldHarvest)
+                                piston =  checkBlock.getPickBlock(getWorld().getBlockState(pos), rayTraceResult, getWorld(), pos, ModMain.getFakePlayer(this.world));
                         } else {
                             IBlockState newBlock = ((ItemBlock)piston.getItem()).getBlock().getStateForPlacement(getWorld(), pos, EnumFacing.getFront(FACING & 7), pos.getX(), pos.getY(), pos.getZ(), piston.getMetadata(), ModMain.getFakePlayer(this.world));
                             //if (getWorld().getBlockState(pos).getBlock() == ((ItemBlock) piston.getItem()).getBlock() && getWorld().getBlockState(pos).getBlock().getMetaFromState(getWorld().getBlockState(pos)) == piston.getMetadata())
@@ -171,12 +177,16 @@ public class BlockSliderTE extends CommonTE implements ITickable {
                                 piston.setCount(piston.getCount() + 1);
                             else
                             {
-                                InventoryHelper.spawnItemStack(getWorld(), pos.getX(), pos.getY(), pos.getZ(), getWorld().getBlockState(pos).getBlock().getPickBlock(getWorld().getBlockState(pos), null, getWorld(), pos, null));
+                                if(shouldHarvest)
+                                    InventoryHelper.spawnItemStack(getWorld(), pos.getX(), pos.getY(), pos.getZ(), checkBlock.getPickBlock(getWorld().getBlockState(pos), null, getWorld(), pos, null));
                             }
                         }
-                        getWorld().setBlockToAir(pos);
-                        itemStackHandler.setStackInSlot(0, piston);
-                        getWorld().playSound((EntityPlayer) null, pos, SoundEvents.BLOCK_PISTON_CONTRACT, SoundCategory.BLOCKS, 0.5F, getWorld().rand.nextFloat() * 0.25F + 0.6F);
+                        if(shouldHarvest)
+                        {
+                            getWorld().setBlockToAir(pos);
+                            itemStackHandler.setStackInSlot(0, piston);
+                            getWorld().playSound((EntityPlayer) null, pos, SoundEvents.BLOCK_PISTON_CONTRACT, SoundCategory.BLOCKS, 0.5F, getWorld().rand.nextFloat() * 0.25F + 0.6F);
+                        }
                         BLOCKSEXTENDED--;
                     } else
                     {
